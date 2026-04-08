@@ -1,0 +1,378 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <!-- Hero -->
+  <section class="min-h-[calc(100vh-4rem)] flex items-center relative overflow-hidden" id="hero">
+    <!-- Interactive dot grid canvas -->
+    <canvas
+      id="hero-canvas"
+      class="absolute inset-0 w-full h-full pointer-events-none"
+    ></canvas>
+
+    <!-- Gradient orb -->
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-15 blur-3xl pointer-events-none transition-transform duration-[2000ms]"
+      style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%)"
+      id="hero-orb"
+    ></div>
+
+    <div class="max-w-5xl mx-auto px-[var(--spacing-container)] w-full relative z-10">
+      <div class="max-w-2xl">
+        <!-- Greeting -->
+        <p
+          class="text-sm font-mono text-accent mb-4 opacity-0 hero-reveal"
+          data-delay="0"
+        >
+          <span class="inline-block w-2 h-2 rounded-full bg-accent mr-2 animate-pulse"></span>
+          Hey, I'm
+        </p>
+
+        <!-- Name -->
+        <h1
+          class="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6 opacity-0 hero-reveal"
+          data-delay="100"
+        >
+          Matias<br />
+          <span class="text-text-secondary">Caliz</span><span class="text-accent">.</span>
+        </h1>
+
+        <!-- Rotating role -->
+        <div
+          class="text-xl sm:text-2xl text-text-secondary leading-relaxed mb-3 opacity-0 hero-reveal"
+          data-delay="250"
+        >
+          <span class="text-text font-medium" id="role-text"></span>
+          <span class="inline-block w-[2px] h-6 bg-accent ml-0.5 align-middle" id="role-cursor"></span>
+        </div>
+
+        <!-- Tagline -->
+        <p
+          class="text-base sm:text-lg text-text-tertiary leading-relaxed mb-8 max-w-lg opacity-0 hero-reveal"
+          data-delay="400"
+        >
+          Currently crafting experiences at
+          <a
+            href="https://www.despegar.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-text-secondary hover:text-accent transition-colors duration-200 underline decoration-border hover:decoration-accent underline-offset-4"
+          >Despegar</a>. Previously auditing systems at
+          <span class="text-text-secondary">EY</span>.
+        </p>
+
+        <!-- CTAs -->
+        <div
+          class="flex flex-wrap gap-4 opacity-0 hero-reveal"
+          data-delay="550"
+        >
+          <a
+            href="/projects"
+            class="group inline-flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-lg font-medium text-sm hover:bg-accent-hover transition-all duration-200 hover:gap-3"
+          >
+            See my work
+            <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+            </svg>
+          </a>
+          <a
+            href="mailto:matias.caliz@gmail.com"
+            class="inline-flex items-center gap-2 px-6 py-3 border border-border rounded-lg font-medium text-sm text-text-secondary hover:text-text hover:border-border-hover hover:bg-bg-secondary transition-all duration-200"
+          >
+            Get in touch
+          </a>
+        </div>
+
+        <!-- Tech stack pills -->
+        <div
+          class="flex flex-wrap gap-2 mt-8 opacity-0 hero-reveal"
+          data-delay="700"
+        >
+          {["React", "Angular", "Java", "Spring", "TypeScript", "Python"].map((tech) => (
+            <span class="px-3 py-1 text-xs font-mono text-text-tertiary border border-border rounded-full hover:text-text-secondary hover:border-border-hover transition-colors duration-200">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div
+        class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-tertiary opacity-0 hero-reveal"
+        data-delay="900"
+      >
+        <span class="text-xs font-mono">scroll</span>
+        <div class="w-px h-8 bg-border relative overflow-hidden">
+          <div class="w-full h-3 bg-text-tertiary absolute animate-scroll-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick intro section -->
+  <section class="py-[var(--spacing-section)] border-t border-border">
+    <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
+      <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+        <!-- Card 1 -->
+        <div class="group scroll-reveal p-6 -m-6 rounded-2xl hover:bg-bg-secondary transition-all duration-300">
+          <div class="text-xs font-mono text-accent mb-3 uppercase tracking-widest">01 / Engineering</div>
+          <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200">Production-scale code</h3>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Building the search box, header & footer used by millions of travelers daily at Despegar. Java, Spring, React & Angular at scale.
+          </p>
+          <div class="mt-4 flex items-center gap-1.5 text-xs font-mono text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <span class="w-1 h-1 rounded-full bg-emerald-500"></span>
+            Millions of daily users
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="group scroll-reveal p-6 -m-6 rounded-2xl hover:bg-bg-secondary transition-all duration-300" style="transition-delay: 100ms;">
+          <div class="text-xs font-mono text-accent mb-3 uppercase tracking-widest">02 / Security</div>
+          <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200">Security-first mindset</h3>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Former IT Auditor at EY. Cybersecurity & systems audit background that shapes how I architect and review code.
+          </p>
+          <div class="mt-4 flex items-center gap-1.5 text-xs font-mono text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <span class="w-1 h-1 rounded-full bg-blue-500"></span>
+            Security + Engineering
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="group scroll-reveal p-6 -m-6 rounded-2xl hover:bg-bg-secondary transition-all duration-300" style="transition-delay: 200ms;">
+          <div class="text-xs font-mono text-accent mb-3 uppercase tracking-widest">03 / Ventures</div>
+          <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200">Building products</h3>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Independently developing Finlatam (fintech dashboard) and Gastronova (restaurant SaaS). From idea to production.
+          </p>
+          <div class="mt-4 flex items-center gap-1.5 text-xs font-mono text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <span class="w-1 h-1 rounded-full bg-amber-500"></span>
+            2 active side projects
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scroll-line {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(300%); }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .hero-reveal.visible {
+    animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-scroll-line {
+    animation: scroll-line 1.5s ease-in-out infinite;
+  }
+
+  #role-cursor {
+    animation: blink 0.8s ease-in-out infinite;
+  }
+
+  /* Scroll reveal for cards */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // ── Hero reveal animations ──
+  document.querySelectorAll<HTMLElement>(".hero-reveal").forEach((el) => {
+    const delay = parseInt(el.dataset.delay || "0", 10);
+    setTimeout(() => el.classList.add("visible"), 100 + delay);
+  });
+
+  // ── Role typing effect ──
+  const roles = [
+    "Full Stack Engineer.",
+    "Product Builder.",
+    "Security-Minded Developer.",
+    "Fintech Enthusiast.",
+  ];
+  const roleEl = document.getElementById("role-text");
+  if (roleEl) {
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let pauseTimer: ReturnType<typeof setTimeout> | null = null;
+
+    function typeRole() {
+      const current = roles[roleIndex];
+
+      if (!isDeleting) {
+        roleEl!.textContent = current.slice(0, charIndex + 1);
+        charIndex++;
+
+        if (charIndex === current.length) {
+          // Pause before deleting
+          pauseTimer = setTimeout(() => {
+            isDeleting = true;
+            typeRole();
+          }, 2000);
+          return;
+        }
+        setTimeout(typeRole, 60 + Math.random() * 40);
+      } else {
+        roleEl!.textContent = current.slice(0, charIndex - 1);
+        charIndex--;
+
+        if (charIndex === 0) {
+          isDeleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+          setTimeout(typeRole, 400);
+          return;
+        }
+        setTimeout(typeRole, 30);
+      }
+    }
+
+    // Start after hero reveals
+    setTimeout(typeRole, 800);
+  }
+
+  // ── Dot grid canvas ──
+  const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement;
+  if (canvas) {
+    const ctx = canvas.getContext("2d")!;
+    let mouseX = -1000;
+    let mouseY = -1000;
+    let animationId: number;
+    const dotSpacing = 32;
+    const dotRadius = 1;
+    const influenceRadius = 120;
+
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+
+    function getAccentColor() {
+      return getComputedStyle(document.documentElement)
+        .getPropertyValue("--color-accent")
+        .trim();
+    }
+
+    function getBorderColor() {
+      return getComputedStyle(document.documentElement)
+        .getPropertyValue("--color-border")
+        .trim();
+    }
+
+    function draw() {
+      const rect = canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+
+      const accent = getAccentColor();
+      const border = getBorderColor();
+
+      for (let x = dotSpacing; x < rect.width; x += dotSpacing) {
+        for (let y = dotSpacing; y < rect.height; y += dotSpacing) {
+          const dx = mouseX - x;
+          const dy = mouseY - y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const influence = Math.max(0, 1 - dist / influenceRadius);
+
+          const radius = dotRadius + influence * 2.5;
+          const alpha = 0.15 + influence * 0.6;
+
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.fillStyle =
+            influence > 0.05
+              ? accent.replace(")", `, ${alpha})` ).replace("rgb", "rgba")
+              : border.replace(")", `, ${0.3})` ).replace("rgb", "rgba");
+
+          // Fallback for hex colors
+          if (!ctx.fillStyle.includes("rgba")) {
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = influence > 0.05 ? accent : border;
+          }
+
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+      }
+
+      animationId = requestAnimationFrame(draw);
+    }
+
+    resize();
+    draw();
+
+    // Track mouse within the hero section
+    const hero = document.getElementById("hero");
+    hero?.addEventListener("mousemove", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    });
+
+    hero?.addEventListener("mouseleave", () => {
+      mouseX = -1000;
+      mouseY = -1000;
+    });
+
+    window.addEventListener("resize", resize, { passive: true });
+
+    // Cleanup on page transition
+    document.addEventListener("astro:before-swap", () => {
+      cancelAnimationFrame(animationId);
+    });
+  }
+
+  // ── Orb parallax ──
+  const orb = document.getElementById("hero-orb");
+  if (orb) {
+    document.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 50;
+      const y = (e.clientY / window.innerHeight - 0.5) * 50;
+      orb.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+    });
+  }
+
+  // ── Scroll reveal (Intersection Observer) ──
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  document.querySelectorAll(".scroll-reveal").forEach((el) => observer.observe(el));
+</script>
