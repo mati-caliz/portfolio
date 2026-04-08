@@ -11,5 +11,11 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [preact()]
+  integrations: [preact()],
+
+  // Enable prefetch for instant navigation
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'viewport',
+  },
 });

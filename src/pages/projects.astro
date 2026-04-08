@@ -58,19 +58,6 @@ const categories = [
 </Layout>
 
 <style>
-  @keyframes fade-in-up {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-reveal {
-    opacity: 0;
-  }
-
-  .hero-reveal.visible {
-    animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
   .project-item {
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
@@ -85,52 +72,34 @@ const categories = [
 </style>
 
 <script>
-  // ── Page reveal ──
-  document.querySelectorAll<HTMLElement>(".hero-reveal").forEach((el) => {
-    const delay = parseInt(el.dataset.delay || "0", 10);
-    setTimeout(() => el.classList.add("visible"), 100 + delay);
-  });
+  // ── Category filter (page-specific) ──
+  function initFilters() {
+    const filterBtns = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    const projectItems = document.querySelectorAll<HTMLElement>(".project-item");
 
-  // ── Scroll reveal for cards ──
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.dataset.filter!;
 
-  document.querySelectorAll(".scroll-reveal").forEach((el) => observer.observe(el));
+        filterBtns.forEach((b) => {
+          b.classList.remove("bg-accent", "text-white", "border-accent");
+          b.classList.add("text-text-secondary", "border-border");
+        });
+        btn.classList.add("bg-accent", "text-white", "border-accent");
+        btn.classList.remove("text-text-secondary", "border-border");
 
-  // ── Category filter ──
-  const filterBtns = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
-  const projectItems = document.querySelectorAll<HTMLElement>(".project-item");
-
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.dataset.filter!;
-
-      // Update button styles
-      filterBtns.forEach((b) => {
-        b.classList.remove("bg-accent", "text-white", "border-accent");
-        b.classList.add("text-text-secondary", "border-border");
-      });
-      btn.classList.add("bg-accent", "text-white", "border-accent");
-      btn.classList.remove("text-text-secondary", "border-border");
-
-      // Filter items
-      projectItems.forEach((item) => {
-        const cat = item.dataset.category;
-        if (filter === "all" || cat === filter) {
-          item.classList.remove("hidden-filter");
-        } else {
-          item.classList.add("hidden-filter");
-        }
+        projectItems.forEach((item) => {
+          const cat = item.dataset.category;
+          if (filter === "all" || cat === filter) {
+            item.classList.remove("hidden-filter");
+          } else {
+            item.classList.add("hidden-filter");
+          }
+        });
       });
     });
-  });
+  }
+
+  initFilters();
+  document.addEventListener("astro:page-load", initFilters);
 </script>
