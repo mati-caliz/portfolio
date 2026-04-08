@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title?: string;
@@ -43,6 +44,9 @@ const navLinks = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
 
+    <!-- Astro View Transitions -->
+    <ClientRouter />
+
     <!-- Prevent FOUC for dark mode -->
     <script is:inline>
       (function () {
@@ -56,12 +60,14 @@ const navLinks = [
     <header
       id="site-header"
       class="fixed top-0 left-0 right-0 z-50 border-b border-border bg-bg/80 backdrop-blur-md transition-transform duration-300"
+      transition:persist
     >
       <nav class="max-w-5xl mx-auto px-[var(--spacing-container)] h-16 flex items-center justify-between">
         <!-- Logo -->
         <a
           href="/"
           class="text-lg font-semibold tracking-tight text-text hover:text-accent transition-colors duration-300 relative group"
+          transition:name="logo"
         >
           mc<span class="text-accent">.</span>
           <span class="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full"></span>
@@ -82,10 +88,11 @@ const navLinks = [
                         ? "text-text bg-bg-secondary"
                         : "text-text-secondary hover:text-text hover:bg-bg-secondary",
                     ]}
+                    data-astro-prefetch
                   >
                     {label}
                     {isActive && (
-                      <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent" />
+                      <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent" transition:name={`nav-dot-${href}`} />
                     )}
                   </a>
                 </li>
@@ -100,7 +107,6 @@ const navLinks = [
             aria-label="Toggle dark mode"
             class="relative p-2 rounded-lg text-text-secondary hover:text-text hover:bg-bg-secondary transition-all duration-200"
           >
-            <!-- Sun icon -->
             <svg
               class="w-5 h-5 transition-transform duration-300"
               id="sun-icon"
@@ -115,7 +121,6 @@ const navLinks = [
                 d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
               ></path>
             </svg>
-            <!-- Moon icon -->
             <svg
               class="w-5 h-5 absolute inset-0 m-auto transition-transform duration-300"
               id="moon-icon"
@@ -167,6 +172,7 @@ const navLinks = [
                         ? "text-text bg-bg-secondary"
                         : "text-text-secondary hover:bg-bg-secondary hover:text-text",
                     ]}
+                    data-astro-prefetch
                   >
                     {label}
                   </a>
@@ -178,15 +184,13 @@ const navLinks = [
       </div>
     </header>
 
-    <main class="flex-1 pt-16">
+    <main class="flex-1 pt-16" transition:animate="fade">
       <slot />
     </main>
 
-    <footer class="border-t border-border">
+    <footer class="border-t border-border" transition:name="footer">
       <div class="max-w-5xl mx-auto px-[var(--spacing-container)] py-16">
-        <!-- Top row: nav + socials -->
         <div class="flex flex-col sm:flex-row items-start justify-between gap-8 mb-12">
-          <!-- Left: brand + status -->
           <div>
             <a href="/" class="text-lg font-semibold tracking-tight text-text hover:text-accent transition-colors duration-300">
               mc<span class="text-accent">.</span>
@@ -197,13 +201,12 @@ const navLinks = [
             </div>
           </div>
 
-          <!-- Center: nav links -->
           <div class="flex gap-8 text-sm">
             <div class="space-y-2">
               <p class="text-xs font-mono text-text-tertiary uppercase tracking-widest mb-3">Pages</p>
-              <a href="/projects" class="block text-text-secondary hover:text-text transition-colors duration-200">Projects</a>
-              <a href="/experience" class="block text-text-secondary hover:text-text transition-colors duration-200">Experience</a>
-              <a href="/about" class="block text-text-secondary hover:text-text transition-colors duration-200">About</a>
+              <a href="/projects" class="block text-text-secondary hover:text-text transition-colors duration-200" data-astro-prefetch>Projects</a>
+              <a href="/experience" class="block text-text-secondary hover:text-text transition-colors duration-200" data-astro-prefetch>Experience</a>
+              <a href="/about" class="block text-text-secondary hover:text-text transition-colors duration-200" data-astro-prefetch>About</a>
             </div>
             <div class="space-y-2">
               <p class="text-xs font-mono text-text-tertiary uppercase tracking-widest mb-3">Connect</p>
@@ -213,7 +216,6 @@ const navLinks = [
             </div>
           </div>
 
-          <!-- Right: social icons -->
           <div class="flex items-center gap-4">
             <a href="https://github.com/mati-caliz" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="p-2 rounded-lg text-text-tertiary hover:text-text hover:bg-bg-secondary transition-all duration-200">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -233,7 +235,6 @@ const navLinks = [
           </div>
         </div>
 
-        <!-- Bottom row: copyright -->
         <div class="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p class="text-xs text-text-tertiary">
             &copy; {new Date().getFullYear()} Matias Caliz. Built with Astro.
@@ -246,12 +247,20 @@ const navLinks = [
     </footer>
 
     <script is:inline>
-      (function () {
-        // ── Theme toggle ──
+      // Run on initial load AND after every view transition
+      function initLayout() {
         const toggle = document.getElementById("theme-toggle");
         const sunIcon = document.getElementById("sun-icon");
         const moonIcon = document.getElementById("moon-icon");
+        const header = document.getElementById("site-header");
+        const mobileBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const line1 = document.getElementById("menu-line-1");
+        const line2 = document.getElementById("menu-line-2");
 
+        if (!toggle || !sunIcon || !moonIcon) return;
+
+        // ── Theme ──
         function getTheme() {
           const stored = localStorage.getItem("theme");
           if (stored) return stored;
@@ -262,24 +271,21 @@ const navLinks = [
           const root = document.documentElement;
           root.classList.remove("light", "dark");
           root.classList.add(theme);
-          // Sun: visible in dark (so user can switch to light)
           sunIcon.style.opacity = theme === "dark" ? "1" : "0";
           sunIcon.style.transform = theme === "dark" ? "rotate(0deg) scale(1)" : "rotate(-90deg) scale(0)";
-          // Moon: visible in light (so user can switch to dark)
           moonIcon.style.opacity = theme === "light" ? "1" : "0";
           moonIcon.style.transform = theme === "light" ? "rotate(0deg) scale(1)" : "rotate(90deg) scale(0)";
         }
 
         applyTheme(getTheme());
 
-        toggle.addEventListener("click", () => {
+        toggle.onclick = () => {
           const next = getTheme() === "dark" ? "light" : "dark";
           localStorage.setItem("theme", next);
           applyTheme(next);
-        });
+        };
 
-        // ── Header hide/show on scroll ──
-        const header = document.getElementById("site-header");
+        // ── Header hide/show ──
         let lastScrollY = window.scrollY;
         let ticking = false;
 
@@ -302,33 +308,69 @@ const navLinks = [
         }, { passive: true });
 
         // ── Mobile menu ──
-        const mobileBtn = document.getElementById("mobile-menu-btn");
-        const mobileMenu = document.getElementById("mobile-menu");
-        const line1 = document.getElementById("menu-line-1");
-        const line2 = document.getElementById("menu-line-2");
         let menuOpen = false;
+        if (mobileBtn && mobileMenu) {
+          // Reset on navigation
+          mobileMenu.style.maxHeight = "0";
+          menuOpen = false;
 
-        mobileBtn.addEventListener("click", () => {
-          menuOpen = !menuOpen;
-          if (menuOpen) {
-            mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
-            line1.setAttribute("transform", "rotate(45 12 12)");
-            line1.setAttribute("y1", "12");
-            line1.setAttribute("y2", "12");
-            line2.setAttribute("transform", "rotate(-45 12 12)");
-            line2.setAttribute("y1", "12");
-            line2.setAttribute("y2", "12");
-          } else {
-            mobileMenu.style.maxHeight = "0";
-            line1.removeAttribute("transform");
-            line1.setAttribute("y1", "8");
-            line1.setAttribute("y2", "8");
-            line2.removeAttribute("transform");
-            line2.setAttribute("y1", "16");
-            line2.setAttribute("y2", "16");
-          }
+          mobileBtn.onclick = () => {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+              mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+              line1.setAttribute("transform", "rotate(45 12 12)");
+              line1.setAttribute("y1", "12");
+              line1.setAttribute("y2", "12");
+              line2.setAttribute("transform", "rotate(-45 12 12)");
+              line2.setAttribute("y1", "12");
+              line2.setAttribute("y2", "12");
+            } else {
+              mobileMenu.style.maxHeight = "0";
+              line1.removeAttribute("transform");
+              line1.setAttribute("y1", "8");
+              line1.setAttribute("y2", "8");
+              line2.removeAttribute("transform");
+              line2.setAttribute("y1", "16");
+              line2.setAttribute("y2", "16");
+            }
+          };
+        }
+      }
+
+      // Run on first load
+      initLayout();
+
+      // Re-run after view transitions swap
+      document.addEventListener("astro:after-swap", () => {
+        // Re-apply dark mode class (it gets removed on swap)
+        const stored = localStorage.getItem("theme");
+        const theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.classList.add(theme);
+        initLayout();
+      });
+
+      // Re-trigger page animations after navigation
+      document.addEventListener("astro:page-load", () => {
+        // Hero reveals
+        document.querySelectorAll(".hero-reveal").forEach((el) => {
+          const delay = parseInt(el.dataset.delay || "0", 10);
+          setTimeout(() => el.classList.add("visible"), 100 + delay);
         });
-      })();
+
+        // Scroll reveals
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+        document.querySelectorAll(".scroll-reveal").forEach((el) => observer.observe(el));
+      });
     </script>
   </body>
 </html>
