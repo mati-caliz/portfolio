@@ -1,0 +1,299 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { projects } from "../../data/projects";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+};
+
+const { project } = Astro.props;
+
+const statusColors = {
+  production: "bg-emerald-500",
+  "in-progress": "bg-amber-500",
+  completed: "bg-blue-500",
+};
+
+const categoryLabels = {
+  work: "Professional",
+  venture: "Venture",
+  "open-source": "Open Source",
+};
+
+// Find adjacent projects for navigation
+const currentIndex = projects.findIndex((p) => p.slug === project.slug);
+const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
+const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
+---
+
+<Layout title={`${project.title} | Matias Caliz`} description={project.tagline}>
+  <article>
+    <!-- Hero header -->
+    <section class="pt-[var(--spacing-section)] pb-12 relative overflow-hidden">
+      <!-- Color accent bg -->
+      <div
+        class="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-10 pointer-events-none"
+        style={`background: ${project.color};`}
+      ></div>
+
+      <div class="max-w-5xl mx-auto px-[var(--spacing-container)] relative z-10">
+        <!-- Back link -->
+        <a
+          href="/projects"
+          class="inline-flex items-center gap-2 text-sm text-text-tertiary hover:text-text transition-colors duration-200 mb-8 group hero-reveal"
+          data-delay="0"
+        >
+          <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+          </svg>
+          All projects
+        </a>
+
+        <!-- Meta row -->
+        <div class="flex flex-wrap items-center gap-3 mb-6 hero-reveal" data-delay="50">
+          <span class="px-2.5 py-0.5 text-xs font-mono rounded-full border border-border text-text-tertiary">
+            {categoryLabels[project.category]}
+          </span>
+          <span class="text-text-tertiary text-xs">|</span>
+          <span class="text-xs font-mono text-text-tertiary">{project.year}</span>
+          <span class="text-text-tertiary text-xs">|</span>
+          <div class="flex items-center gap-1.5">
+            <span class={`w-1.5 h-1.5 rounded-full ${statusColors[project.status]}`}></span>
+            <span class="text-xs font-mono text-text-tertiary">{project.statusLabel}</span>
+          </div>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4 hero-reveal" data-delay="100">
+          {project.title}
+        </h1>
+
+        <!-- Tagline -->
+        <p class="text-xl sm:text-2xl text-text-secondary max-w-2xl leading-relaxed hero-reveal" data-delay="200">
+          {project.tagline}
+        </p>
+
+        <!-- Role -->
+        <p class="text-sm font-mono text-accent mt-4 hero-reveal" data-delay="250">
+          Role: {project.role}
+        </p>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
+      <div class="border-t border-border"></div>
+    </div>
+
+    <!-- Content -->
+    <section class="py-16">
+      <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
+        <div class="grid lg:grid-cols-[1fr_280px] gap-16">
+          <!-- Main content -->
+          <div class="space-y-16">
+            <!-- Overview -->
+            <div class="scroll-reveal">
+              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest">Overview</h2>
+              <p class="text-text-secondary leading-relaxed text-base">
+                {project.description}
+              </p>
+            </div>
+
+            <!-- The Challenge -->
+            <div class="scroll-reveal">
+              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest">The Challenge</h2>
+              <p class="text-text-secondary leading-relaxed text-base">
+                {project.challenge}
+              </p>
+            </div>
+
+            <!-- The Approach -->
+            <div class="scroll-reveal">
+              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest">The Approach</h2>
+              <p class="text-text-secondary leading-relaxed text-base">
+                {project.approach}
+              </p>
+            </div>
+
+            <!-- The Outcome -->
+            <div class="scroll-reveal">
+              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest">The Outcome</h2>
+              <p class="text-text-secondary leading-relaxed text-base">
+                {project.outcome}
+              </p>
+            </div>
+
+            <!-- Key Highlights -->
+            <div class="scroll-reveal">
+              <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest">Key Highlights</h2>
+              <div class="grid sm:grid-cols-2 gap-4">
+                {project.highlights.map((highlight, i) => (
+                  <div class="flex items-start gap-3 p-4 rounded-xl border border-border hover:bg-bg-secondary transition-colors duration-200">
+                    <span class="text-xs font-mono text-text-tertiary mt-0.5 shrink-0">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span class="text-sm text-text-secondary">{highlight}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="space-y-8 lg:sticky lg:top-24 lg:self-start scroll-reveal">
+            <!-- Tech stack -->
+            <div>
+              <h3 class="text-xs font-mono text-text-tertiary mb-3 uppercase tracking-widest">Stack</h3>
+              <div class="flex flex-wrap gap-1.5">
+                {project.stack.map((tech) => (
+                  <span class="px-2.5 py-1 text-xs font-mono text-text-secondary bg-bg-secondary rounded-lg border border-border">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <!-- Links -->
+            {project.links.length > 0 && (
+              <div>
+                <h3 class="text-xs font-mono text-text-tertiary mb-3 uppercase tracking-widest">Links</h3>
+                <div class="space-y-2">
+                  {project.links.map((link) => (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-center gap-2 text-sm text-text-secondary hover:text-accent transition-colors duration-200 group"
+                    >
+                      <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                      </svg>
+                      <span class="group-hover:underline underline-offset-4">{link.label}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <!-- Year -->
+            <div>
+              <h3 class="text-xs font-mono text-text-tertiary mb-3 uppercase tracking-widest">Timeline</h3>
+              <p class="text-sm text-text-secondary">{project.year}</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project navigation -->
+    <section class="border-t border-border">
+      <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
+        <div class="grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-border">
+          <!-- Previous -->
+          <div class="py-12 sm:pr-8">
+            {prevProject ? (
+              <a href={`/projects/${prevProject.slug}`} class="group block">
+                <span class="text-xs font-mono text-text-tertiary mb-2 block">Previous project</span>
+                <span class="text-lg font-semibold group-hover:text-accent transition-colors duration-200 flex items-center gap-2">
+                  <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+                  </svg>
+                  {prevProject.title}
+                </span>
+              </a>
+            ) : (
+              <a href="/projects" class="group block">
+                <span class="text-xs font-mono text-text-tertiary mb-2 block">Back to</span>
+                <span class="text-lg font-semibold group-hover:text-accent transition-colors duration-200 flex items-center gap-2">
+                  <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+                  </svg>
+                  All Projects
+                </span>
+              </a>
+            )}
+          </div>
+
+          <!-- Next -->
+          <div class="py-12 sm:pl-8 text-right">
+            {nextProject ? (
+              <a href={`/projects/${nextProject.slug}`} class="group block">
+                <span class="text-xs font-mono text-text-tertiary mb-2 block">Next project</span>
+                <span class="text-lg font-semibold group-hover:text-accent transition-colors duration-200 flex items-center gap-2 justify-end">
+                  {nextProject.title}
+                  <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+                  </svg>
+                </span>
+              </a>
+            ) : (
+              <a href="/projects" class="group block">
+                <span class="text-xs font-mono text-text-tertiary mb-2 block">Back to</span>
+                <span class="text-lg font-semibold group-hover:text-accent transition-colors duration-200 flex items-center gap-2 justify-end">
+                  All Projects
+                  <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+                  </svg>
+                </span>
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</Layout>
+
+<style>
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-reveal {
+    opacity: 0;
+  }
+
+  .hero-reveal.visible {
+    animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // Hero reveals
+  document.querySelectorAll<HTMLElement>(".hero-reveal").forEach((el) => {
+    const delay = parseInt(el.dataset.delay || "0", 10);
+    setTimeout(() => el.classList.add("visible"), 100 + delay);
+  });
+
+  // Scroll reveals
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  document.querySelectorAll(".scroll-reveal").forEach((el) => observer.observe(el));
+</script>

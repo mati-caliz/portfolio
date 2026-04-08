@@ -1,19 +1,136 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../data/projects";
+
+const categories = [
+  { key: "all", label: "All" },
+  { key: "work", label: "Professional" },
+  { key: "venture", label: "Ventures" },
+  { key: "open-source", label: "Open Source" },
+];
 ---
 
 <Layout title="Projects | Matias Caliz">
   <section class="py-[var(--spacing-section)]">
     <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
-      <p class="text-sm font-mono text-accent mb-4 uppercase tracking-widest">Selected work</p>
-      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Projects</h1>
-      <p class="text-lg text-text-secondary max-w-xl">
-        A selection of things I've built — from production apps serving millions to side projects born from curiosity.
-      </p>
+      <!-- Header -->
+      <div class="mb-16">
+        <p class="text-sm font-mono text-accent mb-4 uppercase tracking-widest hero-reveal" data-delay="0">
+          Selected work
+        </p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4 hero-reveal" data-delay="100">
+          Projects
+        </h1>
+        <p class="text-lg text-text-secondary max-w-xl hero-reveal" data-delay="200">
+          From production apps serving millions of users to side ventures born from curiosity and ambition.
+        </p>
 
-      <div class="mt-16 text-text-tertiary text-sm font-mono">
-        Coming soon...
+        <!-- Category filters -->
+        <div class="flex flex-wrap gap-2 mt-8 hero-reveal" data-delay="300" id="filter-bar">
+          {categories.map(({ key, label }) => (
+            <button
+              type="button"
+              data-filter={key}
+              class:list={[
+                "filter-btn px-4 py-1.5 text-sm font-medium rounded-full border transition-all duration-200",
+                key === "all"
+                  ? "bg-accent text-white border-accent"
+                  : "text-text-secondary border-border hover:border-border-hover hover:text-text",
+              ]}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Projects grid -->
+      <div class="grid sm:grid-cols-2 gap-6" id="projects-grid">
+        {projects.map((project, i) => (
+          <div data-category={project.category} class="project-item">
+            <ProjectCard project={project} index={i} />
+          </div>
+        ))}
       </div>
     </div>
   </section>
 </Layout>
+
+<style>
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-reveal {
+    opacity: 0;
+  }
+
+  .hero-reveal.visible {
+    animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .project-item {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .project-item.hidden-filter {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+    position: absolute;
+    visibility: hidden;
+  }
+</style>
+
+<script>
+  // ── Page reveal ──
+  document.querySelectorAll<HTMLElement>(".hero-reveal").forEach((el) => {
+    const delay = parseInt(el.dataset.delay || "0", 10);
+    setTimeout(() => el.classList.add("visible"), 100 + delay);
+  });
+
+  // ── Scroll reveal for cards ──
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  document.querySelectorAll(".scroll-reveal").forEach((el) => observer.observe(el));
+
+  // ── Category filter ──
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+  const projectItems = document.querySelectorAll<HTMLElement>(".project-item");
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter!;
+
+      // Update button styles
+      filterBtns.forEach((b) => {
+        b.classList.remove("bg-accent", "text-white", "border-accent");
+        b.classList.add("text-text-secondary", "border-border");
+      });
+      btn.classList.add("bg-accent", "text-white", "border-accent");
+      btn.classList.remove("text-text-secondary", "border-border");
+
+      // Filter items
+      projectItems.forEach((item) => {
+        const cat = item.dataset.category;
+        if (filter === "all" || cat === filter) {
+          item.classList.remove("hidden-filter");
+        } else {
+          item.classList.add("hidden-filter");
+        }
+      });
+    });
+  });
+</script>
