@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getFeaturedProjects } from "../data/projects";
+import Terminal from "../components/Terminal";
 
 const featured = getFeaturedProjects();
 ---
@@ -152,6 +153,29 @@ const featured = getFeaturedProjects();
             <span class="w-1 h-1 rounded-full bg-amber-500"></span>
             2 active side projects
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Terminal -->
+  <section class="py-[var(--spacing-section)] border-t border-border">
+    <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
+      <div class="grid lg:grid-cols-[1fr_1fr] gap-12 items-start">
+        <div class="scroll-reveal">
+          <p class="text-xs font-mono text-accent mb-3 uppercase tracking-widest">Interactive</p>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Try the terminal</h2>
+          <p class="text-text-secondary leading-relaxed mb-4">
+            A quick way to explore who I am and what I do. Type <code class="px-1.5 py-0.5 text-xs font-mono bg-bg-secondary rounded border border-border">help</code> to get started.
+          </p>
+          <div class="space-y-2 text-sm text-text-tertiary">
+            <p>Commands like <code class="font-mono text-text-secondary">about</code>, <code class="font-mono text-text-secondary">skills</code>, <code class="font-mono text-text-secondary">projects</code> give you quick info.</p>
+            <p>Use <code class="font-mono text-text-secondary">open projects</code> to navigate directly to pages.</p>
+            <p>Arrow keys for command history. <code class="font-mono text-text-secondary">Ctrl+L</code> to clear.</p>
+          </div>
+        </div>
+        <div class="scroll-reveal" style="transition-delay: 150ms;">
+          <Terminal client:visible />
         </div>
       </div>
     </div>
