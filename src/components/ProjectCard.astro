@@ -14,6 +14,12 @@ const statusColors = {
   "in-progress": "bg-amber-500",
   completed: "bg-blue-500",
 };
+
+const categoryLabelsEs: Record<string, string> = {
+  work: "Profesional",
+  venture: "Emprendimiento",
+  "open-source": "Open Source",
+};
 ---
 
 <a
@@ -34,7 +40,7 @@ const statusColors = {
         <span class="text-xs font-mono text-text-tertiary">{num}</span>
         <div class="flex items-center gap-1.5">
           <span class={`w-1.5 h-1.5 rounded-full ${statusColors[project.status]}`}></span>
-          <span class="text-xs font-mono text-text-tertiary">{project.statusLabel}</span>
+          <span class="text-xs font-mono text-text-tertiary" data-i18n-es={project.statusLabel_es}>{project.statusLabel}</span>
         </div>
       </div>
 
@@ -42,6 +48,7 @@ const statusColors = {
       <div class="mb-3">
         <span
           class="inline-block px-2.5 py-0.5 text-xs font-mono rounded-full border border-border text-text-tertiary"
+          data-i18n-es={categoryLabelsEs[project.category]}
         >
           {project.category === "work" ? "Professional" : project.category === "venture" ? "Venture" : "Open Source"}
         </span>
@@ -53,7 +60,7 @@ const statusColors = {
       </h3>
 
       <!-- Tagline -->
-      <p class="text-sm text-text-secondary leading-relaxed mb-6">
+      <p class="text-sm text-text-secondary leading-relaxed mb-6" data-i18n-es={project.tagline_es}>
         {project.tagline}
       </p>
 
@@ -76,7 +83,7 @@ const statusColors = {
         <svg class="w-4 h-4 mt-0.5 text-accent shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
         </svg>
-        <span>{project.highlights[0]}</span>
+        <span data-i18n-es={project.highlights_es?.[0]}>{project.highlights[0]}</span>
       </div>
     </div>
 
@@ -87,4 +94,3 @@ const statusColors = {
     ></div>
   </article>
 </a>
-
