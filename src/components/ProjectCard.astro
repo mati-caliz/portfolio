@@ -60,12 +60,12 @@ const categoryLabelsEs: Record<string, string> = {
       </h3>
 
       <!-- Tagline -->
-      <p class="text-sm text-text-secondary leading-relaxed mb-6" data-i18n-es={project.tagline_es}>
+      <p class="text-sm text-text-secondary leading-relaxed mb-6 min-h-[3rem]" data-i18n-es={project.tagline_es}>
         {project.tagline}
       </p>
 
       <!-- Stack -->
-      <div class="flex flex-wrap gap-1.5 mb-6">
+      <div class="flex flex-wrap gap-1.5 mb-6 min-h-[2rem]">
         {project.stack.slice(0, 5).map((tech) => (
           <span class="px-2 py-0.5 text-xs font-mono text-text-tertiary bg-bg-secondary rounded border border-border">
             {tech}
