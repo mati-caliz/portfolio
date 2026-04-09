@@ -24,6 +24,12 @@ const categoryLabels = {
   "open-source": "Open Source",
 };
 
+const categoryLabelsEs: Record<string, string> = {
+  work: "Profesional",
+  venture: "Emprendimiento",
+  "open-source": "Open Source",
+};
+
 // Find adjacent projects for navigation
 const currentIndex = projects.findIndex((p) => p.slug === project.slug);
 const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
@@ -50,12 +56,12 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
           <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
           </svg>
-          All projects
+          <span data-i18n-es="Todos los proyectos">All projects</span>
         </a>
 
         <!-- Meta row -->
         <div class="flex flex-wrap items-center gap-3 mb-6 hero-reveal" data-delay="50">
-          <span class="px-2.5 py-0.5 text-xs font-mono rounded-full border border-border text-text-tertiary">
+          <span class="px-2.5 py-0.5 text-xs font-mono rounded-full border border-border text-text-tertiary" data-i18n-es={categoryLabelsEs[project.category]}>
             {categoryLabels[project.category]}
           </span>
           <span class="text-text-tertiary text-xs">|</span>
@@ -63,7 +69,7 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
           <span class="text-text-tertiary text-xs">|</span>
           <div class="flex items-center gap-1.5">
             <span class={`w-1.5 h-1.5 rounded-full ${statusColors[project.status]}`}></span>
-            <span class="text-xs font-mono text-text-tertiary">{project.statusLabel}</span>
+            <span class="text-xs font-mono text-text-tertiary" data-i18n-es={project.statusLabel_es}>{project.statusLabel}</span>
           </div>
         </div>
 
@@ -73,13 +79,16 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
         </h1>
 
         <!-- Tagline -->
-        <p class="text-xl sm:text-2xl text-text-secondary max-w-2xl leading-relaxed hero-reveal" data-delay="200">
+        <p class="text-xl sm:text-2xl text-text-secondary max-w-2xl leading-relaxed hero-reveal" data-delay="200" data-i18n-es={project.tagline_es}>
           {project.tagline}
         </p>
 
         <!-- Role -->
-        <p class="text-sm font-mono text-accent mt-4 hero-reveal" data-delay="250">
+        <p class="text-sm font-mono text-accent mt-4 hero-reveal lang-en" data-delay="250">
           Role: {project.role}
+        </p>
+        <p class="text-sm font-mono text-accent mt-4 hero-reveal lang-es" data-delay="250">
+          Rol: {project.role_es}
         </p>
       </div>
     </section>
@@ -97,46 +106,46 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
           <div class="space-y-16">
             <!-- Overview -->
             <div class="scroll-reveal">
-              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest">Overview</h2>
-              <p class="text-text-secondary leading-relaxed text-base">
+              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest" data-i18n-es="Descripción general">Overview</h2>
+              <p class="text-text-secondary leading-relaxed text-base" data-i18n-es={project.description_es}>
                 {project.description}
               </p>
             </div>
 
             <!-- The Challenge -->
             <div class="scroll-reveal">
-              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest">The Challenge</h2>
-              <p class="text-text-secondary leading-relaxed text-base">
+              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest" data-i18n-es="El Desafío">The Challenge</h2>
+              <p class="text-text-secondary leading-relaxed text-base" data-i18n-es={project.challenge_es}>
                 {project.challenge}
               </p>
             </div>
 
             <!-- The Approach -->
             <div class="scroll-reveal">
-              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest">The Approach</h2>
-              <p class="text-text-secondary leading-relaxed text-base">
+              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest" data-i18n-es="El Enfoque">The Approach</h2>
+              <p class="text-text-secondary leading-relaxed text-base" data-i18n-es={project.approach_es}>
                 {project.approach}
               </p>
             </div>
 
             <!-- The Outcome -->
             <div class="scroll-reveal">
-              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest">The Outcome</h2>
-              <p class="text-text-secondary leading-relaxed text-base">
+              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest" data-i18n-es="El Resultado">The Outcome</h2>
+              <p class="text-text-secondary leading-relaxed text-base" data-i18n-es={project.outcome_es}>
                 {project.outcome}
               </p>
             </div>
 
             <!-- Key Highlights -->
             <div class="scroll-reveal">
-              <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest">Key Highlights</h2>
+              <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest" data-i18n-es="Puntos Clave">Key Highlights</h2>
               <div class="grid sm:grid-cols-2 gap-4">
                 {project.highlights.map((highlight, i) => (
                   <div class="flex items-start gap-3 p-4 rounded-xl border border-border hover:bg-bg-secondary transition-colors duration-200">
                     <span class="text-xs font-mono text-text-tertiary mt-0.5 shrink-0">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span class="text-sm text-text-secondary">{highlight}</span>
+                    <span class="text-sm text-text-secondary" data-i18n-es={project.highlights_es?.[i]}>{highlight}</span>
                   </div>
                 ))}
               </div>
@@ -197,7 +206,7 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
           <div class="py-12 sm:pr-8">
             {prevProject ? (
               <a href={`/projects/${prevProject.slug}`} class="group block">
-                <span class="text-xs font-mono text-text-tertiary mb-2 block">Previous project</span>
+                <span class="text-xs font-mono text-text-tertiary mb-2 block" data-i18n-es="Proyecto anterior">Previous project</span>
                 <span class="text-lg font-semibold group-hover:text-accent transition-colors duration-200 flex items-center gap-2">
                   <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
@@ -207,12 +216,12 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
               </a>
             ) : (
               <a href="/projects" class="group block">
-                <span class="text-xs font-mono text-text-tertiary mb-2 block">Back to</span>
+                <span class="text-xs font-mono text-text-tertiary mb-2 block" data-i18n-es="Volver a">Back to</span>
                 <span class="text-lg font-semibold group-hover:text-accent transition-colors duration-200 flex items-center gap-2">
                   <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
                   </svg>
-                  All Projects
+                  <span data-i18n-es="Todos los Proyectos">All Projects</span>
                 </span>
               </a>
             )}
@@ -222,7 +231,7 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
           <div class="py-12 sm:pl-8 text-right">
             {nextProject ? (
               <a href={`/projects/${nextProject.slug}`} class="group block">
-                <span class="text-xs font-mono text-text-tertiary mb-2 block">Next project</span>
+                <span class="text-xs font-mono text-text-tertiary mb-2 block" data-i18n-es="Siguiente proyecto">Next project</span>
                 <span class="text-lg font-semibold group-hover:text-accent transition-colors duration-200 flex items-center gap-2 justify-end">
                   {nextProject.title}
                   <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -232,9 +241,9 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
               </a>
             ) : (
               <a href="/projects" class="group block">
-                <span class="text-xs font-mono text-text-tertiary mb-2 block">Back to</span>
+                <span class="text-xs font-mono text-text-tertiary mb-2 block" data-i18n-es="Volver a">Back to</span>
                 <span class="text-lg font-semibold group-hover:text-accent transition-colors duration-200 flex items-center gap-2 justify-end">
-                  All Projects
+                  <span data-i18n-es="Todos los Proyectos">All Projects</span>
                   <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
                   </svg>
@@ -247,4 +256,3 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
     </section>
   </article>
 </Layout>
-

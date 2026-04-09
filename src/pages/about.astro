@@ -6,9 +6,9 @@ import Layout from "../layouts/Layout.astro";
   <!-- Header -->
   <section class="pt-[var(--spacing-section)] pb-12">
     <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
-      <p class="text-sm font-mono text-accent mb-4 uppercase tracking-widest hero-reveal" data-delay="0">Who I am</p>
-      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4 hero-reveal" data-delay="100">About</h1>
-      <p class="text-xl text-text-secondary max-w-2xl leading-relaxed hero-reveal" data-delay="200">
+      <p class="text-sm font-mono text-accent mb-4 uppercase tracking-widest hero-reveal" data-delay="0" data-i18n-es="Quién soy">Who I am</p>
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4 hero-reveal" data-delay="100" data-i18n-es="Sobre mí">About</h1>
+      <p class="text-xl text-text-secondary max-w-2xl leading-relaxed hero-reveal" data-delay="200" data-i18n-es="Ingeniero con background en seguridad, construyendo productos que resuelven problemas reales. Basado en Buenos Aires.">
         Engineer with a security background, building products that solve real problems. Based in Buenos Aires.
       </p>
     </div>
@@ -22,39 +22,57 @@ import Layout from "../layouts/Layout.astro";
         <div class="space-y-12">
           <!-- Intro -->
           <div class="scroll-reveal">
-            <p class="text-base text-text-secondary leading-relaxed">
+            <p class="text-base text-text-secondary leading-relaxed lang-en">
               I'm Matias — a 24-year-old Full Stack Engineer from Buenos Aires. I graduated as
               <span class="text-text font-medium">Ingeniero en Informatica</span> from UADE and currently work at
               <span class="text-text font-medium">Despegar</span>, where I build the search experience used by millions of travelers across Latin America.
             </p>
-          </div>
-
-          <div class="scroll-reveal">
-            <p class="text-base text-text-secondary leading-relaxed">
-              Before engineering, I worked as an
-              <span class="text-text font-medium">IT Auditor at EY</span>, evaluating cybersecurity controls and system architecture for enterprise clients. That experience gave me something most developers don't have: a systematic understanding of how systems fail, how security breaks, and how to think about risk at an architectural level.
+            <p class="text-base text-text-secondary leading-relaxed lang-es">
+              Soy Matias — Ingeniero Full Stack de 24 años de Buenos Aires. Me recibí de
+              <span class="text-text font-medium">Ingeniero en Informática</span> en UADE y actualmente trabajo en
+              <span class="text-text font-medium">Despegar</span>, donde construyo la experiencia de búsqueda usada por millones de viajeros en Latinoamérica.
             </p>
           </div>
 
           <div class="scroll-reveal">
-            <p class="text-base text-text-secondary leading-relaxed">
-              Outside of work, I'm building two products:
+            <p class="text-base text-text-secondary leading-relaxed lang-en">
+              Before engineering, I worked as an
+              <span class="text-text font-medium">IT Auditor at EY</span>, evaluating cybersecurity controls and system architecture for enterprise clients. That experience gave me something most developers don't have: a systematic understanding of how systems fail, how security breaks, and how to think about risk at an architectural level.
+            </p>
+            <p class="text-base text-text-secondary leading-relaxed lang-es">
+              Antes de ingeniería, trabajé como
+              <span class="text-text font-medium">Auditor de IT en EY</span>, evaluando controles de ciberseguridad y arquitectura de sistemas para grandes clientes. Esa experiencia me dio algo que la mayoría de los desarrolladores no tienen: un entendimiento sistemático de cómo fallan los sistemas, cómo se quiebra la seguridad y cómo pensar el riesgo a nivel arquitectónico.
+            </p>
+          </div>
+
+          <div class="scroll-reveal">
+            <p class="text-base text-text-secondary leading-relaxed lang-en">
+              Outside of work, I built two products independently:
               <span class="text-text font-medium">Finlatam</span>, a financial data dashboard for LATAM markets, and
               <span class="text-text font-medium">Gastronova</span>, a SaaS for restaurant management.
               I believe the best way to grow as an engineer is to own the full lifecycle — from idea to architecture to production.
+            </p>
+            <p class="text-base text-text-secondary leading-relaxed lang-es">
+              Fuera del trabajo, construí de forma independiente dos productos:
+              <span class="text-text font-medium">Finlatam</span>, un dashboard de datos financieros para mercados LATAM, y
+              <span class="text-text font-medium">Gastronova</span>, un SaaS para gestión gastronómica.
+              Creo que la mejor forma de crecer como ingeniero es ser dueño de todo el ciclo — desde la idea a la arquitectura a producción.
             </p>
           </div>
 
           <!-- Philosophy -->
           <div class="scroll-reveal border-l-2 border-accent pl-6">
-            <p class="text-base text-text italic leading-relaxed">
+            <p class="text-base text-text italic leading-relaxed lang-en">
               "I think software engineering is at its best when it sits at the intersection of technical depth, product thinking, and real-world impact."
+            </p>
+            <p class="text-base text-text italic leading-relaxed lang-es">
+              "Creo que la ingeniería de software está en su mejor momento cuando se encuentra en la intersección de profundidad técnica, pensamiento de producto e impacto real."
             </p>
           </div>
 
           <!-- What drives me -->
           <div class="scroll-reveal">
-            <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest">What drives me</h2>
+            <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest" data-i18n-es="Qué me motiva">What drives me</h2>
             <div class="grid sm:grid-cols-2 gap-4">
               <div class="p-5 border border-border rounded-xl hover:bg-bg-secondary hover:border-border-hover transition-all duration-300">
                 <div class="text-lg mb-2">
@@ -62,8 +80,8 @@ import Layout from "../layouts/Layout.astro";
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
                   </svg>
                 </div>
-                <h3 class="text-sm font-semibold mb-1">Craftsmanship</h3>
-                <p class="text-xs text-text-secondary leading-relaxed">
+                <h3 class="text-sm font-semibold mb-1" data-i18n-es="Oficio">Craftsmanship</h3>
+                <p class="text-xs text-text-secondary leading-relaxed" data-i18n-es="Escribir código que no solo funcione, sino que esté bien arquitecturado, sea performante y mantenible.">
                   Writing code that's not just functional, but well-architected, performant, and maintainable.
                 </p>
               </div>
@@ -73,8 +91,8 @@ import Layout from "../layouts/Layout.astro";
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                   </svg>
                 </div>
-                <h3 class="text-sm font-semibold mb-1">Security</h3>
-                <p class="text-xs text-text-secondary leading-relaxed">
+                <h3 class="text-sm font-semibold mb-1" data-i18n-es="Seguridad">Security</h3>
+                <p class="text-xs text-text-secondary leading-relaxed" data-i18n-es="Mi background en auditoría hace que la seguridad no sea un afterthought — está integrada en cómo diseño sistemas.">
                   My audit background means security isn't an afterthought — it's baked into how I design systems.
                 </p>
               </div>
@@ -84,8 +102,8 @@ import Layout from "../layouts/Layout.astro";
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
                   </svg>
                 </div>
-                <h3 class="text-sm font-semibold mb-1">Impact</h3>
-                <p class="text-xs text-text-secondary leading-relaxed">
+                <h3 class="text-sm font-semibold mb-1" data-i18n-es="Impacto">Impact</h3>
+                <p class="text-xs text-text-secondary leading-relaxed" data-i18n-es="Quiero construir cosas que la gente realmente use. Millones de usuarios interactúan con mi código todos los días.">
                   I want to build things that people actually use. Millions of users interact with my code every day.
                 </p>
               </div>
@@ -96,7 +114,7 @@ import Layout from "../layouts/Layout.astro";
                   </svg>
                 </div>
                 <h3 class="text-sm font-semibold mb-1">Ownership</h3>
-                <p class="text-xs text-text-secondary leading-relaxed">
+                <p class="text-xs text-text-secondary leading-relaxed" data-i18n-es="Construir side projects end-to-end — del concepto a la arquitectura al deploy — porque ahí es donde pasa el crecimiento real.">
                   Building side projects end-to-end — from concept to architecture to deployment — because that's where real growth happens.
                 </p>
               </div>
@@ -108,26 +126,26 @@ import Layout from "../layouts/Layout.astro";
         <aside class="space-y-8 lg:sticky lg:top-24 lg:self-start">
           <!-- Quick facts -->
           <div class="scroll-reveal">
-            <h3 class="text-xs font-mono text-text-tertiary mb-4 uppercase tracking-widest">Quick facts</h3>
+            <h3 class="text-xs font-mono text-text-tertiary mb-4 uppercase tracking-widest" data-i18n-es="Datos rápidos">Quick facts</h3>
             <dl class="space-y-3">
               <div class="flex justify-between items-baseline py-2 border-b border-border">
-                <dt class="text-sm text-text-secondary">Location</dt>
+                <dt class="text-sm text-text-secondary" data-i18n-es="Ubicación">Location</dt>
                 <dd class="text-sm font-medium">Buenos Aires</dd>
               </div>
               <div class="flex justify-between items-baseline py-2 border-b border-border">
-                <dt class="text-sm text-text-secondary">Role</dt>
+                <dt class="text-sm text-text-secondary" data-i18n-es="Rol">Role</dt>
                 <dd class="text-sm font-medium">Full Stack Dev</dd>
               </div>
               <div class="flex justify-between items-baseline py-2 border-b border-border">
-                <dt class="text-sm text-text-secondary">Company</dt>
+                <dt class="text-sm text-text-secondary" data-i18n-es="Empresa">Company</dt>
                 <dd class="text-sm font-medium">Despegar</dd>
               </div>
               <div class="flex justify-between items-baseline py-2 border-b border-border">
-                <dt class="text-sm text-text-secondary">Education</dt>
+                <dt class="text-sm text-text-secondary" data-i18n-es="Educación">Education</dt>
                 <dd class="text-sm font-medium">Ing. Informatica</dd>
               </div>
               <div class="flex justify-between items-baseline py-2 border-b border-border">
-                <dt class="text-sm text-text-secondary">Languages</dt>
+                <dt class="text-sm text-text-secondary" data-i18n-es="Idiomas">Languages</dt>
                 <dd class="text-sm font-medium">ES / EN (B2)</dd>
               </div>
             </dl>
@@ -135,7 +153,7 @@ import Layout from "../layouts/Layout.astro";
 
           <!-- Interests -->
           <div class="scroll-reveal">
-            <h3 class="text-xs font-mono text-text-tertiary mb-4 uppercase tracking-widest">Interests</h3>
+            <h3 class="text-xs font-mono text-text-tertiary mb-4 uppercase tracking-widest" data-i18n-es="Intereses">Interests</h3>
             <div class="flex flex-wrap gap-1.5">
               {[
                 "Fintech",
@@ -155,7 +173,7 @@ import Layout from "../layouts/Layout.astro";
 
           <!-- Daily stack -->
           <div class="scroll-reveal">
-            <h3 class="text-xs font-mono text-text-tertiary mb-4 uppercase tracking-widest">Daily stack</h3>
+            <h3 class="text-xs font-mono text-text-tertiary mb-4 uppercase tracking-widest" data-i18n-es="Stack diario">Daily stack</h3>
             <div class="space-y-2">
               {[
                 { label: "Frontend", tools: "React, Angular, TypeScript" },
@@ -174,7 +192,7 @@ import Layout from "../layouts/Layout.astro";
 
           <!-- Connect -->
           <div class="scroll-reveal">
-            <h3 class="text-xs font-mono text-text-tertiary mb-4 uppercase tracking-widest">Connect</h3>
+            <h3 class="text-xs font-mono text-text-tertiary mb-4 uppercase tracking-widest" data-i18n-es="Contacto">Connect</h3>
             <div class="space-y-2">
               <a
                 href="https://github.com/mati-caliz"
@@ -188,7 +206,7 @@ import Layout from "../layouts/Layout.astro";
                 <span class="group-hover:underline underline-offset-4">GitHub</span>
               </a>
               <a
-                href="https://linkedin.com/in/matiascaliz"
+                href="https://www.linkedin.com/in/matias-caliz/"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="flex items-center gap-2.5 py-2 text-sm text-text-secondary hover:text-accent transition-colors duration-200 group"
@@ -199,13 +217,13 @@ import Layout from "../layouts/Layout.astro";
                 <span class="group-hover:underline underline-offset-4">LinkedIn</span>
               </a>
               <a
-                href="mailto:matias.caliz@gmail.com"
+                href="mailto:matiascaliz@hotmail.com"
                 class="flex items-center gap-2.5 py-2 text-sm text-text-secondary hover:text-accent transition-colors duration-200 group"
               >
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path>
                 </svg>
-                <span class="group-hover:underline underline-offset-4">matias.caliz@gmail.com</span>
+                <span class="group-hover:underline underline-offset-4">matiascaliz@hotmail.com</span>
               </a>
             </div>
           </div>
@@ -214,4 +232,3 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </section>
 </Layout>
-

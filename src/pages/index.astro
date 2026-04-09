@@ -26,11 +26,11 @@ const featured = getFeaturedProjects();
       <div class="max-w-2xl">
         <!-- Greeting -->
         <p
-          class="text-sm font-mono text-accent mb-4 opacity-0 hero-reveal"
+          class="text-base font-mono text-accent mb-4 opacity-0 hero-reveal"
           data-delay="0"
         >
           <span class="inline-block w-2 h-2 rounded-full bg-accent mr-2 animate-pulse"></span>
-          Hey, I'm
+          <span data-i18n-es="Hola, soy">Hey, I'm</span>
         </p>
 
         <!-- Name -->
@@ -53,16 +53,23 @@ const featured = getFeaturedProjects();
 
         <!-- Tagline -->
         <p
-          class="text-base sm:text-lg text-text-tertiary leading-relaxed mb-8 max-w-lg opacity-0 hero-reveal"
+          class="text-base sm:text-lg text-text-tertiary leading-relaxed mb-8 max-w-lg opacity-0 hero-reveal lang-en"
           data-delay="400"
         >
           Currently crafting experiences at
-          <a
-            href="https://www.despegar.com"
-            target="_blank"
-            rel="noopener noreferrer"
+          <a href="https://www.despegar.com" target="_blank" rel="noopener noreferrer"
             class="text-text-secondary hover:text-accent transition-colors duration-200 underline decoration-border hover:decoration-accent underline-offset-4"
           >Despegar</a>. Previously auditing systems at
+          <span class="text-text-secondary">EY</span>.
+        </p>
+        <p
+          class="text-base sm:text-lg text-text-tertiary leading-relaxed mb-8 max-w-lg opacity-0 hero-reveal lang-es"
+          data-delay="400"
+        >
+          Actualmente creando experiencias en
+          <a href="https://www.despegar.com" target="_blank" rel="noopener noreferrer"
+            class="text-text-secondary hover:text-accent transition-colors duration-200 underline decoration-border hover:decoration-accent underline-offset-4"
+          >Despegar</a>. Anteriormente auditando sistemas en
           <span class="text-text-secondary">EY</span>.
         </p>
 
@@ -75,16 +82,16 @@ const featured = getFeaturedProjects();
             href="/projects"
             class="group inline-flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-lg font-medium text-sm hover:bg-accent-hover transition-all duration-200 hover:gap-3"
           >
-            See my work
+            <span data-i18n-es="Ver mi trabajo">See my work</span>
             <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
             </svg>
           </a>
           <a
-            href="mailto:matias.caliz@gmail.com"
+            href="mailto:matiascaliz@hotmail.com"
             class="inline-flex items-center gap-2 px-6 py-3 border border-border rounded-lg font-medium text-sm text-text-secondary hover:text-text hover:border-border-hover hover:bg-bg-secondary transition-all duration-200"
           >
-            Get in touch
+            <span data-i18n-es="Contactame">Get in touch</span>
           </a>
         </div>
 
@@ -103,10 +110,10 @@ const featured = getFeaturedProjects();
 
       <!-- Scroll indicator -->
       <div
-        class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-tertiary opacity-0 hero-reveal"
+        class="absolute bottom-8 right-12 flex flex-col items-center gap-2 text-text-tertiary opacity-0 hero-reveal"
         data-delay="900"
       >
-        <span class="text-xs font-mono">scroll</span>
+        <span class="text-xs font-mono" data-i18n-es="bajar">scroll</span>
         <div class="w-px h-8 bg-border relative overflow-hidden">
           <div class="w-full h-3 bg-text-tertiary absolute animate-scroll-line"></div>
         </div>
@@ -121,38 +128,38 @@ const featured = getFeaturedProjects();
       <div class="grid md:grid-cols-3 gap-8 md:gap-12">
         <!-- Card 1 -->
         <div class="group scroll-reveal p-6 -m-6 rounded-2xl hover:bg-bg-secondary transition-all duration-300">
-          <div class="text-xs font-mono text-accent mb-3 uppercase tracking-widest">01 / Engineering</div>
-          <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200">Production-scale code</h3>
-          <p class="text-sm text-text-secondary leading-relaxed">
+          <div class="text-xs font-mono text-accent mb-3 uppercase tracking-widest" data-i18n-es="01 / Ingeniería">01 / Engineering</div>
+          <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200" data-i18n-es="Código a escala de producción">Production-scale code</h3>
+          <p class="text-sm text-text-secondary leading-relaxed" data-i18n-es="Construyendo el buscador, header y footer usados por millones de viajeros diariamente en Despegar. Java, Spring, React y Angular a escala.">
             Building the search box, header & footer used by millions of travelers daily at Despegar. Java, Spring, React & Angular at scale.
           </p>
           <div class="mt-4 flex items-center gap-1.5 text-xs font-mono text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             <span class="w-1 h-1 rounded-full bg-emerald-500"></span>
-            Millions of daily users
+            <span data-i18n-es="Millones de usuarios diarios">Millions of daily users</span>
           </div>
         </div>
         <!-- Card 2 -->
         <div class="group scroll-reveal p-6 -m-6 rounded-2xl hover:bg-bg-secondary transition-all duration-300" style="transition-delay: 100ms;">
-          <div class="text-xs font-mono text-accent mb-3 uppercase tracking-widest">02 / Security</div>
-          <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200">Security-first mindset</h3>
-          <p class="text-sm text-text-secondary leading-relaxed">
+          <div class="text-xs font-mono text-accent mb-3 uppercase tracking-widest" data-i18n-es="02 / Seguridad">02 / Security</div>
+          <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200" data-i18n-es="Mentalidad security-first">Security-first mindset</h3>
+          <p class="text-sm text-text-secondary leading-relaxed" data-i18n-es="Ex Auditor de IT en EY. Background en ciberseguridad y auditoría de sistemas que define cómo diseño y reviso código.">
             Former IT Auditor at EY. Cybersecurity & systems audit background that shapes how I architect and review code.
           </p>
           <div class="mt-4 flex items-center gap-1.5 text-xs font-mono text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             <span class="w-1 h-1 rounded-full bg-blue-500"></span>
-            Security + Engineering
+            <span data-i18n-es="Seguridad + Ingeniería">Security + Engineering</span>
           </div>
         </div>
         <!-- Card 3 -->
         <div class="group scroll-reveal p-6 -m-6 rounded-2xl hover:bg-bg-secondary transition-all duration-300" style="transition-delay: 200ms;">
-          <div class="text-xs font-mono text-accent mb-3 uppercase tracking-widest">03 / Ventures</div>
-          <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200">Building products</h3>
-          <p class="text-sm text-text-secondary leading-relaxed">
-            Independently developing Finlatam (fintech dashboard) and Gastronova (restaurant SaaS). From idea to production.
+          <div class="text-xs font-mono text-accent mb-3 uppercase tracking-widest" data-i18n-es="03 / Emprendimientos">03 / Ventures</div>
+          <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200" data-i18n-es="Productos propios">Own products</h3>
+          <p class="text-sm text-text-secondary leading-relaxed" data-i18n-es="Construí de forma independiente Finlatam (dashboard fintech) y Gastronova (SaaS gastronómico). De la idea a producción.">
+            Independently built Finlatam (fintech dashboard) and Gastronova (restaurant SaaS). From idea to production.
           </p>
           <div class="mt-4 flex items-center gap-1.5 text-xs font-mono text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             <span class="w-1 h-1 rounded-full bg-amber-500"></span>
-            2 active side projects
+            <span data-i18n-es="2 side projects lanzados">2 shipped side projects</span>
           </div>
         </div>
       </div>
@@ -164,15 +171,23 @@ const featured = getFeaturedProjects();
     <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
       <div class="grid lg:grid-cols-[1fr_1fr] gap-12 items-start">
         <div class="scroll-reveal">
-          <p class="text-xs font-mono text-accent mb-3 uppercase tracking-widest">Interactive</p>
-          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Try the terminal</h2>
-          <p class="text-text-secondary leading-relaxed mb-4">
+          <p class="text-xs font-mono text-accent mb-3 uppercase tracking-widest" data-i18n-es="Interactivo">Interactive</p>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4" data-i18n-es="Probá la terminal">Try the terminal</h2>
+          <p class="text-text-secondary leading-relaxed mb-4 lang-en">
             A quick way to explore who I am and what I do. Type <code class="px-1.5 py-0.5 text-xs font-mono bg-bg-secondary rounded border border-border">help</code> to get started.
           </p>
-          <div class="space-y-2 text-sm text-text-tertiary">
+          <p class="text-text-secondary leading-relaxed mb-4 lang-es">
+            Una forma rápida de explorar quién soy y qué hago. Escribí <code class="px-1.5 py-0.5 text-xs font-mono bg-bg-secondary rounded border border-border">help</code> para empezar.
+          </p>
+          <div class="space-y-2 text-sm text-text-tertiary lang-en">
             <p>Commands like <code class="font-mono text-text-secondary">about</code>, <code class="font-mono text-text-secondary">skills</code>, <code class="font-mono text-text-secondary">projects</code> give you quick info.</p>
             <p>Use <code class="font-mono text-text-secondary">open projects</code> to navigate directly to pages.</p>
             <p>Arrow keys for command history. <code class="font-mono text-text-secondary">Ctrl+L</code> to clear.</p>
+          </div>
+          <div class="space-y-2 text-sm text-text-tertiary lang-es">
+            <p>Comandos como <code class="font-mono text-text-secondary">about</code>, <code class="font-mono text-text-secondary">skills</code>, <code class="font-mono text-text-secondary">projects</code> te dan info rápida.</p>
+            <p>Usá <code class="font-mono text-text-secondary">open projects</code> para navegar directo a las páginas.</p>
+            <p>Flechas para historial de comandos. <code class="font-mono text-text-secondary">Ctrl+L</code> para limpiar.</p>
           </div>
         </div>
         <div class="scroll-reveal" style="transition-delay: 150ms;">
@@ -187,14 +202,14 @@ const featured = getFeaturedProjects();
     <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
       <div class="flex items-end justify-between mb-12">
         <div>
-          <p class="text-xs font-mono text-accent mb-3 uppercase tracking-widest scroll-reveal">Featured work</p>
-          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight scroll-reveal">Selected Projects</h2>
+          <p class="text-xs font-mono text-accent mb-3 uppercase tracking-widest scroll-reveal" data-i18n-es="Trabajo destacado">Featured work</p>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight scroll-reveal" data-i18n-es="Proyectos Seleccionados">Selected Projects</h2>
         </div>
         <a
           href="/projects"
           class="hidden sm:flex items-center gap-2 text-sm text-text-secondary hover:text-accent transition-colors duration-200 group scroll-reveal"
         >
-          View all
+          <span data-i18n-es="Ver todos">View all</span>
           <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
           </svg>
@@ -221,11 +236,12 @@ const featured = getFeaturedProjects();
                     <h3 class="text-lg sm:text-xl font-bold group-hover:text-accent transition-colors duration-200">
                       {project.title}
                     </h3>
-                    <span class="px-2 py-0.5 text-xs font-mono rounded-full border border-border text-text-tertiary">
+                    <span class="px-2 py-0.5 text-xs font-mono rounded-full border border-border text-text-tertiary"
+                      data-i18n-es={project.category === "work" ? "Profesional" : "Emprendimiento"}>
                       {project.category === "work" ? "Professional" : "Venture"}
                     </span>
                   </div>
-                  <p class="text-sm text-text-secondary">{project.tagline}</p>
+                  <p class="text-sm text-text-secondary" data-i18n-es={project.tagline_es}>{project.tagline}</p>
                 </div>
                 <div class="flex items-center gap-4 shrink-0">
                   <div class="hidden sm:flex flex-wrap gap-1.5">
@@ -250,7 +266,7 @@ const featured = getFeaturedProjects();
         href="/projects"
         class="sm:hidden flex items-center justify-center gap-2 mt-8 py-3 text-sm font-medium text-text-secondary hover:text-accent transition-colors duration-200 scroll-reveal"
       >
-        View all projects
+        <span data-i18n-es="Ver todos los proyectos">View all projects</span>
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
         </svg>
@@ -281,12 +297,23 @@ const featured = getFeaturedProjects();
 
 <script>
   // ── Role typing effect ──
-  const roles = [
+  const rolesEn = [
     "Full Stack Engineer.",
     "Product Builder.",
     "Security-Minded Developer.",
     "Fintech Enthusiast.",
   ];
+  const rolesEs = [
+    "Ingeniero Full Stack.",
+    "Constructor de Productos.",
+    "Desarrollador Security-First.",
+    "Entusiasta Fintech.",
+  ];
+
+  function getRoles() {
+    return (document.documentElement.getAttribute("data-lang") || "en") === "es" ? rolesEs : rolesEn;
+  }
+
   const roleEl = document.getElementById("role-text");
   if (roleEl) {
     let roleIndex = 0;
@@ -294,7 +321,17 @@ const featured = getFeaturedProjects();
     let isDeleting = false;
     let pauseTimer: ReturnType<typeof setTimeout> | null = null;
 
+    // Listen for language changes — reset typing
+    window.addEventListener("langchange", () => {
+      charIndex = 0;
+      isDeleting = false;
+      if (pauseTimer) clearTimeout(pauseTimer);
+      roleEl!.textContent = "";
+      typeRole();
+    });
+
     function typeRole() {
+      const roles = getRoles();
       const current = roles[roleIndex];
 
       if (!isDeleting) {

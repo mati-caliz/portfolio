@@ -4,10 +4,10 @@ import ProjectCard from "../components/ProjectCard.astro";
 import { projects } from "../data/projects";
 
 const categories = [
-  { key: "all", label: "All" },
-  { key: "work", label: "Professional" },
-  { key: "venture", label: "Ventures" },
-  { key: "open-source", label: "Open Source" },
+  { key: "all", label: "All", labelEs: "Todos" },
+  { key: "work", label: "Professional", labelEs: "Profesional" },
+  { key: "venture", label: "Ventures", labelEs: "Emprendimientos" },
+  { key: "open-source", label: "Open Source", labelEs: "Open Source" },
 ];
 ---
 
@@ -16,19 +16,19 @@ const categories = [
     <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
       <!-- Header -->
       <div class="mb-16">
-        <p class="text-sm font-mono text-accent mb-4 uppercase tracking-widest hero-reveal" data-delay="0">
+        <p class="text-sm font-mono text-accent mb-4 uppercase tracking-widest hero-reveal" data-delay="0" data-i18n-es="Trabajo seleccionado">
           Selected work
         </p>
-        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4 hero-reveal" data-delay="100">
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4 hero-reveal" data-delay="100" data-i18n-es="Proyectos">
           Projects
         </h1>
-        <p class="text-lg text-text-secondary max-w-xl hero-reveal" data-delay="200">
+        <p class="text-lg text-text-secondary max-w-xl hero-reveal" data-delay="200" data-i18n-es="Desde apps en producción sirviendo millones de usuarios hasta emprendimientos nacidos de la curiosidad y la ambición.">
           From production apps serving millions of users to side ventures born from curiosity and ambition.
         </p>
 
         <!-- Category filters -->
         <div class="flex flex-wrap gap-2 mt-8 hero-reveal" data-delay="300" id="filter-bar">
-          {categories.map(({ key, label }) => (
+          {categories.map(({ key, label, labelEs }) => (
             <button
               type="button"
               data-filter={key}
@@ -38,6 +38,7 @@ const categories = [
                   ? "bg-accent text-white border-accent"
                   : "text-text-secondary border-border hover:border-border-hover hover:text-text",
               ]}
+              data-i18n-es={labelEs}
             >
               {label}
             </button>

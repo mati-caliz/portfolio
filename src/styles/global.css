@@ -185,6 +185,22 @@ body {
   box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
+/* ── i18n show/hide (for elements with HTML content) ── */
+[data-lang="es"] .lang-en { display: none !important; }
+[data-lang="es"] .lang-es { display: block !important; }
+[data-lang="en"] .lang-es,
+:root:not([data-lang]) .lang-es { display: none !important; }
+
+/* Inline variant for spans */
+[data-lang="es"] span.lang-es,
+[data-lang="es"] a.lang-es { display: inline !important; }
+[data-lang="es"] span.lang-en,
+[data-lang="es"] a.lang-en { display: none !important; }
+
+/* Flex variant */
+[data-lang="es"] .lang-es-flex { display: flex !important; }
+[data-lang="es"] .lang-en-flex { display: none !important; }
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

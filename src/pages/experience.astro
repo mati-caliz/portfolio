@@ -7,9 +7,9 @@ import { experiences, education, certifications } from "../data/experience";
   <!-- Header -->
   <section class="pt-[var(--spacing-section)] pb-12">
     <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
-      <p class="text-sm font-mono text-accent mb-4 uppercase tracking-widest hero-reveal" data-delay="0">Career</p>
-      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4 hero-reveal" data-delay="100">Experience</h1>
-      <p class="text-lg text-text-secondary max-w-xl hero-reveal" data-delay="200">
+      <p class="text-sm font-mono text-accent mb-4 uppercase tracking-widest hero-reveal" data-delay="0" data-i18n-es="Carrera">Career</p>
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4 hero-reveal" data-delay="100" data-i18n-es="Experiencia">Experience</h1>
+      <p class="text-lg text-text-secondary max-w-xl hero-reveal" data-delay="200" data-i18n-es="De auditar sistemas en EY a construir productos a escala. El background en seguridad no es un desvío — es un superpoder.">
         From auditing systems at EY to building products at scale. The security background isn't a detour — it's a superpower.
       </p>
     </div>
@@ -51,12 +51,12 @@ import { experiences, education, certifications } from "../data/experience";
                       <h3 class="text-xl sm:text-2xl font-bold group-hover:text-accent transition-colors duration-200">
                         {exp.company}
                       </h3>
-                      <p class="text-sm font-medium text-text-secondary mt-0.5">{exp.role}</p>
+                      <p class="text-sm font-medium text-text-secondary mt-0.5" data-i18n-es={exp.role_es}>{exp.role}</p>
                     </div>
                     <div class="flex items-center gap-3 shrink-0">
                       <span class="text-xs font-mono text-text-tertiary">{exp.period}</span>
                       {exp.current && (
-                        <span class="px-2 py-0.5 text-xs font-mono rounded-full bg-accent/10 text-accent border border-accent/20">
+                        <span class="px-2 py-0.5 text-xs font-mono rounded-full bg-accent/10 text-accent border border-accent/20" data-i18n-es="Actual">
                           Current
                         </span>
                       )}
@@ -73,18 +73,18 @@ import { experiences, education, certifications } from "../data/experience";
                   </div>
 
                   <!-- Description -->
-                  <p class="text-sm text-text-secondary leading-relaxed mb-6">
+                  <p class="text-sm text-text-secondary leading-relaxed mb-6" data-i18n-es={exp.description_es}>
                     {exp.description}
                   </p>
 
                   <!-- Achievements -->
                   <ul class="space-y-2 mb-6">
-                    {exp.achievements.map((achievement) => (
+                    {exp.achievements.map((achievement, j) => (
                       <li class="flex items-start gap-2.5 text-sm text-text-secondary">
                         <svg class="w-4 h-4 mt-0.5 text-accent shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
-                        <span>{achievement}</span>
+                        <span data-i18n-es={exp.achievements_es[j]}>{achievement}</span>
                       </li>
                     ))}
                   </ul>
@@ -118,15 +118,15 @@ import { experiences, education, certifications } from "../data/experience";
       <div class="grid md:grid-cols-2 gap-12 md:gap-16">
         <!-- Education -->
         <div class="scroll-reveal">
-          <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest">Education</h2>
+          <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest" data-i18n-es="Educación">Education</h2>
           {education.map((edu) => (
             <div class="border border-border rounded-xl p-6 hover:border-border-hover hover:bg-bg-secondary transition-all duration-300">
               <div class="flex items-start justify-between gap-2 mb-2">
                 <h3 class="text-lg font-bold">{edu.institution}</h3>
                 <span class="text-xs font-mono text-text-tertiary shrink-0">{edu.period}</span>
               </div>
-              <p class="text-sm font-medium text-accent mb-3">{edu.degree}</p>
-              <p class="text-sm text-text-secondary leading-relaxed">{edu.description}</p>
+              <p class="text-sm font-medium text-accent mb-3" data-i18n-es={edu.degree_es}>{edu.degree}</p>
+              <p class="text-sm text-text-secondary leading-relaxed" data-i18n-es={edu.description_es}>{edu.description}</p>
             </div>
           ))}
         </div>
@@ -134,7 +134,7 @@ import { experiences, education, certifications } from "../data/experience";
         <!-- Certifications & Languages -->
         <div class="space-y-8">
           <div class="scroll-reveal">
-            <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest">Certifications</h2>
+            <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest" data-i18n-es="Certificaciones">Certifications</h2>
             <div class="space-y-3">
               {certifications.map((cert) => (
                 <div class="flex items-center justify-between border border-border rounded-xl p-4 hover:border-border-hover hover:bg-bg-secondary transition-all duration-300">
@@ -149,16 +149,16 @@ import { experiences, education, certifications } from "../data/experience";
           </div>
 
           <div class="scroll-reveal">
-            <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest">Languages</h2>
+            <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest" data-i18n-es="Idiomas">Languages</h2>
             <div class="space-y-3">
               <div class="flex items-center justify-between border border-border rounded-xl p-4 hover:border-border-hover hover:bg-bg-secondary transition-all duration-300">
-                <span class="text-sm font-semibold">Spanish</span>
-                <span class="text-xs font-mono text-text-tertiary">Native</span>
+                <span class="text-sm font-semibold" data-i18n-es="Español">Spanish</span>
+                <span class="text-xs font-mono text-text-tertiary" data-i18n-es="Nativo">Native</span>
               </div>
               <div class="flex items-center justify-between border border-border rounded-xl p-4 hover:border-border-hover hover:bg-bg-secondary transition-all duration-300">
                 <div>
-                  <span class="text-sm font-semibold">English</span>
-                  <span class="text-xs text-text-tertiary ml-2">Cambridge B2 — targeting Advanced in 2026</span>
+                  <span class="text-sm font-semibold" data-i18n-es="Inglés">English</span>
+                  <span class="text-xs text-text-tertiary ml-2" data-i18n-es="Cambridge B2 — apuntando a Advanced en 2026">Cambridge B2 — targeting Advanced in 2026</span>
                 </div>
                 <span class="text-xs font-mono text-text-tertiary">B2</span>
               </div>
@@ -172,12 +172,12 @@ import { experiences, education, certifications } from "../data/experience";
   <!-- CTA -->
   <section class="py-16 border-t border-border">
     <div class="max-w-5xl mx-auto px-[var(--spacing-container)] text-center scroll-reveal">
-      <p class="text-text-secondary mb-6">Interested in working together?</p>
+      <p class="text-text-secondary mb-6" data-i18n-es="¿Interesado en trabajar juntos?">Interested in working together?</p>
       <a
-        href="mailto:matias.caliz@gmail.com"
+        href="mailto:matiascaliz@hotmail.com"
         class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-lg font-medium text-sm hover:bg-accent-hover transition-colors duration-200"
       >
-        Get in touch
+        <span data-i18n-es="Contactame">Get in touch</span>
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
         </svg>
@@ -185,4 +185,3 @@ import { experiences, education, certifications } from "../data/experience";
     </div>
   </section>
 </Layout>
-
