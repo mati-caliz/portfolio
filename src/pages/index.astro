@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getFeaturedProjects } from "../data/projects";
+import { experiences, education } from "../data/experience";
 import Terminal from "../components/Terminal";
 
 const featured = getFeaturedProjects();
@@ -194,6 +195,95 @@ const featured = getFeaturedProjects();
           <Terminal client:visible />
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="py-[var(--spacing-section)] border-t border-border">
+    <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
+      <div class="flex items-end justify-between mb-12">
+        <div>
+          <p class="text-xs font-mono text-accent mb-3 uppercase tracking-widest scroll-reveal" data-i18n-es="Trayectoria">Background</p>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight scroll-reveal" data-i18n-es="Experiencia">Experience</h2>
+        </div>
+        <a
+          href="/experience"
+          class="hidden sm:flex items-center gap-2 text-sm text-text-secondary hover:text-accent transition-colors duration-200 group scroll-reveal"
+        >
+          <span data-i18n-es="Ver más">See more</span>
+          <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+          </svg>
+        </a>
+      </div>
+
+      <div class="space-y-6">
+        {experiences.map((exp, i) => (
+          <div
+            class="group scroll-reveal relative border border-border rounded-xl p-6 sm:p-8 hover:border-border-hover hover:bg-bg-secondary transition-all duration-300 overflow-hidden"
+            style={`transition-delay: ${i * 100}ms;`}
+          >
+            <div
+              class="absolute top-0 left-0 w-1 h-full rounded-l-xl"
+              style={`background: ${exp.color};`}
+            ></div>
+
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-1">
+                  <h3 class="text-lg sm:text-xl font-bold">{exp.company}</h3>
+                  {exp.current && (
+                    <span class="flex items-center gap-1.5 px-2 py-0.5 text-xs font-mono rounded-full border border-emerald-500/30 text-emerald-500">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span data-i18n-es="Actual">Current</span>
+                    </span>
+                  )}
+                </div>
+                <p class="text-sm font-medium text-accent mb-2 lang-en">{exp.role}</p>
+                <p class="text-sm font-medium text-accent mb-2 lang-es">{exp.role_es}</p>
+                <p class="text-sm text-text-secondary leading-relaxed lang-en">{exp.description}</p>
+                <p class="text-sm text-text-secondary leading-relaxed lang-es">{exp.description_es}</p>
+              </div>
+              <div class="sm:text-right shrink-0">
+                <p class="text-sm font-mono text-text-tertiary">{exp.period}</p>
+                <p class="text-xs text-text-tertiary mt-1">{exp.location}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        {education.map((edu, i) => (
+          <div
+            class="group scroll-reveal relative border border-border rounded-xl p-6 sm:p-8 hover:border-border-hover hover:bg-bg-secondary transition-all duration-300 overflow-hidden"
+            style={`transition-delay: ${(experiences.length + i) * 100}ms;`}
+          >
+            <div class="absolute top-0 left-0 w-1 h-full rounded-l-xl bg-text-tertiary"></div>
+
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+              <div class="flex-1">
+                <h3 class="text-lg sm:text-xl font-bold mb-1">{edu.institution}</h3>
+                <p class="text-sm font-medium text-accent mb-2 lang-en">{edu.degree}</p>
+                <p class="text-sm font-medium text-accent mb-2 lang-es">{edu.degree_es}</p>
+                <p class="text-sm text-text-secondary leading-relaxed lang-en">{edu.description}</p>
+                <p class="text-sm text-text-secondary leading-relaxed lang-es">{edu.description_es}</p>
+              </div>
+              <div class="sm:text-right shrink-0">
+                <p class="text-sm font-mono text-text-tertiary">{edu.period}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <a
+        href="/experience"
+        class="sm:hidden flex items-center justify-center gap-2 mt-8 py-3 text-sm font-medium text-text-secondary hover:text-accent transition-colors duration-200 scroll-reveal"
+      >
+        <span data-i18n-es="Ver experiencia completa">See full experience</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+        </svg>
+      </a>
     </div>
   </section>
 

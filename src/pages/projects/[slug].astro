@@ -198,6 +198,74 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
       </div>
     </section>
 
+    <!-- Live Preview -->
+    {project.links.length > 0 && project.links[0].href && !project.hidePreview && (
+      <section class="py-16 border-t border-border">
+        <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
+          <div class="scroll-reveal">
+            <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest" data-i18n-es="Vista previa en vivo">Live Preview</h2>
+            <p class="text-sm text-text-tertiary mb-4" data-i18n-es="Interactuá con el sitio directamente — scrolleá, navegá y explorá.">
+              Interact with the site directly — scroll, navigate, and explore.
+            </p>
+            <div class="relative rounded-xl border border-border overflow-hidden bg-bg-secondary">
+              <!-- Browser chrome -->
+              <div class="flex items-center gap-2 px-4 py-3 border-b border-border bg-bg-secondary">
+                <div class="flex gap-1.5">
+                  <span class="w-3 h-3 rounded-full bg-red-500/60"></span>
+                  <span class="w-3 h-3 rounded-full bg-yellow-500/60"></span>
+                  <span class="w-3 h-3 rounded-full bg-green-500/60"></span>
+                </div>
+                <div class="flex-1 mx-3">
+                  <div class="bg-bg text-text-tertiary text-xs font-mono px-3 py-1.5 rounded-md border border-border truncate">
+                    {project.previewUrl || project.links[0].href}
+                  </div>
+                </div>
+                <a
+                  href={project.links[0].href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-text-tertiary hover:text-accent transition-colors duration-200"
+                  title="Open in new tab"
+                >
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                  </svg>
+                </a>
+              </div>
+              <!-- Iframe with fallback -->
+              <div class="relative" data-iframe-wrapper>
+                <iframe
+                  src={project.previewUrl || project.links[0].href}
+                  title={`${project.title} live preview`}
+                  class="w-full h-[500px] sm:h-[600px] bg-white"
+                  loading="lazy"
+                  sandbox="allow-scripts allow-same-origin allow-popups"
+                  data-iframe-preview
+                ></iframe>
+                <div class="hidden absolute inset-0 flex-col items-center justify-center bg-bg-secondary text-center p-8" data-iframe-fallback>
+                  <svg class="w-12 h-12 text-text-tertiary mb-4" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"></path>
+                  </svg>
+                  <p class="text-text-secondary mb-1 font-medium" data-i18n-es="Este sitio no permite vista previa embebida">This site doesn't allow embedded preview</p>
+                  <a
+                    href={project.links[0].href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 mt-3 px-4 py-2 text-sm font-mono text-accent border border-accent/30 rounded-lg hover:bg-accent/10 transition-colors duration-200"
+                  >
+                    <span data-i18n-es={`Visitar ${project.title}`}>Visit {project.title}</span>
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
     <!-- Project navigation -->
     <section class="border-t border-border">
       <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
