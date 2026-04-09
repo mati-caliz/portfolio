@@ -1,0 +1,136 @@
+---
+import { getFeaturedProjects } from "../data/projects";
+
+const topProject = getFeaturedProjects()[0];
+---
+
+<section class="py-[var(--spacing-section)] border-t border-border">
+  <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
+    <h2 class="sr-only">What I do</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+      <!-- Engineering (2x1) -->
+      <div class="group scroll-reveal lg:col-span-2 p-6 rounded-2xl border border-border hover:border-border-hover hover:bg-bg-secondary transition-all duration-300 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-1 h-full bg-accent rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top"></div>
+        <div class="text-xs font-mono text-accent mb-3 uppercase tracking-widest" data-i18n-es="01 / Ingenieria">01 / Engineering</div>
+        <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200" data-i18n-es="Codigo a escala de produccion">Production-scale code</h3>
+        <p class="text-sm text-text-secondary leading-relaxed" data-i18n-es="Construyendo el buscador, header y footer usados por millones de viajeros diariamente en Despegar. Java, Spring, React y Angular a escala.">
+          Building the search box, header & footer used by millions of travelers daily at Despegar. Java, Spring, React & Angular at scale.
+        </p>
+        <div class="mt-4 flex items-center gap-1.5 text-xs font-mono text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <span class="w-1 h-1 rounded-full bg-emerald-500"></span>
+          <span data-i18n-es="Millones de usuarios diarios">Millions of daily users</span>
+        </div>
+      </div>
+
+      <!-- Security (1x1) -->
+      <div class="group scroll-reveal p-6 rounded-2xl border border-border hover:border-border-hover hover:bg-bg-secondary transition-all duration-300 relative overflow-hidden" style="transition-delay: 100ms;">
+        <div class="absolute top-0 left-0 w-1 h-full bg-blue-500 rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top"></div>
+        <div class="text-xs font-mono text-accent mb-3 uppercase tracking-widest" data-i18n-es="02 / Seguridad">02 / Security</div>
+        <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200" data-i18n-es="Mentalidad security-first">Security-first mindset</h3>
+        <p class="text-sm text-text-secondary leading-relaxed" data-i18n-es="Ex Auditor de IT en EY. Background en ciberseguridad y auditoria de sistemas.">
+          Former IT Auditor at EY. Cybersecurity & systems audit background.
+        </p>
+        <div class="mt-4 flex items-center gap-1.5 text-xs font-mono text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <span class="w-1 h-1 rounded-full bg-blue-500"></span>
+          <span data-i18n-es="Seguridad + Ingenieria">Security + Engineering</span>
+        </div>
+      </div>
+
+      <!-- Ventures (1x1) -->
+      <div class="group scroll-reveal p-6 rounded-2xl border border-border hover:border-border-hover hover:bg-bg-secondary transition-all duration-300 relative overflow-hidden" style="transition-delay: 200ms;">
+        <div class="absolute top-0 left-0 w-1 h-full bg-amber-500 rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top"></div>
+        <div class="text-xs font-mono text-accent mb-3 uppercase tracking-widest" data-i18n-es="03 / Emprendimientos">03 / Ventures</div>
+        <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200" data-i18n-es="Productos propios">Own products</h3>
+        <p class="text-sm text-text-secondary leading-relaxed" data-i18n-es="Construi de forma independiente Finlatam y Gastronova. De la idea a produccion.">
+          Independently built Finlatam & Gastronova. From idea to production.
+        </p>
+        <div class="mt-4 flex items-center gap-1.5 text-xs font-mono text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <span class="w-1 h-1 rounded-full bg-amber-500"></span>
+          <span data-i18n-es="2 side projects lanzados">2 shipped side projects</span>
+        </div>
+      </div>
+
+      <!-- Stats (1x1) -->
+      <div class="scroll-reveal p-6 rounded-2xl border border-border hover:border-border-hover hover:bg-bg-secondary transition-all duration-300" style="transition-delay: 300ms;">
+        <div class="flex flex-col justify-between h-full">
+          <div>
+            <span class="text-4xl font-bold text-accent">4+</span>
+            <p class="text-sm text-text-secondary mt-1" data-i18n-es="Anos de experiencia">Years of experience</p>
+          </div>
+          <div class="mt-4 pt-4 border-t border-border">
+            <span class="text-4xl font-bold text-text">8</span>
+            <p class="text-sm text-text-secondary mt-1" data-i18n-es="Proyectos enviados">Projects shipped</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Project (2x1) -->
+      <a
+        href={`/projects/${topProject.slug}`}
+        class="group scroll-reveal lg:col-span-2 p-6 rounded-2xl border border-border hover:border-border-hover hover:bg-bg-secondary transition-all duration-300 relative overflow-hidden"
+        style="transition-delay: 400ms;"
+      >
+        <div
+          class="absolute top-0 left-0 w-1 h-full rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top"
+          style={`background: ${topProject.color};`}
+        ></div>
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <div class="text-xs font-mono text-accent mb-3 uppercase tracking-widest" data-i18n-es="Proyecto destacado">Featured project</div>
+            <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200">
+              {topProject.title}
+            </h3>
+            <p class="text-sm text-text-secondary leading-relaxed" data-i18n-es={topProject.tagline_es}>{topProject.tagline}</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              {topProject.stack.slice(0, 4).map((tech) => (
+                <span class="px-2 py-0.5 text-xs font-mono text-text-tertiary border border-border rounded-full">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+          <svg class="w-5 h-5 text-text-tertiary group-hover:text-accent transition-all duration-200 group-hover:translate-x-1 shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+          </svg>
+        </div>
+      </a>
+
+      <!-- Terminal CTA (1x1) -->
+      <button
+        id="bento-terminal-cta"
+        class="group scroll-reveal p-6 rounded-2xl border border-border hover:border-border-hover hover:bg-bg-secondary transition-all duration-300 text-left cursor-pointer"
+        style="transition-delay: 500ms;"
+        aria-label="Scroll to terminal section"
+      >
+        <div class="font-mono text-sm text-accent mb-3">
+          <span class="opacity-70">$</span> <span class="animate-pulse">_</span>
+        </div>
+        <h3 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-200" data-i18n-es="Proba la terminal">Try the terminal</h3>
+        <p class="text-sm text-text-secondary" data-i18n-es="Terminal interactiva con comandos para explorarme.">Interactive terminal with commands to explore.</p>
+        <div class="mt-4 flex items-center gap-1 text-xs font-mono text-text-tertiary group-hover:text-accent transition-colors duration-200">
+          <span data-i18n-es="Bajar">Scroll down</span>
+          <svg class="w-3 h-3 transition-transform duration-200 group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"></path>
+          </svg>
+        </div>
+      </button>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const cta = document.getElementById("bento-terminal-cta");
+    if (cta) {
+      cta.addEventListener("click", () => {
+        const terminal = document.querySelector("#terminal-section");
+        if (terminal) {
+          terminal.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      });
+    }
+  });
+</script>

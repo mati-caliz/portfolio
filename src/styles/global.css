@@ -201,6 +201,13 @@ body {
 [data-lang="es"] .lang-es-flex { display: flex !important; }
 [data-lang="es"] .lang-en-flex { display: none !important; }
 
+/* ── GitHub Heatmap colors ── */
+.heatmap-0 { background-color: var(--color-bg-secondary); }
+.heatmap-1 { background-color: color-mix(in srgb, var(--color-accent) 25%, var(--color-bg-secondary)); }
+.heatmap-2 { background-color: color-mix(in srgb, var(--color-accent) 50%, var(--color-bg-secondary)); }
+.heatmap-3 { background-color: color-mix(in srgb, var(--color-accent) 75%, var(--color-bg-secondary)); }
+.heatmap-4 { background-color: var(--color-accent); }
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
+import CommandPalette from "../components/CommandPalette";
 
 interface Props {
   title?: string;
@@ -119,6 +120,19 @@ const navLinks = [
             })}
           </ul>
 
+          <!-- Command palette hint -->
+          <button
+            id="cmd-k-hint"
+            type="button"
+            aria-label="Open command palette"
+            class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-border text-text-tertiary hover:text-text hover:border-border-hover hover:bg-bg-secondary transition-all duration-200 text-xs font-mono"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+            <kbd class="text-[10px]">&#8984;K</kbd>
+          </button>
+
           <!-- Language toggle -->
           <button
             id="lang-toggle"
@@ -214,6 +228,11 @@ const navLinks = [
       </div>
     </header>
 
+    <!-- Command Palette -->
+    <div transition:persist="command-palette">
+      <CommandPalette client:idle />
+    </div>
+
     <main class="flex-1 pt-16" transition:animate="fade">
       <slot />
     </main>
@@ -305,7 +324,16 @@ const navLinks = [
         const line2 = document.getElementById("menu-line-2");
         const langToggle = document.getElementById("lang-toggle");
 
+        const cmdKHint = document.getElementById("cmd-k-hint");
+
         if (!toggle || !sunIcon || !moonIcon) return;
+
+        // ── Command Palette hint button ──
+        if (cmdKHint) {
+          cmdKHint.onclick = function () {
+            window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true }));
+          };
+        }
 
         // ── Language ──
         var currentLang = localStorage.getItem("lang") || "en";
