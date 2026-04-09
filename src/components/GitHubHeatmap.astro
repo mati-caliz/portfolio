@@ -1,0 +1,192 @@
+---
+interface ContributionDay {
+  date: string;
+  count: number;
+  level: number;
+}
+
+interface ContributionData {
+  total: Record<string, number>;
+  contributions: ContributionDay[];
+}
+
+// Fetch at build time — no token needed
+let contributions: ContributionDay[] = [];
+let totalThisYear = 0;
+let fetchFailed = false;
+
+try {
+  const res = await fetch("https://github-contributions-api.jogruber.de/v4/mati-caliz");
+  if (res.ok) {
+    const data: ContributionData = await res.json();
+    // Get last 365 days of contributions
+    const now = new Date();
+    const oneYearAgo = new Date(now);
+    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+    contributions = data.contributions.filter((d) => {
+      const date = new Date(d.date);
+      return date >= oneYearAgo && date <= now;
+    });
+
+    // Total for current year
+    const currentYear = String(now.getFullYear());
+    totalThisYear = data.total[currentYear] || 0;
+  } else {
+    fetchFailed = true;
+  }
+} catch {
+  fetchFailed = true;
+}
+
+// Organize into weeks (columns) — each week starts on Sunday
+function organizeIntoWeeks(days: ContributionDay[]): ContributionDay[][] {
+  if (days.length === 0) return [];
+
+  const weeks: ContributionDay[][] = [];
+  let currentWeek: ContributionDay[] = [];
+
+  // Pad the first week with empty days if it doesn't start on Sunday
+  const firstDay = new Date(days[0].date).getDay();
+  for (let i = 0; i < firstDay; i++) {
+    currentWeek.push({ date: "", count: -1, level: -1 });
+  }
+
+  for (const day of days) {
+    currentWeek.push(day);
+    if (currentWeek.length === 7) {
+      weeks.push(currentWeek);
+      currentWeek = [];
+    }
+  }
+
+  // Push remaining partial week
+  if (currentWeek.length > 0) {
+    weeks.push(currentWeek);
+  }
+
+  return weeks;
+}
+
+const weeks = organizeIntoWeeks(contributions);
+
+// Month labels: find the first occurrence of each month
+const monthLabels: { label: string; label_es: string; col: number }[] = [];
+const monthNamesEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const monthNamesEs = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+const seenMonths = new Set<string>();
+
+weeks.forEach((week, weekIndex) => {
+  for (const day of week) {
+    if (day.date) {
+      const month = day.date.slice(0, 7); // YYYY-MM
+      if (!seenMonths.has(month)) {
+        seenMonths.add(month);
+        const monthNum = parseInt(day.date.slice(5, 7), 10) - 1;
+        monthLabels.push({
+          label: monthNamesEn[monthNum],
+          label_es: monthNamesEs[monthNum],
+          col: weekIndex,
+        });
+      }
+    }
+  }
+});
+
+const dayLabelsEn = ["", "Mon", "", "Wed", "", "Fri", ""];
+const dayLabelsEs = ["", "Lun", "", "Mie", "", "Vie", ""];
+---
+
+<div class="scroll-reveal">
+  {fetchFailed ? (
+    <p class="text-sm text-text-tertiary" data-i18n-es="Datos de contribuciones no disponibles">Contribution data unavailable</p>
+  ) : (
+    <div>
+      <!-- Header -->
+      <div class="flex items-baseline justify-between mb-4">
+        <div>
+          <p class="text-xs font-mono text-accent uppercase tracking-widest mb-1" data-i18n-es="Actividad en GitHub">GitHub activity</p>
+          <p class="text-sm text-text-secondary">
+            <span class="text-text font-semibold">{totalThisYear.toLocaleString()}</span>
+            <span data-i18n-es={` contribuciones en ${new Date().getFullYear()}`}>{` contributions in ${new Date().getFullYear()}`}</span>
+          </p>
+        </div>
+        <a
+          href="https://github.com/mati-caliz"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs text-text-tertiary hover:text-accent transition-colors duration-200 font-mono"
+        >
+          @mati-caliz
+        </a>
+      </div>
+
+      <!-- Heatmap grid -->
+      <div class="overflow-x-auto -mx-2 px-2" style="scrollbar-width: thin;">
+        <div class="inline-flex flex-col gap-0.5 min-w-fit">
+          <!-- Month labels row -->
+          <div class="flex gap-[3px] ml-[28px] mb-1">
+            {weeks.map((_, weekIndex) => {
+              const monthLabel = monthLabels.find((m) => m.col === weekIndex);
+              return (
+                <div class="w-[11px] text-center">
+                  {monthLabel ? (
+                    <span class="text-[9px] font-mono text-text-tertiary">
+                      <span class="lang-en">{monthLabel.label}</span>
+                      <span class="lang-es">{monthLabel.label_es}</span>
+                    </span>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+
+          <!-- Grid rows (7 days) -->
+          {[0, 1, 2, 3, 4, 5, 6].map((dayIndex) => (
+            <div class="flex items-center gap-[3px]">
+              <!-- Day label -->
+              <div class="w-[24px] text-right pr-1">
+                <span class="text-[9px] font-mono text-text-tertiary lang-en">{dayLabelsEn[dayIndex]}</span>
+                <span class="text-[9px] font-mono text-text-tertiary lang-es">{dayLabelsEs[dayIndex]}</span>
+              </div>
+              {/* Cells for each week */}
+              {weeks.map((week) => {
+                const day = week[dayIndex];
+                if (!day || day.level === -1) {
+                  return <div class="w-[11px] h-[11px]" />;
+                }
+                return (
+                  <div
+                    class:list={[
+                      "w-[11px] h-[11px] rounded-[2px] transition-colors duration-200",
+                      day.level === 0 && "heatmap-0",
+                      day.level === 1 && "heatmap-1",
+                      day.level === 2 && "heatmap-2",
+                      day.level === 3 && "heatmap-3",
+                      day.level === 4 && "heatmap-4",
+                    ]}
+                    title={`${day.date}: ${day.count} contribution${day.count !== 1 ? "s" : ""}`}
+                    aria-label={`${day.count} contributions on ${day.date}`}
+                  />
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="flex items-center justify-end gap-2 mt-3">
+        <span class="text-[9px] font-mono text-text-tertiary" data-i18n-es="Menos">Less</span>
+        <div class="flex gap-[2px]">
+          <div class="w-[11px] h-[11px] rounded-[2px] heatmap-0"></div>
+          <div class="w-[11px] h-[11px] rounded-[2px] heatmap-1"></div>
+          <div class="w-[11px] h-[11px] rounded-[2px] heatmap-2"></div>
+          <div class="w-[11px] h-[11px] rounded-[2px] heatmap-3"></div>
+          <div class="w-[11px] h-[11px] rounded-[2px] heatmap-4"></div>
+        </div>
+        <span class="text-[9px] font-mono text-text-tertiary" data-i18n-es="Mas">More</span>
+      </div>
+    </div>
+  )}
+</div>
