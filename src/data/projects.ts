@@ -21,6 +21,8 @@ export interface Project {
   outcome: string;
   outcome_es: string;
   links: { label: string; href: string }[];
+  previewUrl?: string;
+  hidePreview?: boolean;
   featured: boolean;
   category: "work" | "venture" | "open-source";
   color: string;
@@ -70,6 +72,7 @@ export const projects: Project[] = [
     links: [
       { label: "Visit Despegar", href: "https://www.despegar.com" },
     ],
+    hidePreview: true,
     featured: true,
     category: "work",
     color: "#2563eb",
@@ -114,8 +117,10 @@ export const projects: Project[] = [
       "Shipped MVP aggregating data from multiple LATAM markets with interactive charts, analytics, and ML-powered trend insights.",
     outcome_es:
       "MVP lanzado con agregación de datos de múltiples mercados LATAM, gráficos interactivos, analytics e insights de tendencias con ML.",
-    links: [],
-    featured: true,
+    links: [
+      { label: "Visit Finlatam", href: "https://finlatamio.com" },
+    ],
+    featured: false,
     category: "venture",
     color: "#10b981",
   },
@@ -159,54 +164,147 @@ export const projects: Project[] = [
       "Shipped a full-featured MVP validated with restaurant owners in Buenos Aires. Core modules live: orders, tables, inventory, and analytics.",
     outcome_es:
       "MVP completo lanzado y validado con dueños de restaurantes en Buenos Aires. Módulos core en producción: pedidos, mesas, inventario y analytics.",
-    links: [],
+    links: [
+      { label: "Visit Gastronova", href: "https://gastronova.com.ar" },
+    ],
+    previewUrl: "https://gastronova.com.ar/producto",
     featured: true,
     category: "venture",
     color: "#f59e0b",
   },
   {
-    slug: "jeff-core",
-    title: "jeff-core",
-    tagline: "Lightweight component library built with Preact",
-    tagline_es: "Librería de componentes liviana construida con Preact",
+    slug: "prop-metrics",
+    title: "PropMetrics",
+    tagline: "Real estate intelligence platform for the Argentine market",
+    tagline_es: "Plataforma de inteligencia inmobiliaria para el mercado argentino",
     description:
-      "An internal component library built with Preact and TypeScript, designed for high performance and minimal bundle size. Published on GitHub and used across multiple internal projects. Follows a design system with consistent tokens, accessibility patterns, and comprehensive test coverage.",
+      "A real estate data platform that automates property data collection from major Argentine portals (ZonaProp, Argenprop) and provides market analysis tools. Features advanced search, price history tracking, market statistics, and a buy vs. rent ROI calculator — built to bring data-driven decision making to Argentina's real estate market.",
     description_es:
-      "Una librería de componentes interna construida con Preact y TypeScript, diseñada para alto rendimiento y bundle size mínimo. Publicada en GitHub y usada en múltiples proyectos internos. Sigue un design system con tokens consistentes, patrones de accesibilidad y cobertura de tests completa.",
-    role: "Creator & Maintainer",
-    role_es: "Creador y Mantenedor",
-    year: "2024",
+      "Una plataforma de datos inmobiliarios que automatiza la recolección de datos de los principales portales argentinos (ZonaProp, Argenprop) y provee herramientas de análisis de mercado. Incluye búsqueda avanzada, seguimiento de historial de precios, estadísticas de mercado y calculadora de ROI compra vs. alquiler — construida para llevar decisiones basadas en datos al mercado inmobiliario argentino.",
+    role: "Creator & Developer",
+    role_es: "Creador y Desarrollador",
+    year: "2025",
     status: "completed",
-    statusLabel: "Published on GitHub",
-    statusLabel_es: "Publicado en GitHub",
-    stack: ["Preact", "TypeScript", "Jest", "Tailwind CSS", "Vite"],
+    statusLabel: "Completed",
+    statusLabel_es: "Completado",
+    stack: ["Java", "Spring Boot", "PostgreSQL", "Redis", "Selenium"],
     highlights: [
-      "Tiny bundle — Preact for minimal overhead",
-      "Full TypeScript support with exported types",
-      "Jest test coverage for all components",
-      "Design tokens and consistent API surface",
+      "Automated scraping with anti-bot evasion strategies",
+      "Price history tracking with change detection",
+      "Market stats: averages, medians, price/m² ranges",
+      "Buy vs. Rent ROI calculator with financial analysis",
     ],
     highlights_es: [
-      "Bundle mínimo — Preact para overhead mínimo",
-      "Soporte completo de TypeScript con tipos exportados",
-      "Cobertura de tests con Jest para todos los componentes",
-      "Design tokens y API surface consistente",
+      "Scraping automatizado con estrategias anti-bot",
+      "Seguimiento de historial de precios con detección de cambios",
+      "Estadísticas de mercado: promedios, medianas, rangos de precio/m²",
+      "Calculadora ROI compra vs. alquiler con análisis financiero",
     ],
     challenge:
-      "Needed a set of reusable UI components that were lightweight enough for performance-critical apps, while maintaining consistency and developer experience across projects.",
+      "Argentina's real estate market lacks transparent, centralized data. Property listings are scattered across multiple portals with no easy way to track price changes, compare neighborhoods, or analyze market trends over time.",
     challenge_es:
-      "Necesitaba un set de componentes UI reutilizables lo suficientemente livianos para apps críticas en performance, manteniendo consistencia y developer experience entre proyectos.",
+      "El mercado inmobiliario argentino carece de datos transparentes y centralizados. Los listados de propiedades están dispersos en múltiples portales sin una forma fácil de rastrear cambios de precios, comparar barrios o analizar tendencias del mercado en el tiempo.",
     approach:
-      "Chose Preact over React for its 3KB footprint. Each component is individually tree-shakeable, fully typed, and tested. The library uses Tailwind-compatible design tokens so it integrates with any Tailwind-based project seamlessly.",
+      "Built a Spring Boot backend with Jsoup and Selenium for scraping, PostgreSQL for persistence, and Redis for caching. Implemented anti-bot measures like User-Agent rotation, random delays, and headless browser strategies. The API exposes advanced search, statistics, and financial analysis endpoints.",
     approach_es:
-      "Elegí Preact sobre React por su footprint de 3KB. Cada componente es tree-shakeable individualmente, totalmente tipado y testeado. La librería usa design tokens compatibles con Tailwind para integrarse con cualquier proyecto Tailwind sin problemas.",
+      "Construí un backend con Spring Boot usando Jsoup y Selenium para scraping, PostgreSQL para persistencia y Redis para caching. Implementé medidas anti-bot como rotación de User-Agent, delays aleatorios y estrategias de navegador headless. La API expone endpoints de búsqueda avanzada, estadísticas y análisis financiero.",
     outcome:
-      "Adopted across multiple internal projects. The library reduced UI development time and enforced visual consistency across applications.",
+      "Backend API fully functional with data from two major portals covering Buenos Aires. Roadmap includes ML-powered valuations, heatmaps, and a React/Next.js frontend.",
     outcome_es:
-      "Adoptada en múltiples proyectos internos. La librería redujo el tiempo de desarrollo de UI y reforzó la consistencia visual entre aplicaciones.",
-    links: [
-      { label: "GitHub", href: "https://github.com/mati-caliz" },
+      "API backend totalmente funcional con datos de dos portales principales cubriendo Buenos Aires. El roadmap incluye valuaciones con ML, mapas de calor y un frontend en React/Next.js.",
+    links: [],
+    featured: false,
+    category: "venture",
+    color: "#6366f1",
+  },
+  {
+    slug: "ccitaliana",
+    title: "CCI Argentina",
+    tagline: "Website for the Italian Chamber of Commerce in Argentina",
+    tagline_es: "Sitio web para la Cámara de Comercio Italiana en Argentina",
+    description:
+      "The official website for the Italian Chamber of Commerce in Argentina, a non-profit organization promoting business between Italy and Argentina. Built by a team of three, it features a headless CMS for managing events, news, staff, and partner benefits — with content managed by non-technical staff through an admin panel.",
+    description_es:
+      "El sitio web oficial de la Cámara de Comercio Italiana en Argentina, una organización sin fines de lucro que promueve negocios entre Italia y Argentina. Construido por un equipo de tres personas, incluye un CMS headless para gestionar eventos, noticias, personal y beneficios de socios — con contenido gestionado por personal no técnico a través de un panel de administración.",
+    role: "Developer (team of 3)",
+    role_es: "Desarrollador (equipo de 3)",
+    year: "2025",
+    status: "production",
+    statusLabel: "Live in production",
+    statusLabel_es: "En producción",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Decap CMS"],
+    highlights: [
+      "Headless CMS with GitHub-based content storage",
+      "Events calendar with registration support",
+      "Partner benefits showcase and newsletter",
+      "Content managed by non-technical staff via admin panel",
     ],
+    highlights_es: [
+      "CMS headless con almacenamiento de contenido en GitHub",
+      "Calendario de eventos con soporte de registro",
+      "Showcase de beneficios de socios y newsletter",
+      "Contenido gestionado por personal no técnico vía panel admin",
+    ],
+    challenge:
+      "The Chamber needed a modern website that non-technical staff could update independently — managing events, news, board members, and partner benefits without developer intervention.",
+    challenge_es:
+      "La Cámara necesitaba un sitio web moderno que el personal no técnico pudiera actualizar de forma independiente — gestionando eventos, noticias, miembros del directorio y beneficios de socios sin intervención de desarrolladores.",
+    approach:
+      "Built with Next.js and Decap CMS (formerly Netlify CMS) using Git-based content storage. The editorial workflow lets staff create and edit content through an admin panel, with changes committed directly to GitHub. Deployed on Netlify with Resend for email functionality.",
+    approach_es:
+      "Construido con Next.js y Decap CMS (antes Netlify CMS) usando almacenamiento de contenido basado en Git. El flujo editorial permite al personal crear y editar contenido a través de un panel admin, con cambios commiteados directamente a GitHub. Desplegado en Netlify con Resend para funcionalidad de email.",
+    outcome:
+      "Live website actively used by the Chamber's staff to publish events, news, and manage partner content without any developer involvement.",
+    outcome_es:
+      "Sitio web en producción usado activamente por el personal de la Cámara para publicar eventos, noticias y gestionar contenido de socios sin intervención de desarrolladores.",
+    links: [
+      { label: "Visit CCI Argentina", href: "https://cciargentina.org.ar/" },
+    ],
+    featured: true,
+    category: "work",
+    color: "#059669",
+  },
+  {
+    slug: "dynamic-systems",
+    title: "Dynamic Systems",
+    tagline: "Modeling and simulation toolkit for dynamic systems",
+    tagline_es: "Toolkit de modelado y simulación para sistemas dinámicos",
+    description:
+      "An academic project for analyzing and simulating linear and non-linear dynamic systems. Provides tools for equilibrium analysis, phase portraits, bifurcation diagrams, and numerical methods for differential equations — built for the Modeling and Simulation course at UADE.",
+    description_es:
+      "Un proyecto académico para analizar y simular sistemas dinámicos lineales y no lineales. Provee herramientas para análisis de equilibrio, retratos de fase, diagramas de bifurcación y métodos numéricos para ecuaciones diferenciales — construido para la materia de Modelado y Simulación en UADE.",
+    role: "Developer",
+    role_es: "Desarrollador",
+    year: "2025",
+    status: "completed",
+    statusLabel: "Completed",
+    statusLabel_es: "Completado",
+    stack: ["Python", "NumPy", "SciPy", "SymPy", "Matplotlib"],
+    highlights: [
+      "Equilibrium point identification and classification",
+      "Phase portrait and bifurcation diagram visualization",
+      "Numerical methods: Euler, Runge-Kutta, root finding",
+      "Full stability analysis via Jacobian computation",
+    ],
+    highlights_es: [
+      "Identificación y clasificación de puntos de equilibrio",
+      "Visualización de retratos de fase y diagramas de bifurcación",
+      "Métodos numéricos: Euler, Runge-Kutta, búsqueda de raíces",
+      "Análisis de estabilidad completo vía computación de Jacobianos",
+    ],
+    challenge:
+      "Analyzing dynamic systems requires computing Jacobians, finding equilibria, classifying stability, and visualizing complex behaviors like bifurcations and phase portraits — a process that's tedious to do manually.",
+    challenge_es:
+      "Analizar sistemas dinámicos requiere computar Jacobianos, encontrar equilibrios, clasificar estabilidad y visualizar comportamientos complejos como bifurcaciones y retratos de fase — un proceso tedioso de hacer manualmente.",
+    approach:
+      "Built a modular Python toolkit using SymPy for symbolic math, NumPy/SciPy for numerical computation, and Matplotlib for visualization. The core DynamicSystem class provides a run_full_analysis() method that automates the complete workflow.",
+    approach_es:
+      "Construí un toolkit modular en Python usando SymPy para matemática simbólica, NumPy/SciPy para computación numérica y Matplotlib para visualización. La clase core DynamicSystem provee un método run_full_analysis() que automatiza el flujo completo.",
+    outcome:
+      "Complete analysis toolkit used for coursework at UADE, automating equilibrium analysis, stability classification, and visualization of dynamic system behaviors.",
+    outcome_es:
+      "Toolkit de análisis completo usado para trabajos prácticos en UADE, automatizando análisis de equilibrio, clasificación de estabilidad y visualización de comportamientos de sistemas dinámicos.",
+    links: [],
     featured: false,
     category: "open-source",
     color: "#8b5cf6",
