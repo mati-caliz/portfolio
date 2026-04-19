@@ -84,11 +84,14 @@ weeks.forEach((week, weekIndex) => {
       if (!seenMonths.has(month)) {
         seenMonths.add(month);
         const monthNum = parseInt(day.date.slice(5, 7), 10) - 1;
-        monthLabels.push({
-          label: monthNamesEn[monthNum],
-          label_es: monthNamesEs[monthNum],
-          col: weekIndex,
-        });
+        const prev = monthLabels[monthLabels.length - 1];
+        if (!prev || weekIndex - prev.col >= 3) {
+          monthLabels.push({
+            label: monthNamesEn[monthNum],
+            label_es: monthNamesEs[monthNum],
+            col: weekIndex,
+          });
+        }
       }
     }
   }
