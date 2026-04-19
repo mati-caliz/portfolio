@@ -24,10 +24,12 @@ try {
     const oneYearAgo = new Date(now);
     oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 
-    contributions = data.contributions.filter((d) => {
-      const date = new Date(d.date);
-      return date >= oneYearAgo && date <= now;
-    });
+    contributions = data.contributions
+      .filter((d) => {
+        const date = new Date(d.date);
+        return date >= oneYearAgo && date <= now;
+      })
+      .sort((a, b) => a.date.localeCompare(b.date));
 
     // Total for the rolling last 365 days (matches what the heatmap shows and GitHub's profile number)
     totalThisYear = contributions.reduce((sum, d) => sum + d.count, 0);
