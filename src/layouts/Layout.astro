@@ -70,7 +70,7 @@ const navLinks = [
         const theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
         document.documentElement.classList.add(theme);
 
-        const lang = localStorage.getItem("lang") || "en";
+        const lang = (localStorage.getItem("lang") || ((navigator.language || "en").toLowerCase().startsWith("es") ? "es" : "en"));
         document.documentElement.setAttribute("data-lang", lang);
       })();
     </script>
@@ -336,7 +336,7 @@ const navLinks = [
         }
 
         // ── Language ──
-        var currentLang = localStorage.getItem("lang") || "en";
+        var currentLang = (localStorage.getItem("lang") || ((navigator.language || "en").toLowerCase().startsWith("es") ? "es" : "en"));
         applyLang(currentLang);
 
         if (langToggle) {
@@ -434,7 +434,7 @@ const navLinks = [
         const theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
         document.documentElement.classList.add(theme);
         // Re-apply language
-        const lang = localStorage.getItem("lang") || "en";
+        const lang = (localStorage.getItem("lang") || ((navigator.language || "en").toLowerCase().startsWith("es") ? "es" : "en"));
         document.documentElement.setAttribute("data-lang", lang);
         initLayout();
       });
@@ -442,7 +442,7 @@ const navLinks = [
       // Re-trigger page animations + language after navigation
       document.addEventListener("astro:page-load", () => {
         // Re-apply language on every page load (most reliable timing)
-        var pageLang = localStorage.getItem("lang") || "en";
+        var pageLang = (localStorage.getItem("lang") || ((navigator.language || "en").toLowerCase().startsWith("es") ? "es" : "en"));
         applyLang(pageLang);
 
         // Hero reveals
