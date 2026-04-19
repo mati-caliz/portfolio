@@ -29,9 +29,8 @@ try {
       return date >= oneYearAgo && date <= now;
     });
 
-    // Total for current year
-    const currentYear = String(now.getFullYear());
-    totalThisYear = data.total[currentYear] || 0;
+    // Total for the rolling last 365 days (matches what the heatmap shows and GitHub's profile number)
+    totalThisYear = contributions.reduce((sum, d) => sum + d.count, 0);
   } else {
     fetchFailed = true;
   }
@@ -108,7 +107,7 @@ const dayLabelsEs = ["", "Lun", "", "Mie", "", "Vie", ""];
           <p class="text-xs font-mono text-accent uppercase tracking-widest mb-1" data-i18n-es="Actividad en GitHub">GitHub activity</p>
           <p class="text-sm text-text-secondary">
             <span class="text-text font-semibold">{totalThisYear.toLocaleString()}</span>
-            <span data-i18n-es={` contribuciones en ${new Date().getFullYear()}`}>{` contributions in ${new Date().getFullYear()}`}</span>
+            <span data-i18n-es=" contribuciones en el último año"> contributions in the last year</span>
           </p>
         </div>
         <a
