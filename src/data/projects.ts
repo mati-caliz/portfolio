@@ -125,6 +125,7 @@ export const projects: Project[] = [
     category: "work",
     color: "#0ea5e9",
   },
+  /*
   {
     slug: "finlatam",
     title: "Finlatam",
@@ -172,6 +173,7 @@ export const projects: Project[] = [
     category: "venture",
     color: "#10b981",
   },
+  */
   {
     slug: "gastronova",
     title: "Gastronova",
