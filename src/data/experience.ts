@@ -3,7 +3,9 @@ export interface Experience {
   role: string;
   role_es: string;
   period: string;
+  period_es: string;
   location: string;
+  location_es: string;
   type: "full-time" | "contract";
   current: boolean;
   description: string;
@@ -32,58 +34,62 @@ export interface Certification {
 export const experiences: Experience[] = [
   {
     company: "Despegar",
-    role: "Full Stack Software Developer",
-    role_es: "Desarrollador Full Stack",
-    period: "2024 — Present",
-    location: "Buenos Aires, Argentina",
+    role: "Full Stack Software Developer SSR",
+    role_es: "Software Developer Fullstack SSR",
+    period: "Aug 2023 — Present · 2 yrs 10 mos",
+    period_es: "ago. 2023 — actualidad · 2 años 10 meses",
+    location: "Buenos Aires Province, Argentina · Hybrid / Remote",
+    location_es: "Provincia de Buenos Aires, Argentina · Híbrido / Remoto",
     type: "full-time",
     current: true,
     description:
-      "Owning critical front-facing components — the search box, header, and footer — used by millions of travelers daily across Latin America. Working across the full stack with React, Angular, Java, and Spring in a high-traffic, A/B-tested environment.",
+      "Full stack software developer working on Despegar's search box, header, and footer. Built frontend and backend solutions with React, Angular, TypeScript, Java, PostgreSQL, and MongoDB, including work for Strategic Management and Web Development processes.",
     description_es:
-      "A cargo de componentes críticos de cara al usuario — el buscador, header y footer — usados por millones de viajeros diariamente en toda Latinoamérica. Trabajando full stack con React, Angular, Java y Spring en un entorno de alto tráfico con A/B testing.",
+      "Software developer fullstack trabajando en la caja de búsqueda, header y footer de Despegar. Desarrollo frontend y backend con React, Angular, TypeScript, Java, PostgreSQL y MongoDB, incluyendo trabajo para procesos de gestión estratégica y desarrollo web.",
     achievements: [
-      "Own the search box component — the primary conversion driver for the entire platform",
-      "Ship code serving millions of daily active users across LATAM markets",
-      "Work across React, Angular, Java/Spring in a microservices architecture",
-      "A/B test every major change with real traffic to validate impact on conversion",
-      "Optimize bundle sizes and loading performance for 3G networks",
+      "Implemented unit, E2E, and smoke tests from scratch for the full search box with Cypress and JUnit, covering both frontend and backend",
+      "Delivered major refactors and performance improvements for loading and rendering, especially in the packages search box and header",
+      "Built new capabilities such as LLM-powered semantic search in the search box and region-based searches",
+      "Worked on backend logic with Java, Spring, and SQL",
+      "Regularly supported team management by organizing requests and planning with sponsors",
     ],
     achievements_es: [
-      "A cargo del buscador — el principal driver de conversión de toda la plataforma",
-      "Código en producción sirviendo a millones de usuarios activos diarios en LATAM",
-      "Trabajo con React, Angular, Java/Spring en una arquitectura de microservicios",
-      "A/B testing de cada cambio importante con tráfico real para validar impacto en conversión",
-      "Optimización de bundle sizes y performance de carga para redes 3G",
+      "Implementé desde cero tests unitarios, E2E y smoke de toda la caja de búsqueda con Cypress y JUnit, tanto para frontend como backend",
+      "Realicé refactors y mejoras sustanciales en tiempos de carga y renderización, principalmente en la caja de paquetes de la searchbox y en el header",
+      "Implementé funcionalidades nuevas como búsquedas semánticas con IA y LLM en la searchbox, búsquedas por regiones y otras mejoras",
+      "Trabajé en soluciones backend con Java, Spring y SQL",
+      "Trabajé recurrentemente en la gestión del equipo, organizando pedidos y planificando con sponsors",
     ],
-    stack: ["React", "Angular", "Java", "Spring", "TypeScript", "Cypress", "SQL"],
+    stack: ["React", "Angular", "TypeScript", "Java", "Spring", "PostgreSQL", "MongoDB", "Cypress", "JUnit"],
     color: "#2563eb",
   },
   {
     company: "EY (Ernst & Young)",
-    role: "IT Auditor",
-    role_es: "Auditor de IT",
-    period: "2023 — 2024",
-    location: "Buenos Aires, Argentina",
+    role: "IT Auditor & Cybersecurity Analyst",
+    role_es: "Auditor IT & Analista en Ciberseguridad",
+    period: "Jun 2020 — Jun 2022 · 2 yrs 1 mo",
+    period_es: "jun. 2020 — jun. 2022 · 2 años 1 mes",
+    location: "Buenos Aires Province, Argentina · Remote",
+    location_es: "Provincia de Buenos Aires, Argentina · En remoto",
     type: "full-time",
     current: false,
     description:
-      "Audited IT systems and cybersecurity practices for major enterprise clients. Evaluated access controls, data integrity, and compliance with security standards. This experience shaped my security-first approach to software development.",
+      "IT auditor focused on systems and cybersecurity. Evaluated technology controls, cybersecurity practices, and compliance requirements for enterprise environments.",
     description_es:
-      "Audité sistemas de IT y prácticas de ciberseguridad para grandes clientes empresariales. Evalué controles de acceso, integridad de datos y cumplimiento de estándares de seguridad. Esta experiencia formó mi enfoque security-first en el desarrollo de software.",
+      "Auditor IT orientado en sistemas y ciberseguridad. Evalué controles tecnológicos, prácticas de ciberseguridad y requerimientos de cumplimiento en entornos empresariales.",
     achievements: [
-      "Audited IT infrastructure and cybersecurity controls for enterprise clients",
+      "Worked with SOX, PCI Compliance, ISO/IEC 27001, and ISO/IEC 27002 standards",
+      "Audited IT systems and cybersecurity controls for enterprise clients",
       "Evaluated access management, data integrity, and regulatory compliance",
-      "Identified security vulnerabilities and recommended remediation strategies",
       "Developed systematic thinking about risk, controls, and system architecture",
     ],
     achievements_es: [
-      "Audité infraestructura de IT y controles de ciberseguridad para clientes empresariales",
+      "Utilicé estándares como SOX, PCI Compliance, ISO/IEC 27001 e ISO/IEC 27002",
+      "Audité sistemas de IT y controles de ciberseguridad para clientes empresariales",
       "Evalué gestión de accesos, integridad de datos y cumplimiento regulatorio",
-      "Identifiqué vulnerabilidades de seguridad y recomendé estrategias de remediación",
       "Desarrollé pensamiento sistemático sobre riesgo, controles y arquitectura de sistemas",
     ],
-    stack: ["IT Audit", "Cybersecurity", "Risk Assessment", "Compliance", "COBIT"],
+    stack: ["IT Audit", "Cybersecurity", "SOX", "PCI Compliance", "ISO 27001", "ISO 27002"],
     color: "#f59e0b",
   },
 ];
@@ -103,8 +109,8 @@ export const education: Education[] = [
 
 export const certifications: Certification[] = [
   {
-    name: "Cambridge B2 First (FCE)",
+    name: "English C1",
     issuer: "Cambridge Assessment English",
-    year: "2023",
+    year: "C1",
   },
 ];
