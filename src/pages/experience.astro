@@ -54,7 +54,7 @@ import { experiences, education, certifications } from "../data/experience";
                       <p class="text-sm font-medium text-text-secondary mt-0.5" data-i18n-es={exp.role_es}>{exp.role}</p>
                     </div>
                     <div class="flex items-center gap-3 shrink-0">
-                      <span class="text-xs font-mono text-text-tertiary">{exp.period}</span>
+                      <span class="text-xs font-mono text-text-tertiary" data-i18n-es={exp.period_es}>{exp.period}</span>
                       {exp.current && (
                         <span class="px-2 py-0.5 text-xs font-mono rounded-full bg-accent/10 text-accent border border-accent/20" data-i18n-es="Actual">
                           Current
@@ -69,7 +69,7 @@ import { experiences, education, certifications } from "../data/experience";
                       <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
-                    {exp.location}
+                    <span data-i18n-es={exp.location_es}>{exp.location}</span>
                   </div>
 
                   <!-- Description -->
@@ -158,9 +158,9 @@ import { experiences, education, certifications } from "../data/experience";
               <div class="flex items-center justify-between border border-border rounded-xl p-4 hover:border-border-hover hover:bg-bg-secondary transition-all duration-300">
                 <div>
                   <span class="text-sm font-semibold" data-i18n-es="Inglés">English</span>
-                  <span class="text-xs text-text-tertiary ml-2" data-i18n-es="Cambridge B2 — apuntando a Advanced en 2026">Cambridge B2 — targeting Advanced in 2026</span>
+                  <span class="text-xs text-text-tertiary ml-2" data-i18n-es="C1">C1</span>
                 </div>
-                <span class="text-xs font-mono text-text-tertiary">B2</span>
+                <span class="text-xs font-mono text-text-tertiary">C1</span>
               </div>
             </div>
           </div>

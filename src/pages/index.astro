@@ -212,8 +212,8 @@ const featured = getFeaturedProjects();
                 <p class="text-sm text-text-secondary leading-relaxed lang-es">{exp.description_es}</p>
               </div>
               <div class="sm:text-right shrink-0">
-                <p class="text-sm font-mono text-text-tertiary">{exp.period}</p>
-                <p class="text-xs text-text-tertiary mt-1">{exp.location}</p>
+                <p class="text-sm font-mono text-text-tertiary" data-i18n-es={exp.period_es}>{exp.period}</p>
+                <p class="text-xs text-text-tertiary mt-1" data-i18n-es={exp.location_es}>{exp.location}</p>
               </div>
             </div>
           </div>
