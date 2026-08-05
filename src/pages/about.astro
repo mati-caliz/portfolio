@@ -47,16 +47,20 @@ import Layout from "../layouts/Layout.astro";
 
           <div class="scroll-reveal">
             <p class="text-base text-text-secondary leading-relaxed lang-en">
-              Outside of work, I built products independently:
-              {/* <span class="text-text font-medium">Finlatam</span>, a financial data dashboard for LATAM markets, and */}
+              Outside of work, I build and ship products independently — and I run them myself, on my own server:
+              <span class="text-text font-medium">La Brecha</span>, a public observatory of Argentine economic indicators;
+              <span class="text-text font-medium">Conseguilo</span>, a job-hunting SaaS with ATS-ready CVs and AI matching;
+              <span class="text-text font-medium">Respondi</span>, a platform for AI agents on WhatsApp and Telegram; and
               <span class="text-text font-medium">Gastronova</span>, a SaaS for restaurant management.
-              I believe the best way to grow as an engineer is to own the full lifecycle — from idea to architecture to production.
+              I believe the best way to grow as an engineer is to own the full lifecycle — from idea to architecture to production, including the part where it has to keep running.
             </p>
             <p class="text-base text-text-secondary leading-relaxed lang-es">
-              Fuera del trabajo, construí productos de forma independiente:
-              {/* <span class="text-text font-medium">Finlatam</span>, un dashboard de datos financieros para mercados LATAM, y */}
+              Fuera del trabajo construyo y lanzo productos propios — y los opero yo, en mi propio servidor:
+              <span class="text-text font-medium">La Brecha</span>, un observatorio público de indicadores económicos argentinos;
+              <span class="text-text font-medium">Conseguilo</span>, un SaaS de búsqueda laboral con CVs ATS y match con IA;
+              <span class="text-text font-medium">Respondi</span>, una plataforma de agentes IA sobre WhatsApp y Telegram; y
               <span class="text-text font-medium">Gastronova</span>, un SaaS para gestión gastronómica.
-              Creo que la mejor forma de crecer como ingeniero es ser dueño de todo el ciclo — desde la idea a la arquitectura a producción.
+              Creo que la mejor forma de crecer como ingeniero es ser dueño de todo el ciclo — desde la idea a la arquitectura a producción, incluida la parte en la que tiene que seguir funcionando.
             </p>
           </div>
 
@@ -157,6 +161,7 @@ import Layout from "../layouts/Layout.astro";
             <div class="flex flex-wrap gap-1.5">
               {[
                 "Fintech",
+                "AI Agents",
                 "Data Analysis",
                 "Cybersecurity",
                 "Biohacking",
@@ -176,11 +181,12 @@ import Layout from "../layouts/Layout.astro";
             <h3 class="text-xs font-mono text-text-tertiary mb-4 uppercase tracking-widest" data-i18n-es="Stack diario">Daily stack</h3>
             <div class="space-y-2">
               {[
-                { label: "Frontend", tools: "React, Angular, TypeScript" },
-                { label: "Backend", tools: "Java, Spring, Node.js" },
-                { label: "Data", tools: "SQL, Python, MongoDB" },
+                { label: "Frontend", tools: "React, Next.js, Angular, TypeScript" },
+                { label: "Backend", tools: "Java, Spring, Node.js, FastAPI" },
+                { label: "Data", tools: "PostgreSQL, MongoDB, Redis, Python" },
+                { label: "AI", tools: "Claude, Vercel AI SDK, RAG" },
                 { label: "Testing", tools: "Cypress, Jest, JUnit" },
-                { label: "Infra", tools: "Docker, Linux, Git" },
+                { label: "Infra", tools: "Docker, Nginx, Linux, GitHub Actions" },
               ].map((row) => (
                 <div class="flex items-baseline gap-3 py-1.5">
                   <span class="text-xs font-mono text-accent w-20 shrink-0">{row.label}</span>
