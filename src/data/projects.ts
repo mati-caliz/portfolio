@@ -125,55 +125,54 @@ export const projects: Project[] = [
     category: "work",
     color: "#0ea5e9",
   },
-  /*
   {
-    slug: "finlatam",
-    title: "Finlatam",
-    tagline: "Financial data dashboard for the Latin American market",
-    tagline_es: "Dashboard de datos financieros para el mercado latinoamericano",
+    slug: "labrecha",
+    title: "La Brecha",
+    tagline: "Public observatory of Argentina's political and economic indicators",
+    tagline_es: "Observatorio público de indicadores político-económicos de Argentina",
     description:
-      "A comprehensive fintech dashboard that aggregates and visualizes financial data from Latin American markets. Built to provide real-time insights on market trends, asset performance, and economic indicators — designed for investors and analysts who need a LATAM-focused financial intelligence tool.",
+      "A read-only public observatory that pulls scattered Argentine data — INDEC, BCRA, datos.gob.ar, private consultancies, Congress — into a single source. Two defining features: the gap between measurements of the same indicator across sources, and time series annotated with the political events that moved them. Formerly FinArg; rebuilt from scratch in 2026 after retiring the original Java/Spring stack.",
     description_es:
-      "Un dashboard fintech completo que agrega y visualiza datos financieros de mercados latinoamericanos. Construido para proveer insights en tiempo real sobre tendencias de mercado, rendimiento de activos e indicadores económicos — diseñado para inversores y analistas que necesitan una herramienta de inteligencia financiera enfocada en LATAM.",
+      "Un observatorio público de solo lectura que reúne datos argentinos dispersos — INDEC, BCRA, datos.gob.ar, consultoras, Congreso — en una sola fuente. Dos features definitorias: la brecha entre mediciones de un mismo indicador según distintas fuentes, y series temporales anotadas con los eventos políticos que las movieron. Antes se llamaba FinArg; reescrito desde cero en 2026 tras retirar el stack original de Java/Spring.",
     role: "Founder & Developer",
     role_es: "Fundador y Desarrollador",
-    year: "2025",
-    status: "completed",
-    statusLabel: "Shipped",
-    statusLabel_es: "Lanzado",
-    stack: ["React", "TypeScript", "Python", "TensorFlow", "SQL", "Node.js"],
+    year: "2025 — Present",
+    status: "production",
+    statusLabel: "Live in production",
+    statusLabel_es: "En producción",
+    stack: ["Next.js", "TypeScript", "Python", "FastAPI", "PostgreSQL", "Alembic", "Recharts", "Docker"],
     highlights: [
-      "Real-time market data aggregation and visualization",
-      "ML-powered trend analysis with TensorFlow",
-      "Custom charting engine for financial time series",
-      "Built from scratch — architecture, design, and implementation",
+      "One connector per source: a scraper registry run by cron, from dollar rates every 15 min to daily jobs",
+      "Historical series back to 1940 (BCRA reserves) and 2011 (blue dollar), merged with intraday data",
+      "AI-generated summaries of Congress votes, produced headlessly by a Claude connector",
+      "Postgres as the contract between scraper, FastAPI and the Next.js frontend — plus a public read-only API",
     ],
     highlights_es: [
-      "Agregación y visualización de datos de mercado en tiempo real",
-      "Análisis de tendencias con ML usando TensorFlow",
-      "Motor de gráficos custom para series temporales financieras",
-      "Construido desde cero — arquitectura, diseño e implementación",
+      "Un conector por fuente: un registry de scrapers corrido por cron, del dólar cada 15 min a jobs diarios",
+      "Series históricas desde 1940 (reservas del BCRA) y 2011 (dólar blue), mergeadas con datos intradiarios",
+      "Resúmenes IA de las votaciones del Congreso, generados por un conector headless con Claude",
+      "Postgres como contrato entre scraper, FastAPI y el frontend Next.js — más una API pública de solo lectura",
     ],
     challenge:
-      "Latin American financial markets are fragmented across different exchanges, currencies, and regulatory environments. There was no unified platform that provided clean, actionable data with a modern UX for LATAM-focused investors.",
+      "Argentine economic data is published by a dozen institutions in incompatible formats, and the same indicator often has several conflicting values depending on who measures it. Reading a number without knowing which source it came from — or what happened politically that week — hides more than it explains.",
     challenge_es:
-      "Los mercados financieros latinoamericanos están fragmentados entre diferentes bolsas, monedas y entornos regulatorios. No existía una plataforma unificada que proveyera datos limpios y accionables con una UX moderna para inversores enfocados en LATAM.",
+      "Los datos económicos argentinos los publica una docena de instituciones en formatos incompatibles, y un mismo indicador suele tener varios valores según quién lo mida. Leer un número sin saber de qué fuente viene — ni qué pasó políticamente esa semana — esconde más de lo que explica.",
     approach:
-      "I designed a data pipeline using Python and Scrapy to aggregate financial data from multiple sources. The frontend is a React dashboard with custom D3-based visualizations. I integrated TensorFlow models for trend prediction and anomaly detection.",
+      "Three pieces with PostgreSQL as the contract between them: a Python scraper where each source is a self-contained connector module, a stateless FastAPI read layer with the calculators on top, and a Next.js App Router frontend that consumes it through a same-origin cached proxy. Schema changes go through Alembic migrations; the scraper runs on cron with a per-job CLI.",
     approach_es:
-      "Diseñé un pipeline de datos usando Python y Scrapy para agregar datos financieros de múltiples fuentes. El frontend es un dashboard en React con visualizaciones custom basadas en D3. Integré modelos de TensorFlow para predicción de tendencias y detección de anomalías.",
+      "Tres piezas con PostgreSQL como contrato entre ellas: un scraper en Python donde cada fuente es un módulo conector autocontenido, una capa de lectura FastAPI sin estado con las calculadoras encima, y un frontend Next.js App Router que la consume por un proxy same-origin cacheado. El esquema evoluciona con migraciones Alembic; el scraper corre por cron con un CLI por job.",
     outcome:
-      "Shipped MVP aggregating data from multiple LATAM markets with interactive charts, analytics, and ML-powered trend insights.",
+      "Live and ingesting continuously: 77k+ indicator rows across dozens of series, gap views, annotated charts, a Congress section, and a public API — all without login.",
     outcome_es:
-      "MVP lanzado con agregación de datos de múltiples mercados LATAM, gráficos interactivos, analytics e insights de tendencias con ML.",
+      "En producción e ingiriendo de forma continua: 77k+ filas de indicadores en decenas de series, vistas de brechas, gráficos anotados, sección de Congreso y una API pública — todo sin login.",
     links: [
-      { label: "Visit Finlatam", href: "https://finlatamio.com" },
+      { label: "Visit La Brecha", href: "https://labrecha.matiascaliz.com.ar" },
     ],
-    featured: false,
+    previewUrl: "https://labrecha.matiascaliz.com.ar",
+    featured: true,
     category: "venture",
     color: "#10b981",
   },
-  */
   {
     slug: "gastronova",
     title: "Gastronova",
@@ -234,9 +233,9 @@ export const projects: Project[] = [
     role: "Founder & Developer",
     role_es: "Fundador y Desarrollador",
     year: "2026",
-    status: "in-progress",
-    statusLabel: "MVP in progress",
-    statusLabel_es: "MVP en progreso",
+    status: "production",
+    statusLabel: "Live in production",
+    statusLabel_es: "En producción",
     stack: [
       "Next.js",
       "React",
@@ -267,9 +266,9 @@ export const projects: Project[] = [
     approach_es:
       "Construí un producto con Next.js App Router, workspaces autenticados, persistencia con Drizzle/Postgres, edición y renderizado de CVs, tracking de postulaciones y features de IA con créditos conscientes de costo. La app soporta cambio de provider entre Claude, OpenAI y Gemini, además de exports con react-pdf y docx.",
     outcome:
-      "MVP features are implemented locally: auth, CV builder, PDF/DOCX exports, kanban tracker, reminders, AI-powered bullet and cover letter generation, match scoring, billing gates, and legal pages. Next steps are production deployment and team accounts.",
+      "Live at its own domain with the full MVP shipped: auth, CV builder, PDF/DOCX exports, kanban tracker, reminders, AI-powered bullet and cover letter generation, match scoring, Mercado Pago billing gates, and legal pages. Deployed on my own box with push-to-deploy from GitHub Actions.",
     outcome_es:
-      "Las features del MVP están implementadas localmente: auth, constructor de CVs, exports PDF/DOCX, tracker kanban, recordatorios, generación IA de bullets y cover letters, match scoring, límites por plan y páginas legales. Los próximos pasos son deploy productivo y cuentas de equipo.",
+      "En producción con dominio propio y el MVP completo: auth, constructor de CVs, exports PDF/DOCX, tracker kanban, recordatorios, generación IA de bullets y cover letters, match scoring, cobros con Mercado Pago y páginas legales. Deployado en servidor propio con push-to-deploy desde GitHub Actions.",
     links: [
       { label: "Visit Conseguilo", href: "https://conseguilo.com.ar" },
     ],
@@ -277,6 +276,147 @@ export const projects: Project[] = [
     featured: true,
     category: "venture",
     color: "#14b8a6",
+  },
+  {
+    slug: "respondi",
+    title: "Respondi",
+    tagline: "Platform for AI agents that answer on WhatsApp and Telegram",
+    tagline_es: "Plataforma de agentes IA que responden en WhatsApp y Telegram",
+    description:
+      "A multi-tenant platform for building AI agents connected to real messaging channels: WhatsApp through Meta's official Cloud API, and Telegram. Each agent has its own knowledge base with RAG retrieval, connectors to external tools, and a queue-backed engine that keeps conversations coherent. It generalizes the parts of Gastronova's agents that were worth reusing — Gastronova is its first intended consumer.",
+    description_es:
+      "Una plataforma multi-tenant para construir agentes IA conectados a canales de mensajería reales: WhatsApp vía la Cloud API oficial de Meta, y Telegram. Cada agente tiene su base de conocimiento con recuperación RAG, conectores a herramientas externas y un motor con colas que mantiene coherentes las conversaciones. Generaliza lo que valía la pena reutilizar de los agentes de Gastronova — que es su primer consumidor previsto.",
+    role: "Founder & Developer",
+    role_es: "Fundador y Desarrollador",
+    year: "2026",
+    status: "in-progress",
+    statusLabel: "In production, private beta",
+    statusLabel_es: "En producción, beta privada",
+    stack: ["TypeScript", "Fastify", "Next.js", "PostgreSQL", "pgvector", "Drizzle ORM", "BullMQ", "Redis", "Docker"],
+    highlights: [
+      "pnpm + Turborepo monorepo: core API with the agent engine, a channel gateway, and the web app",
+      "Official WhatsApp Cloud API webhooks with raw-body HMAC signature verification",
+      "RAG over pgvector, plus BullMQ workers for everything that must not block a reply",
+      "Per-channel credentials and OAuth tokens encrypted at rest, never in environment files",
+    ],
+    highlights_es: [
+      "Monorepo pnpm + Turborepo: core API con el motor de agentes, un gateway de canales y la web",
+      "Webhooks de la Cloud API oficial de WhatsApp con verificación HMAC sobre el body crudo",
+      "RAG sobre pgvector, más workers BullMQ para todo lo que no puede bloquear una respuesta",
+      "Credenciales por canal y tokens OAuth cifrados at-rest, nunca en archivos de entorno",
+    ],
+    challenge:
+      "Most WhatsApp bots are built on unofficial bridges that break without warning and can get the number banned. Doing it properly means the official Cloud API, strict webhook signature validation, and a design where every tenant's channel credentials are isolated and encrypted.",
+    challenge_es:
+      "La mayoría de los bots de WhatsApp se apoyan en bridges no oficiales que se rompen sin aviso y pueden hacer que baneen el número. Hacerlo bien implica la Cloud API oficial, validación estricta de firmas en los webhooks y un diseño donde las credenciales de canal de cada tenant queden aisladas y cifradas.",
+    approach:
+      "Split the system into a Fastify core API (agent engine, RAG, background workers), a thin channel gateway that only validates and normalizes provider webhooks, and a Next.js front end — with Zod contracts shared between them. Schema changes go through Drizzle migrations that run before the containers come up; media lives in a private S3-compatible bucket.",
+    approach_es:
+      "Separé el sistema en una core API con Fastify (motor de agentes, RAG, workers), un gateway de canales delgado que solo valida y normaliza los webhooks de cada proveedor, y un frontend Next.js — con contratos Zod compartidos entre las piezas. El esquema evoluciona con migraciones Drizzle que corren antes de levantar los containers; los archivos van a un bucket privado compatible con S3.",
+    outcome:
+      "Deployed and running behind its own domain since 2026, with the full container stack, migrations wired into the deploy, and channel onboarding in place. Next up: connecting the first production WhatsApp Business account.",
+    outcome_es:
+      "Deployado y corriendo con dominio propio desde 2026, con el stack completo de containers, migraciones integradas al deploy y el onboarding de canales listo. Lo próximo: conectar la primera cuenta de WhatsApp Business productiva.",
+    links: [
+      { label: "Visit Respondi", href: "https://respondi.matiascaliz.com.ar" },
+    ],
+    previewUrl: "https://respondi.matiascaliz.com.ar",
+    featured: true,
+    category: "venture",
+    color: "#7c3aed",
+  },
+  {
+    slug: "soma",
+    title: "Soma Intelligence",
+    tagline: "Computer vision that turns existing security cameras into operational metrics",
+    tagline_es: "Visión por computadora que convierte las cámaras existentes en métricas operativas",
+    description:
+      "A platform that plugs into a venue's existing IP cameras and turns the video into live occupancy metrics and security alerts. A mini-PC on site runs the vision models and emits only JSON events — the raw video never leaves the venue, and there is no facial recognition, just anonymous silhouettes. Privacy is the feature, not a disclaimer.",
+    description_es:
+      "Una plataforma que se conecta a las cámaras IP que el local ya tiene y convierte el video en métricas de aforo en vivo y alertas de seguridad. Una mini-PC en el local corre los modelos de visión y emite solo eventos JSON — el video crudo nunca sale del local, y no hay reconocimiento facial, solo siluetas anónimas. La privacidad es la feature, no un descargo.",
+    role: "Founder & Developer",
+    role_es: "Fundador y Desarrollador",
+    year: "2026",
+    status: "in-progress",
+    statusLabel: "Deployed, pre-MVP",
+    statusLabel_es: "Deployado, pre-MVP",
+    stack: ["Java", "Spring Boot", "React", "TypeScript", "Python", "YOLO", "MQTT", "TimescaleDB", "MinIO", "Docker"],
+    highlights: [
+      "Edge/cloud split: YOLO + tracking on site, only JSON events cross the network over MQTT",
+      "TimescaleDB for time series: live occupancy, entries per hour, dwell time",
+      "Alert rules engine: after-hours intrusion, capacity limits, camera down",
+      "No facial recognition by design — anonymous silhouettes only",
+    ],
+    highlights_es: [
+      "Separación edge/nube: YOLO + tracking en el local, solo eventos JSON cruzan la red por MQTT",
+      "TimescaleDB para las series temporales: aforo en vivo, entradas por hora, permanencia",
+      "Motor de reglas de alerta: intrusión fuera de horario, aforo máximo, cámara caída",
+      "Sin reconocimiento facial por diseño — solo siluetas anónimas",
+    ],
+    challenge:
+      "Venues already have cameras, but the footage is only ever watched after something goes wrong. Turning it into live operational data means running vision models cheaply on site, and doing it without shipping customers' raw video to a cloud they don't control.",
+    challenge_es:
+      "Los locales ya tienen cámaras, pero el video solo se mira después de que algo salió mal. Convertirlo en datos operativos en vivo implica correr modelos de visión de forma barata en el local, y hacerlo sin mandar el video crudo de los clientes a una nube que no controlan.",
+    approach:
+      "Four components: a Python edge service doing detection and tracking, a Spring Boot backend that aggregates events into metrics and evaluates alert rules, a React dashboard, and an MQTT broker as the edge-to-cloud contract. The whole stack — Timescale, EMQX, MinIO, API and web — runs as containers with a fail-fast production profile.",
+    approach_es:
+      "Cuatro componentes: un servicio edge en Python que detecta y trackea, un backend Spring Boot que agrega los eventos en métricas y evalúa reglas de alerta, un dashboard React, y un broker MQTT como contrato entre el edge y la nube. Todo el stack — Timescale, EMQX, MinIO, API y web — corre en containers con un perfil productivo fail-fast.",
+    outcome:
+      "The cloud side is deployed end to end behind its own domain, with signup, venue setup, the event pipeline and the dashboard working. The initial vertical is hospitality; the edge service is the piece still being hardened.",
+    outcome_es:
+      "El lado nube está deployado end to end con dominio propio: registro, alta de local, pipeline de eventos y dashboard funcionando. La vertical inicial es gastronomía; el servicio edge es la pieza que falta endurecer.",
+    links: [
+      { label: "Visit Soma", href: "https://aforo.matiascaliz.com.ar" },
+    ],
+    hidePreview: true,
+    featured: false,
+    category: "venture",
+    color: "#3072d0",
+  },
+  {
+    slug: "tarjetazo",
+    title: "Tarjetazo",
+    tagline: "A bot that reads my credit card statement and sends me the breakdown",
+    tagline_es: "Un bot que lee el resumen de mi tarjeta y me manda el desglose",
+    description:
+      "A small, self-contained automation that watches my inbox for the monthly BNA VISA statement, decrypts the password-protected PDF, extracts and categorizes every transaction, and sends a Telegram summary compared against the previous month. Built because reading a bank PDF every month to find out where the money went is exactly the kind of thing a computer should do.",
+    description_es:
+      "Una automatización chica y autocontenida que vigila mi casilla esperando el resumen mensual de la VISA del BNA, desencripta el PDF protegido con contraseña, extrae y categoriza cada movimiento, y manda un resumen por Telegram comparado contra el mes anterior. Lo hice porque leer un PDF del banco todos los meses para saber a dónde se fue la plata es exactamente lo que debería hacer una computadora.",
+    role: "Creator",
+    role_es: "Creador",
+    year: "2026",
+    status: "production",
+    statusLabel: "Running on cron",
+    statusLabel_es: "Corriendo por cron",
+    stack: ["Python", "IMAP", "pypdf", "Claude API", "Telegram Bot API", "cron"],
+    highlights: [
+      "Idempotent by design: the email is only marked as read once the whole pipeline succeeds",
+      "Keyword rules first, Claude only for merchants the rules don't recognize — and the answer is cached",
+      "Validates the computed total against the statement balance and flags any mismatch",
+      "Dead man's switch: alerts me if too long goes by without a new statement, in case the bot broke",
+    ],
+    highlights_es: [
+      "Idempotente por diseño: el mail se marca como leído solo cuando todo el pipeline terminó bien",
+      "Primero reglas por palabras clave, Claude solo para los comercios que las reglas no reconocen — y la respuesta se cachea",
+      "Valida que el total calculado cuadre con el saldo del resumen y avisa si no",
+      "Dead man's switch: me avisa si pasa demasiado tiempo sin un resumen nuevo, por si el bot se rompió",
+    ],
+    challenge:
+      "The statement arrives as an encrypted PDF with no consistent structure, merchant names are cryptic strings, and the job runs unattended — so a silent failure means finding out months later that nothing was tracked.",
+    challenge_es:
+      "El resumen llega como un PDF encriptado sin estructura consistente, los nombres de los comercios son cadenas crípticas, y el job corre desatendido — así que una falla silenciosa significa enterarte meses después de que no se registró nada.",
+    approach:
+      "One module per step — email, PDF parsing, categorization, formatting, history, delivery — orchestrated by a main script that only commits state when every step passed. Categorization is rules-first with an LLM fallback so the API cost stays near zero, and known merchants persist to a local cache.",
+    approach_es:
+      "Un módulo por paso — mail, parseo del PDF, categorización, formato, histórico, envío — orquestados por un script principal que solo persiste el estado cuando todos los pasos salieron bien. La categorización es primero por reglas con fallback a LLM para que el costo de API sea casi cero, y los comercios conocidos quedan en un caché local.",
+    outcome:
+      "Running unattended on a cron every six hours. Every month I get a categorized breakdown with subtotals and a month-over-month comparison, without opening a single PDF.",
+    outcome_es:
+      "Corriendo desatendido por cron cada seis horas. Todos los meses recibo el desglose categorizado con subtotales y comparación contra el mes anterior, sin abrir un solo PDF.",
+    links: [],
+    featured: false,
+    category: "open-source",
+    color: "#e11d48",
   },
   {
     slug: "prop-metrics",
@@ -366,7 +506,7 @@ export const projects: Project[] = [
     links: [
       { label: "Visit CCI Argentina", href: "https://cciargentina.org.ar/" },
     ],
-    featured: true,
+    featured: false,
     category: "work",
     color: "#059669",
   },
