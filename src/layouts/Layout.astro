@@ -6,14 +6,34 @@ import CommandPalette from "../components/CommandPalette";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const {
   title = "Matias Caliz | Full Stack Engineer",
   description = "Full Stack Engineer building products that matter. Currently at Despegar.",
+  image = "/og.png",
 } = Astro.props;
 
 const pathname = Astro.url.pathname;
+const canonical = new URL(pathname, Astro.site ?? Astro.url).href;
+const ogImage = new URL(image, Astro.site ?? Astro.url).href;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Matias Caliz",
+  url: Astro.site?.href ?? "https://matiascaliz.com.ar/",
+  image: ogImage,
+  jobTitle: "Full Stack Software Engineer",
+  email: "mailto:matiascaliz@hotmail.com",
+  worksFor: { "@type": "Organization", name: "Despegar", url: "https://www.despegar.com" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "UADE", url: "https://www.uade.edu.ar" },
+  address: { "@type": "PostalAddress", addressRegion: "Buenos Aires", addressCountry: "AR" },
+  knowsLanguage: ["es-AR", "en"],
+  sameAs: ["https://github.com/mati-caliz", "https://www.linkedin.com/in/matias-caliz/"],
+  knowsAbout: ["TypeScript", "React", "Java", "Spring", "Python", "Docker", "Software architecture"],
+};
 const navLinks = [
   { href: "/projects", label: "Projects", labelEs: "Proyectos" },
   { href: "/experience", label: "Experience", labelEs: "Experiencia" },
@@ -28,11 +48,28 @@ const navLinks = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <meta name="author" content="Matias Caliz" />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Matias Caliz" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Matias Caliz — Full Stack Engineer" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_AR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#fafaf9" media="(prefers-color-scheme: light)" />
 
@@ -58,7 +95,11 @@ const navLinks = [
     </noscript>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{title}</title>
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
 
     <!-- Astro View Transitions -->
     <ClientRouter />
@@ -72,6 +113,7 @@ const navLinks = [
 
         const lang = (localStorage.getItem("lang") || ((navigator.language || "en").toLowerCase().startsWith("es") ? "es" : "en"));
         document.documentElement.setAttribute("data-lang", lang);
+        document.documentElement.lang = lang === "es" ? "es-AR" : "en";
       })();
     </script>
   </head>
@@ -299,6 +341,7 @@ const navLinks = [
       // ── i18n ──
       function applyLang(lang) {
         document.documentElement.setAttribute("data-lang", lang);
+        document.documentElement.lang = lang === "es" ? "es-AR" : "en";
         document.querySelectorAll("[data-i18n-es]").forEach(function (el) {
           if (!el.getAttribute("data-i18n-en")) {
             el.setAttribute("data-i18n-en", el.textContent);
@@ -436,6 +479,7 @@ const navLinks = [
         // Re-apply language
         const lang = (localStorage.getItem("lang") || ((navigator.language || "en").toLowerCase().startsWith("es") ? "es" : "en"));
         document.documentElement.setAttribute("data-lang", lang);
+        document.documentElement.lang = lang === "es" ? "es-AR" : "en";
         initLayout();
       });
 

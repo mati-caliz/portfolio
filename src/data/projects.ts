@@ -174,54 +174,6 @@ export const projects: Project[] = [
     color: "#10b981",
   },
   {
-    slug: "gastronova",
-    title: "Gastronova",
-    tagline: "SaaS platform for the restaurant industry",
-    tagline_es: "Plataforma SaaS para la industria gastronómica",
-    description:
-      "A complete SaaS solution for restaurant management — covering everything from table reservations and order management to inventory tracking and analytics. Think Fudo or Maxirest, but built with a modern stack and focused on the small-to-medium restaurant segment in Argentina.",
-    description_es:
-      "Una solución SaaS completa para gestión de restaurantes — cubriendo desde reservas de mesas y gestión de pedidos hasta seguimiento de inventario y analytics. Similar a Fudo o Maxirest, pero construido con un stack moderno y enfocado en el segmento de restaurantes pequeños y medianos en Argentina.",
-    role: "Founder & Developer",
-    role_es: "Fundador y Desarrollador",
-    year: "2025",
-    status: "completed",
-    statusLabel: "Shipped",
-    statusLabel_es: "Lanzado",
-    stack: ["React", "Node.js", "TypeScript", "MongoDB", "Docker"],
-    highlights: [
-      "End-to-end restaurant management system",
-      "Real-time order tracking and table management",
-      "Inventory system with low-stock alerts",
-      "Revenue analytics and reporting dashboard",
-    ],
-    highlights_es: [
-      "Sistema de gestión de restaurantes end-to-end",
-      "Seguimiento de pedidos y gestión de mesas en tiempo real",
-      "Sistema de inventario con alertas de stock bajo",
-      "Dashboard de analytics de ingresos y reportes",
-    ],
-    challenge:
-      "Most restaurant management software in Argentina is either outdated, overpriced, or designed for enterprise chains. Small and medium restaurants need an affordable, modern, easy-to-use tool that covers the full operation cycle.",
-    challenge_es:
-      "La mayoría del software de gestión gastronómica en Argentina está desactualizado, es caro o está diseñado para cadenas grandes. Los restaurantes pequeños y medianos necesitan una herramienta accesible, moderna y fácil de usar que cubra todo el ciclo operativo.",
-    approach:
-      "Built a modular SaaS where restaurants can start with basic features (orders, tables) and add modules as they grow (inventory, analytics, reservations). The architecture is microservices-based with Docker, designed to scale from a single restaurant to a chain.",
-    approach_es:
-      "Construí un SaaS modular donde los restaurantes pueden empezar con funciones básicas (pedidos, mesas) y agregar módulos a medida que crecen (inventario, analytics, reservas). La arquitectura está basada en microservicios con Docker, diseñada para escalar desde un restaurante a una cadena.",
-    outcome:
-      "Shipped a full-featured MVP validated with restaurant owners in Buenos Aires. Core modules live: orders, tables, inventory, and analytics.",
-    outcome_es:
-      "MVP completo lanzado y validado con dueños de restaurantes en Buenos Aires. Módulos core en producción: pedidos, mesas, inventario y analytics.",
-    links: [
-      { label: "Visit Gastronova", href: "https://gastronova.com.ar" },
-    ],
-    previewUrl: "https://gastronova.com.ar",
-    featured: true,
-    category: "venture",
-    color: "#f59e0b",
-  },
-  {
     slug: "conseguilo",
     title: "Conseguilo",
     tagline: "SaaS job-hunting platform with ATS-ready CVs, application tracking, and AI matching",
@@ -314,9 +266,9 @@ export const projects: Project[] = [
     approach_es:
       "Separé el sistema en una core API con Fastify (motor de agentes, RAG, workers), un gateway de canales delgado que solo valida y normaliza los webhooks de cada proveedor, y un frontend Next.js — con contratos Zod compartidos entre las piezas. El esquema evoluciona con migraciones Drizzle que corren antes de levantar los containers; los archivos van a un bucket privado compatible con S3.",
     outcome:
-      "Deployed and running behind its own domain since 2026, with the full container stack, migrations wired into the deploy, and channel onboarding in place. Next up: connecting the first production WhatsApp Business account.",
+      "Running behind its own domain with a live WhatsApp Business number, an API-key layer with scopes, and a native connector that lets an agent pull a whole tool catalogue from an external service — PropMetrics answers real estate questions through it, in the same conversation.",
     outcome_es:
-      "Deployado y corriendo con dominio propio desde 2026, con el stack completo de containers, migraciones integradas al deploy y el onboarding de canales listo. Lo próximo: conectar la primera cuenta de WhatsApp Business productiva.",
+      "Corriendo con dominio propio y un número de WhatsApp Business real, una capa de API keys con scopes y un conector nativo que le permite a un agente tomar un catálogo entero de herramientas de un servicio externo — PropMetrics contesta consultas inmobiliarias por ahí, en la misma conversación.",
     links: [
       { label: "Visit Respondi", href: "https://respondi.matiascaliz.com.ar" },
     ],
@@ -324,6 +276,104 @@ export const projects: Project[] = [
     featured: true,
     category: "venture",
     color: "#7c3aed",
+  },
+  {
+    slug: "prop-metrics",
+    title: "PropMetrics",
+    tagline: "Real estate intelligence for the Argentine market",
+    tagline_es: "Inteligencia inmobiliaria para el mercado argentino",
+    description:
+      "A real estate data platform that scrapes the 48 neighbourhoods of Buenos Aires every night and turns the listings into decisions: price per m² by neighbourhood, yield and payback, an algorithmic appraiser with a confidence interval, an opportunity detector, short-term vs. traditional rent, flipping margins, and prices deflated by UVA, CER or ICL to see what actually moved. It ships its own dependency-free dashboard and answers the same questions over WhatsApp through Respondi.",
+    description_es:
+      "Una plataforma de datos inmobiliarios que scrapea los 48 barrios de CABA cada noche y convierte los avisos en decisiones: precio por m² por barrio, yield y PER, un tasador algorítmico con intervalo de confianza, un detector de oportunidades, temporario vs. alquiler tradicional, margen de flipping y precios deflactados por UVA, CER o ICL para ver qué se movió de verdad. Trae su propio tablero sin dependencias y contesta lo mismo por WhatsApp a través de Respondi.",
+    role: "Creator & Developer",
+    role_es: "Creador y Desarrollador",
+    year: "2026",
+    status: "production",
+    statusLabel: "Live",
+    statusLabel_es: "En vivo",
+    stack: ["Python", "FastAPI", "PostgreSQL", "Redis", "scikit-learn", "Playwright", "arq", "Docker"],
+    highlights: [
+      "Algorithmic appraiser: three quantile gradient-boosting models (p10/p50/p90) over log price, tuned for interval coverage rather than median error",
+      "Opportunity detector that compares each listing against its own cohort using MAD, not the neighbourhood average",
+      "Prices deflated by UVA, CER or ICL from the central bank, so a nominal rise and a real one stop looking the same",
+      "Zero-dependency dashboard: hand-drawn SVG map, no tiles, no CDNs, no build step",
+      "13 tools exposed to a WhatsApp agent, served from a catalogue the assistant reads on its own",
+    ],
+    highlights_es: [
+      "Tasador algorítmico: tres modelos de gradient boosting por cuantiles (p10/p50/p90) sobre el log del precio, ajustados por cobertura del intervalo antes que por error mediano",
+      "Detector de oportunidades que compara cada aviso contra su propio grupo usando MAD, no el promedio del barrio",
+      "Precios deflactados por UVA, CER o ICL desde el BCRA, para que una suba nominal y una real dejen de parecer lo mismo",
+      "Tablero sin dependencias: mapa en SVG dibujado a mano, sin tiles, sin CDNs, sin build",
+      "13 herramientas expuestas a un agente de WhatsApp, servidas como catálogo que el asistente lee solo",
+    ],
+    challenge:
+      "Argentina's real estate market has no transparent data: listings are scattered across portals, prices are asked prices, and inflation makes any historical series unreadable. On top of that, the portals actively block datacenter traffic — the first scraper worked locally and returned nothing at all from the server.",
+    challenge_es:
+      "El mercado inmobiliario argentino no tiene datos transparentes: los avisos están dispersos entre portales, los precios son de oferta y la inflación vuelve ilegible cualquier serie histórica. Encima, los portales bloquean activamente el tráfico de datacenter — el primer scraper andaba local y desde el servidor no traía un solo dato.",
+    approach:
+      "Rewrote the Spring Boot backend as an async FastAPI service with Alembic migrations and an arq worker for the nightly jobs. The blocking turned out to be measurable rather than absolute: one portal only filters IPv4, another rate-limits after six requests, so the scraper paces itself, backs off, and cools a portal down instead of giving up on the whole run. Every metric ships its sample size and returns null when the data is not there yet — that is what let the analytics land before the historical series existed.",
+    approach_es:
+      "Reescribí el backend de Spring Boot como un servicio FastAPI async con migraciones Alembic y un worker arq para los jobs nocturnos. El bloqueo resultó medible y no absoluto: un portal filtra sólo IPv4 y otro corta por rate a partir del sexto pedido, así que el scraper se marca el ritmo, hace backoff y enfría el portal en vez de abandonar la corrida entera. Cada métrica viaja con su tamaño de muestra y devuelve null cuando todavía no hay datos — eso es lo que permitió tener el análisis andando antes que la serie histórica.",
+    outcome:
+      "Live on its own domain with the nightly pipeline running: 48 neighbourhoods, cross-portal deduplication, geocoding, appraisal models retrained daily, and a market digest that arrives on WhatsApp every morning. The appraiser sits at 21.5% median error on sale and 16.9% on rent, with its p10–p90 interval covering 81.5% of held-out listings.",
+    outcome_es:
+      "En vivo con dominio propio y el pipeline nocturno corriendo: 48 barrios, deduplicación entre portales, geocoding, modelos de tasación reentrenados a diario y un resumen de mercado que llega por WhatsApp cada mañana. El tasador está en 21,5% de error mediano en venta y 16,9% en alquiler, con el intervalo p10–p90 cubriendo el 81,5% de los avisos de holdout.",
+    links: [
+      { label: "Visit PropMetrics", href: "https://propmetrics.matiascaliz.com.ar" },
+    ],
+    previewUrl: "https://propmetrics.matiascaliz.com.ar",
+    featured: true,
+    category: "venture",
+    color: "#6366f1",
+  },
+  {
+    slug: "gastronova",
+    title: "Gastronova",
+    tagline: "SaaS platform for the restaurant industry",
+    tagline_es: "Plataforma SaaS para la industria gastronómica",
+    description:
+      "A complete SaaS solution for restaurant management — covering everything from table reservations and order management to inventory tracking and analytics. Think Fudo or Maxirest, but built with a modern stack and focused on the small-to-medium restaurant segment in Argentina.",
+    description_es:
+      "Una solución SaaS completa para gestión de restaurantes — cubriendo desde reservas de mesas y gestión de pedidos hasta seguimiento de inventario y analytics. Similar a Fudo o Maxirest, pero construido con un stack moderno y enfocado en el segmento de restaurantes pequeños y medianos en Argentina.",
+    role: "Founder & Developer",
+    role_es: "Fundador y Desarrollador",
+    year: "2025",
+    status: "completed",
+    statusLabel: "Shipped",
+    statusLabel_es: "Lanzado",
+    stack: ["React", "Node.js", "TypeScript", "MongoDB", "Docker"],
+    highlights: [
+      "End-to-end restaurant management system",
+      "Real-time order tracking and table management",
+      "Inventory system with low-stock alerts",
+      "Revenue analytics and reporting dashboard",
+    ],
+    highlights_es: [
+      "Sistema de gestión de restaurantes end-to-end",
+      "Seguimiento de pedidos y gestión de mesas en tiempo real",
+      "Sistema de inventario con alertas de stock bajo",
+      "Dashboard de analytics de ingresos y reportes",
+    ],
+    challenge:
+      "Most restaurant management software in Argentina is either outdated, overpriced, or designed for enterprise chains. Small and medium restaurants need an affordable, modern, easy-to-use tool that covers the full operation cycle.",
+    challenge_es:
+      "La mayoría del software de gestión gastronómica en Argentina está desactualizado, es caro o está diseñado para cadenas grandes. Los restaurantes pequeños y medianos necesitan una herramienta accesible, moderna y fácil de usar que cubra todo el ciclo operativo.",
+    approach:
+      "Built a modular SaaS where restaurants can start with basic features (orders, tables) and add modules as they grow (inventory, analytics, reservations). The architecture is microservices-based with Docker, designed to scale from a single restaurant to a chain.",
+    approach_es:
+      "Construí un SaaS modular donde los restaurantes pueden empezar con funciones básicas (pedidos, mesas) y agregar módulos a medida que crecen (inventario, analytics, reservas). La arquitectura está basada en microservicios con Docker, diseñada para escalar desde un restaurante a una cadena.",
+    outcome:
+      "Shipped a full-featured MVP validated with restaurant owners in Buenos Aires. Core modules live: orders, tables, inventory, and analytics.",
+    outcome_es:
+      "MVP completo lanzado y validado con dueños de restaurantes en Buenos Aires. Módulos core en producción: pedidos, mesas, inventario y analytics.",
+    links: [
+      { label: "Visit Gastronova", href: "https://gastronova.com.ar" },
+    ],
+    previewUrl: "https://gastronova.com.ar",
+    featured: true,
+    category: "venture",
+    color: "#f59e0b",
   },
   {
     slug: "soma",
@@ -374,6 +424,51 @@ export const projects: Project[] = [
     color: "#3072d0",
   },
   {
+    slug: "chirola",
+    title: "Chirola",
+    tagline: "Electronic invoicing against Argentina's tax authority, as an API",
+    tagline_es: "Facturación electrónica contra ARCA, como API",
+    description:
+      "A billing backend that talks to ARCA (formerly AFIP) so nobody else has to: A/B/C invoices, credit and debit notes, each one returning its CAE. It is multi-tenant by design — every taxpayer keeps its own CUIT and digital certificate in an encrypted vault, and every API consumer is scoped to the taxpayers it is allowed to invoice for. It is the fiscal backend behind Respondi's billing agent.",
+    description_es:
+      "Un backend de facturación que habla con ARCA (ex AFIP) para que nadie más tenga que hacerlo: comprobantes A/B/C, notas de crédito y débito, cada uno devolviendo su CAE. Es multi-tenant desde el schema — cada contribuyente guarda su CUIT y su certificado digital en un vault cifrado, y cada consumidor de la API sólo puede facturar por los contribuyentes que tiene habilitados. Es el backend fiscal del agente de facturación de Respondi.",
+    role: "Creator & Developer",
+    role_es: "Creador y Desarrollador",
+    year: "2026",
+    status: "production",
+    statusLabel: "In production",
+    statusLabel_es: "En producción",
+    stack: ["NestJS", "TypeScript", "Prisma", "PostgreSQL", "Zod", "SOAP", "Docker"],
+    highlights: [
+      "SOAP integration with ARCA's WSAA and WSFEv1, including ticket lifecycle and CAE retrieval",
+      "Private keys never leave the backend: certificates live encrypted at rest in a dedicated vault",
+      "Multi-tenant model where an API consumer is explicitly bound to the taxpayers it may invoice for",
+      "Consumed server-to-server by Respondi, so a business can invoice straight from a WhatsApp conversation",
+    ],
+    highlights_es: [
+      "Integración SOAP con WSAA y WSFEv1 de ARCA, incluyendo el ciclo de vida del ticket y la obtención del CAE",
+      "Las claves privadas nunca salen del backend: los certificados viven cifrados at-rest en un vault dedicado",
+      "Modelo multi-tenant donde cada consumidor de la API queda atado explícitamente a los contribuyentes que puede facturar",
+      "Consumido server-to-server por Respondi, así un negocio factura desde una conversación de WhatsApp",
+    ],
+    challenge:
+      "Invoicing in Argentina means SOAP web services, X.509 certificates, short-lived auth tickets, and a validation model that rejects a whole invoice over a rounding difference. Any product that wants to invoice ends up reimplementing all of it — and, worse, handling somebody else's private key.",
+    challenge_es:
+      "Facturar en Argentina significa servicios SOAP, certificados X.509, tickets de autenticación de vida corta y un modelo de validación que rechaza un comprobante entero por una diferencia de redondeo. Cualquier producto que quiera facturar termina reimplementando todo eso — y, peor, manejando la clave privada de otro.",
+    approach:
+      "Built it as a NestJS service with Prisma and Postgres, in a pnpm monorepo with Zod contracts shared across packages. The certificate vault is encrypted with a key that lives only in the deployment environment, and the schema models issuers, API consumers, and the grants between them as first-class entities instead of configuration.",
+    approach_es:
+      "Lo construí como un servicio NestJS con Prisma y Postgres, en un monorepo pnpm con contratos Zod compartidos. El vault de certificados se cifra con una clave que sólo existe en el entorno de deploy, y el schema modela emisores, consumidores de API y los permisos entre ellos como entidades de primera clase en vez de configuración.",
+    outcome:
+      "Running in production with push-to-deploy and migrations applied on every release, reachable only from inside the private network — its single consumer today is Respondi's billing agent. A mobile app for the taxpayer side is the next step.",
+    outcome_es:
+      "Corriendo en producción con push-to-deploy y migraciones aplicadas en cada release, alcanzable sólo desde la red privada — hoy su único consumidor es el agente de facturación de Respondi. La app mobile del lado del contribuyente es el próximo paso.",
+    links: [],
+    featured: false,
+    category: "venture",
+    color: "#0ea5e9",
+  },
+  {
     slug: "tarjetazo",
     title: "Tarjetazo",
     tagline: "A bot that reads my credit card statement and sends me the breakdown",
@@ -417,51 +512,6 @@ export const projects: Project[] = [
     featured: false,
     category: "open-source",
     color: "#e11d48",
-  },
-  {
-    slug: "prop-metrics",
-    title: "PropMetrics",
-    tagline: "Real estate intelligence platform for the Argentine market",
-    tagline_es: "Plataforma de inteligencia inmobiliaria para el mercado argentino",
-    description:
-      "A real estate data platform that automates property data collection from major Argentine portals (ZonaProp, Argenprop) and provides market analysis tools. Features advanced search, price history tracking, market statistics, and a buy vs. rent ROI calculator — built to bring data-driven decision making to Argentina's real estate market.",
-    description_es:
-      "Una plataforma de datos inmobiliarios que automatiza la recolección de datos de los principales portales argentinos (ZonaProp, Argenprop) y provee herramientas de análisis de mercado. Incluye búsqueda avanzada, seguimiento de historial de precios, estadísticas de mercado y calculadora de ROI compra vs. alquiler — construida para llevar decisiones basadas en datos al mercado inmobiliario argentino.",
-    role: "Creator & Developer",
-    role_es: "Creador y Desarrollador",
-    year: "2025",
-    status: "completed",
-    statusLabel: "Completed",
-    statusLabel_es: "Completado",
-    stack: ["Java", "Spring Boot", "PostgreSQL", "Redis", "Selenium"],
-    highlights: [
-      "Automated scraping with anti-bot evasion strategies",
-      "Price history tracking with change detection",
-      "Market stats: averages, medians, price/m² ranges",
-      "Buy vs. Rent ROI calculator with financial analysis",
-    ],
-    highlights_es: [
-      "Scraping automatizado con estrategias anti-bot",
-      "Seguimiento de historial de precios con detección de cambios",
-      "Estadísticas de mercado: promedios, medianas, rangos de precio/m²",
-      "Calculadora ROI compra vs. alquiler con análisis financiero",
-    ],
-    challenge:
-      "Argentina's real estate market lacks transparent, centralized data. Property listings are scattered across multiple portals with no easy way to track price changes, compare neighborhoods, or analyze market trends over time.",
-    challenge_es:
-      "El mercado inmobiliario argentino carece de datos transparentes y centralizados. Los listados de propiedades están dispersos en múltiples portales sin una forma fácil de rastrear cambios de precios, comparar barrios o analizar tendencias del mercado en el tiempo.",
-    approach:
-      "Built a Spring Boot backend with Jsoup and Selenium for scraping, PostgreSQL for persistence, and Redis for caching. Implemented anti-bot measures like User-Agent rotation, random delays, and headless browser strategies. The API exposes advanced search, statistics, and financial analysis endpoints.",
-    approach_es:
-      "Construí un backend con Spring Boot usando Jsoup y Selenium para scraping, PostgreSQL para persistencia y Redis para caching. Implementé medidas anti-bot como rotación de User-Agent, delays aleatorios y estrategias de navegador headless. La API expone endpoints de búsqueda avanzada, estadísticas y análisis financiero.",
-    outcome:
-      "Backend API fully functional with data from two major portals covering Buenos Aires. Roadmap includes ML-powered valuations, heatmaps, and a React/Next.js frontend.",
-    outcome_es:
-      "API backend totalmente funcional con datos de dos portales principales cubriendo Buenos Aires. El roadmap incluye valuaciones con ML, mapas de calor y un frontend en React/Next.js.",
-    links: [],
-    featured: false,
-    category: "venture",
-    color: "#6366f1",
   },
   {
     slug: "ccitaliana",
@@ -554,6 +604,54 @@ export const projects: Project[] = [
     featured: false,
     category: "open-source",
     color: "#8b5cf6",
+  },
+  {
+    slug: "bender",
+    title: "Bender",
+    tagline: "One Chrome extension replacing ModHeader, Cookie-Editor, Tampermonkey and an Allow-CORS toggle",
+    tagline_es: "Una extensión de Chrome que reemplaza a ModHeader, Cookie-Editor, Tampermonkey y el switch de Allow-CORS",
+    description:
+      "A Manifest V3 extension for everyday web development: request and response header profiles, traffic rules that block, redirect or mock a URL, a CORS switch that reflects the real origin, User-Agent presets with client hints, full cookie and storage management with JWT decoding and named snapshots, per-site user scripts, a live traffic log, and a set of design tools drawn on top of the page.",
+    description_es:
+      "Una extensión Manifest V3 para el día a día del desarrollo web: perfiles de headers de request y response, reglas de tráfico que bloquean, redirigen o mockean una URL, un switch de CORS que refleja el origen real, presets de User-Agent con client hints, ABM completo de cookies y storage con decodificador de JWT y snapshots con nombre, scripts propios por sitio, un log de tráfico en vivo y herramientas de diseño dibujadas sobre la página.",
+    role: "Creator",
+    role_es: "Creador",
+    year: "2026",
+    status: "completed",
+    statusLabel: "Chrome extension",
+    statusLabel_es: "Extensión de Chrome",
+    stack: ["TypeScript", "Preact", "Chrome MV3", "declarativeNetRequest", "Vite"],
+    highlights: [
+      "Cookie snapshots per domain: jump between logged-in users in one click",
+      "Mock any response — status, headers, body, delay — or turn a real one into a mock from the traffic log",
+      "The traffic log shows the headers that actually went out and which Bender rule touched each request",
+      "Same app in the popup, the side panel and a full tab; only the width changes",
+    ],
+    highlights_es: [
+      "Snapshots de cookies por dominio: saltar entre usuarios logueados de un click",
+      "Mockear cualquier response — status, headers, body, delay — o convertir uno real en mock desde el log de tráfico",
+      "El log de tráfico muestra los headers que salieron de verdad y qué regla de Bender tocó cada request",
+      "La misma app en el popup, el panel lateral y una pestaña completa; sólo cambia el ancho",
+    ],
+    challenge:
+      "The tools a web developer needs every day come from four different extensions that do not know about each other. When a request goes out wrong, none of them can tell you which one rewrote it.",
+    challenge_es:
+      "Las herramientas que un desarrollador web necesita todos los días vienen de cuatro extensiones distintas que no se conocen entre sí. Cuando una request sale mal, ninguna te puede decir cuál de ellas la reescribió.",
+    approach:
+      "Everything compiles down to a single batch of declarativeNetRequest session rules: the engine takes the whole state and returns the complete rule list, the service worker swaps the old set for the new one. Session rules rather than dynamic ones, because they are the only kind that accept a tabIds condition — which is what makes \"this tab only\" scoping possible. Explicit priorities decide who wins when two rules touch the same header.",
+    approach_es:
+      "Todo se compila a una sola tanda de reglas de sesión de declarativeNetRequest: el motor toma el estado completo y devuelve la lista entera, y el service worker cambia el set viejo por el nuevo. Reglas de sesión y no dinámicas, porque son las únicas que aceptan la condición tabIds — que es lo que hace posible el alcance «sólo esta pestaña». Las prioridades explícitas definen quién gana cuando dos reglas tocan el mismo header.",
+    outcome:
+      "A daily driver that replaced four extensions in my own workflow, with its privacy policy published and the store listing prepared.",
+    outcome_es:
+      "Una herramienta de uso diario que reemplazó cuatro extensiones en mi propio workflow, con su política de privacidad publicada y el listado de la store preparado.",
+    links: [
+      { label: "Privacy policy", href: "https://matiascaliz.com.ar/bender/privacidad" },
+    ],
+    hidePreview: true,
+    featured: false,
+    category: "open-source",
+    color: "#f97316",
   },
   {
     slug: "chrome-extension",
