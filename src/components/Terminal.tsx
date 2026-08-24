@@ -109,9 +109,6 @@ const COMMANDS: Record<string, () => string[]> = {
     "▸ Dynamic Systems         [completed]",
     "  Modeling & simulation toolkit in Python",
     "",
-    "▸ DevTools Extension      [completed]",
-    "  Chrome extension for localStorage/cookies",
-    "",
     '  → Type "open projects" to see full details',
   ],
   contact: () => [

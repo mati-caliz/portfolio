@@ -653,51 +653,6 @@ export const projects: Project[] = [
     category: "open-source",
     color: "#f97316",
   },
-  {
-    slug: "chrome-extension",
-    title: "DevTools Extension",
-    tagline: "Browser extension for managing localStorage & cookies",
-    tagline_es: "Extensión de navegador para gestionar localStorage y cookies",
-    description:
-      "A Chrome extension built with Preact and Tailwind CSS that provides a clean interface for inspecting, editing, and managing localStorage and cookies. Born from a personal pain point — the built-in Chrome DevTools for storage are functional but clunky for daily use.",
-    description_es:
-      "Una extensión de Chrome construida con Preact y Tailwind CSS que provee una interfaz limpia para inspeccionar, editar y gestionar localStorage y cookies. Nació de un pain point personal — las DevTools de Chrome para storage son funcionales pero poco prácticas para uso diario.",
-    role: "Creator",
-    role_es: "Creador",
-    year: "2024",
-    status: "completed",
-    statusLabel: "Available on Chrome",
-    statusLabel_es: "Disponible en Chrome",
-    stack: ["Preact", "Tailwind CSS", "Chrome APIs", "TypeScript"],
-    highlights: [
-      "Clean UI for storage inspection and editing",
-      "Bulk operations on localStorage and cookies",
-      "Search and filter across all stored data",
-      "Built to solve a real daily workflow friction",
-    ],
-    highlights_es: [
-      "UI limpia para inspección y edición de storage",
-      "Operaciones masivas en localStorage y cookies",
-      "Búsqueda y filtrado en todos los datos almacenados",
-      "Construido para resolver una fricción real del día a día",
-    ],
-    challenge:
-      "As a developer working with multiple environments and auth flows, I was constantly digging through Chrome DevTools to inspect and modify localStorage and cookies. The native interface is powerful but not optimized for rapid daily use.",
-    challenge_es:
-      "Como desarrollador trabajando con múltiples entornos y flujos de auth, constantemente estaba buscando en las DevTools de Chrome para inspeccionar y modificar localStorage y cookies. La interfaz nativa es poderosa pero no está optimizada para uso rápido diario.",
-    approach:
-      "Built a minimal Preact extension with Tailwind for styling. Focused on keyboard shortcuts, search, and bulk operations — the features I needed most. Used Chrome's extension APIs for storage access with proper permission scoping.",
-    approach_es:
-      "Construí una extensión mínima con Preact y Tailwind para el styling. Me enfoqué en atajos de teclado, búsqueda y operaciones masivas — las funciones que más necesitaba. Usé las APIs de extensiones de Chrome para acceso a storage con permisos correctamente delimitados.",
-    outcome:
-      "Became a daily-use tool in my workflow. Saves significant time when debugging auth flows, testing different user states, and managing development environment data.",
-    outcome_es:
-      "Se convirtió en una herramienta de uso diario en mi workflow. Ahorra tiempo significativo al debuggear flujos de auth, testear diferentes estados de usuario y gestionar datos del entorno de desarrollo.",
-    links: [],
-    featured: false,
-    category: "open-source",
-    color: "#ec4899",
-  },
 ];
 
 export function getFeaturedProjects() {
