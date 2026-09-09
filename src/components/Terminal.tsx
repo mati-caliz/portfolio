@@ -114,7 +114,7 @@ const COMMANDS: Record<string, () => string[]> = {
   contact: () => [
     "── Get in touch ──────────────────────",
     "",
-    "  Email     mati-caliz",
+    "  GitHub    @mati-caliz",
     "  GitHub    github.com/mati-caliz",
     "  LinkedIn  www.linkedin.com/in/matias-caliz/",
     "",
@@ -149,7 +149,7 @@ const EASTER_EGGS: Record<string, () => string[]> = {
     "  ║   Excellent decision.                ║",
     "  ║   You clearly have great taste.      ║",
     "  ║                                      ║",
-    "  ║   → mati-caliz          ║",
+    "  ║   → github.com/mati-caliz            ║",
     "  ║   → linkedin.com/in/matias-caliz     ║",
     "  ║                                      ║",
     "  ║   Let's build something together.    ║",
