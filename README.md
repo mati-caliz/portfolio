@@ -53,16 +53,16 @@ src/
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Start dev server
-npm run dev
+pnpm run dev
 
 # Build for production
-npm run build
+pnpm run build
 
 # Preview production build
-npm run preview
+pnpm run preview
 ```
 
 ## Lighthouse scores
@@ -79,7 +79,7 @@ npm run preview
 The `dist/` directory contains static HTML, CSS, and JS — deploy it to any static hosting provider.
 
 ```bash
-npm run build
+pnpm run build
 # Upload dist/ to your server
 ```
 
