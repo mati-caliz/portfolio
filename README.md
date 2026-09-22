@@ -1,92 +1,41 @@
-# matias caliz — portfolio
+# Portfolio
 
-Personal portfolio website built with [Astro](https://astro.build), [Tailwind CSS v4](https://tailwindcss.com), and [Preact](https://preactjs.com).
+Sitio personal de Matías Caliz, publicado en [matiascaliz.com.ar](https://matiascaliz.com.ar).
 
-**Live:** _coming soon_
+Astro 5 con Tailwind 4 e islas de Preact para lo poco que es interactivo: el fondo de puntos
+que reacciona al mouse, el efecto de tipeo y la terminal con comandos (`about`, `skills`,
+`projects`, `contact`). El resto es HTML estático, sin JavaScript.
 
-## Stack
-
-| Technology | Why |
-|---|---|
-| **Astro 5** | Static-first, zero JS by default, View Transitions for SPA-like navigation |
-| **Tailwind CSS 4** | Utility-first CSS with custom design tokens via `@theme` |
-| **Preact** | Lightweight interactive components (terminal) — 3KB runtime |
-| **TypeScript** | Type-safe data layer and components |
-
-## Features
-
-- **Interactive dot grid** — Canvas 2D hero background that reacts to mouse movement
-- **Typing effect** — Rotating roles with typewriter animation
-- **Interactive terminal** — Preact component with commands (`about`, `skills`, `projects`, `contact`, etc.)
-- **View Transitions** — SPA-like page transitions with Astro's `ClientRouter`
-- **Prefetch** — All pages preloaded on viewport intersection for instant navigation
-- **Dark/light mode** — System preference detection + manual toggle with localStorage persistence
-- **Scroll reveal animations** — Intersection Observer-based fade-in-up on all sections
-- **Responsive** — Mobile menu with animated hamburger-to-X transition
-- **Accessible** — `prefers-reduced-motion` support, semantic HTML, proper heading order, color contrast AA+
-
-## Project structure
+## Cómo está organizado
 
 ```
-src/
-├── components/
-│   ├── ProjectCard.astro     # Project grid card with hover effects
-│   └── Terminal.tsx           # Interactive terminal (Preact)
-├── data/
-│   ├── projects.ts            # Project definitions and helpers
-│   └── experience.ts          # Career timeline data
-├── layouts/
-│   └── Layout.astro           # Base layout (header, footer, transitions, scripts)
-├── pages/
-│   ├── index.astro            # Homepage (hero, intro, terminal, featured projects)
-│   ├── projects.astro         # Project grid with category filters
-│   ├── projects/[slug].astro  # Dynamic case study pages
-│   ├── experience.astro       # Career timeline + education
-│   └── about.astro            # Personal story + sidebar
-└── styles/
-    └── global.css             # Design tokens, dark mode, animations
+src/data/        los proyectos y la línea de tiempo de la carrera: editar acá, no en las páginas
+src/pages/       index, projects (con filtro por categoría), projects/[slug], experience, about
+src/layouts/     el layout base: header, footer, transiciones y scripts
+src/components/  ProjectCard.astro y Terminal.tsx
+src/styles/      tokens de diseño, modo oscuro y animaciones
 ```
 
-## Getting started
+## Desarrollo
 
-**Prerequisites:** Node.js >= 22 (use `nvm use` to pick up `.nvmrc`)
+Necesita Node 22 o superior (`nvm use` toma el `.nvmrc`).
 
 ```bash
-# Install dependencies
 pnpm install
-
-# Start dev server
 pnpm run dev
-
-# Build for production
-pnpm run build
-
-# Preview production build
-pnpm run preview
 ```
 
-## Lighthouse scores
+## Decisiones que no se ven en el código
 
-| Category | Score |
-|---|---|
-| Performance | 93 |
-| Accessibility | 95 |
-| Best Practices | 100 |
-| SEO | 100 |
+- **Cero JavaScript por defecto.** Cada componente interactivo es una isla de Preact que se
+  hidrata sola; si algo se puede hacer con CSS, se hace con CSS.
+- **Las transiciones de vista** (`ClientRouter` de Astro) más el prefetch al entrar en viewport
+  son lo que hace que navegar se sienta instantáneo sin ser una SPA.
+- **`prefers-reduced-motion` se respeta en todas las animaciones**, incluida la del fondo.
+- El modo oscuro sale de la preferencia del sistema y se puede forzar; la elección queda en
+  `localStorage`.
 
-## Deployment
+## Producción
 
-The `dist/` directory contains static HTML, CSS, and JS — deploy it to any static hosting provider.
-
-```bash
-pnpm run build
-# Upload dist/ to your server
-```
-
-## License
-
-MIT
-
----
-
-Built by [Matias Caliz](https://github.com/mati-caliz)
+Se despliega en el VPS con Docker Compose (contenedor `portfolio`), detrás del proxy
+compartido. El build genera HTML, CSS y JS estáticos: no hay servidor de Node en producción.
