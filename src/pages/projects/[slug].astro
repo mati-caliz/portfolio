@@ -1,7 +1,19 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { projects } from "../../data/projects";
+import ProjectLivePreview from "../../components/project/ProjectLivePreview.astro";
+import ProjectNavigation from "../../components/project/ProjectNavigation.astro";
+import { projects, type Project } from "../../data/projects";
+import {
+  PROJECT_CATEGORY_LABELS,
+  PROJECT_CATEGORY_LABELS_ES,
+  PROJECT_STATUS_COLORS,
+} from "../../data/projectLabels";
+import { hasText } from "../../lib/text";
 import type { GetStaticPaths } from "astro";
+
+interface Props {
+  project: Project;
+}
 
 export const getStaticPaths: GetStaticPaths = () => {
   return projects.map((project) => ({
@@ -12,28 +24,12 @@ export const getStaticPaths: GetStaticPaths = () => {
 
 const { project } = Astro.props;
 
-const statusColors = {
-  production: "bg-emerald-500",
-  "in-progress": "bg-amber-500",
-  completed: "bg-blue-500",
-};
-
-const categoryLabels = {
-  work: "Professional",
-  venture: "Venture",
-  "open-source": "Open Source",
-};
-
-const categoryLabelsEs: Record<string, string> = {
-  work: "Profesional",
-  venture: "Emprendimiento",
-  "open-source": "Open Source",
-};
-
-// Find adjacent projects for navigation
-const currentIndex = projects.findIndex((p) => p.slug === project.slug);
-const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
-const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
+const currentIndex = projects.findIndex((candidate) => candidate.slug === project.slug);
+const previousProject = projects[currentIndex - 1];
+const nextProject = projects[currentIndex + 1];
+const [primaryLink] = project.links;
+const showLivePreview =
+  primaryLink !== undefined && hasText(primaryLink.href) && project.hidePreview !== true;
 ---
 
 <Layout title={`${project.title} | Matias Caliz`} description={project.tagline}>
@@ -53,33 +49,55 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
           class="inline-flex items-center gap-2 text-sm text-text-tertiary hover:text-text transition-colors duration-200 mb-8 group hero-reveal"
           data-delay="0"
         >
-          <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+          <svg
+            class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+            ></path>
           </svg>
           <span data-i18n-es="Todos los proyectos">All projects</span>
         </a>
 
         <!-- Meta row -->
         <div class="flex flex-wrap items-center gap-3 mb-6 hero-reveal" data-delay="50">
-          <span class="px-2.5 py-0.5 text-xs font-mono rounded-full border border-border text-text-tertiary" data-i18n-es={categoryLabelsEs[project.category]}>
-            {categoryLabels[project.category]}
+          <span
+            class="px-2.5 py-0.5 text-xs font-mono rounded-full border border-border text-text-tertiary"
+            data-i18n-es={PROJECT_CATEGORY_LABELS_ES[project.category]}
+          >
+            {PROJECT_CATEGORY_LABELS[project.category]}
           </span>
           <span class="text-text-tertiary text-xs">|</span>
           <span class="text-xs font-mono text-text-tertiary">{project.year}</span>
           <span class="text-text-tertiary text-xs">|</span>
           <div class="flex items-center gap-1.5">
-            <span class={`w-1.5 h-1.5 rounded-full ${statusColors[project.status]}`}></span>
-            <span class="text-xs font-mono text-text-tertiary" data-i18n-es={project.statusLabel_es}>{project.statusLabel}</span>
+            <span class={`w-1.5 h-1.5 rounded-full ${PROJECT_STATUS_COLORS[project.status]}`}></span>
+            <span class="text-xs font-mono text-text-tertiary" data-i18n-es={project.statusLabel_es}>
+              {project.statusLabel}
+            </span>
           </div>
         </div>
 
         <!-- Title -->
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4 hero-reveal" data-delay="100">
+        <h1
+          class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4 hero-reveal"
+          data-delay="100"
+        >
           {project.title}
         </h1>
 
         <!-- Tagline -->
-        <p class="text-xl sm:text-2xl text-text-secondary max-w-2xl leading-relaxed hero-reveal" data-delay="200" data-i18n-es={project.tagline_es}>
+        <p
+          class="text-xl sm:text-2xl text-text-secondary max-w-2xl leading-relaxed hero-reveal"
+          data-delay="200"
+          data-i18n-es={project.tagline_es}
+        >
           {project.tagline}
         </p>
 
@@ -106,7 +124,12 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
           <div class="space-y-16">
             <!-- Overview -->
             <div class="scroll-reveal">
-              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest" data-i18n-es="Descripción general">Overview</h2>
+              <h2
+                class="text-xs font-mono text-accent mb-4 uppercase tracking-widest"
+                data-i18n-es="Descripción general"
+              >
+                Overview
+              </h2>
               <p class="text-text-secondary leading-relaxed text-base" data-i18n-es={project.description_es}>
                 {project.description}
               </p>
@@ -114,7 +137,12 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
 
             <!-- The Challenge -->
             <div class="scroll-reveal">
-              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest" data-i18n-es="El Desafío">The Challenge</h2>
+              <h2
+                class="text-xs font-mono text-accent mb-4 uppercase tracking-widest"
+                data-i18n-es="El Desafío"
+              >
+                The Challenge
+              </h2>
               <p class="text-text-secondary leading-relaxed text-base" data-i18n-es={project.challenge_es}>
                 {project.challenge}
               </p>
@@ -122,7 +150,12 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
 
             <!-- The Approach -->
             <div class="scroll-reveal">
-              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest" data-i18n-es="El Enfoque">The Approach</h2>
+              <h2
+                class="text-xs font-mono text-accent mb-4 uppercase tracking-widest"
+                data-i18n-es="El Enfoque"
+              >
+                The Approach
+              </h2>
               <p class="text-text-secondary leading-relaxed text-base" data-i18n-es={project.approach_es}>
                 {project.approach}
               </p>
@@ -130,7 +163,12 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
 
             <!-- The Outcome -->
             <div class="scroll-reveal">
-              <h2 class="text-xs font-mono text-accent mb-4 uppercase tracking-widest" data-i18n-es="El Resultado">The Outcome</h2>
+              <h2
+                class="text-xs font-mono text-accent mb-4 uppercase tracking-widest"
+                data-i18n-es="El Resultado"
+              >
+                The Outcome
+              </h2>
               <p class="text-text-secondary leading-relaxed text-base" data-i18n-es={project.outcome_es}>
                 {project.outcome}
               </p>
@@ -138,14 +176,21 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
 
             <!-- Key Highlights -->
             <div class="scroll-reveal">
-              <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest" data-i18n-es="Puntos Clave">Key Highlights</h2>
+              <h2
+                class="text-xs font-mono text-accent mb-6 uppercase tracking-widest"
+                data-i18n-es="Puntos Clave"
+              >
+                Key Highlights
+              </h2>
               <div class="grid sm:grid-cols-2 gap-4">
                 {project.highlights.map((highlight, i) => (
                   <div class="flex items-start gap-3 p-4 rounded-xl border border-border hover:bg-bg-secondary transition-colors duration-200">
                     <span class="text-xs font-mono text-text-tertiary mt-0.5 shrink-0">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span class="text-sm text-text-secondary" data-i18n-es={project.highlights_es?.[i]}>{highlight}</span>
+                    <span class="text-sm text-text-secondary" data-i18n-es={project.highlights_es[i]}>
+                      {highlight}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -178,8 +223,18 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
                       rel="noopener noreferrer"
                       class="flex items-center gap-2 text-sm text-text-secondary hover:text-accent transition-colors duration-200 group"
                     >
-                      <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                      <svg
+                        class="w-4 h-4 shrink-0"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                        ></path>
                       </svg>
                       <span class="group-hover:underline underline-offset-4">{link.label}</span>
                     </a>
@@ -198,129 +253,14 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
       </div>
     </section>
 
-    <!-- Live Preview -->
-    {project.links.length > 0 && project.links[0].href && !project.hidePreview && (
-      <section class="py-16 border-t border-border">
-        <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
-          <div class="scroll-reveal">
-            <h2 class="text-xs font-mono text-accent mb-6 uppercase tracking-widest" data-i18n-es="Vista previa en vivo">Live Preview</h2>
-            <p class="text-sm text-text-tertiary mb-4" data-i18n-es="Interactuá con el sitio directamente — scrolleá, navegá y explorá.">
-              Interact with the site directly — scroll, navigate, and explore.
-            </p>
-            <div class="relative rounded-xl border border-border overflow-hidden bg-bg-secondary">
-              <!-- Browser chrome -->
-              <div class="flex items-center gap-2 px-4 py-3 border-b border-border bg-bg-secondary">
-                <div class="flex gap-1.5">
-                  <span class="w-3 h-3 rounded-full bg-red-500/60"></span>
-                  <span class="w-3 h-3 rounded-full bg-yellow-500/60"></span>
-                  <span class="w-3 h-3 rounded-full bg-green-500/60"></span>
-                </div>
-                <div class="flex-1 mx-3">
-                  <div class="bg-bg text-text-tertiary text-xs font-mono px-3 py-1.5 rounded-md border border-border truncate">
-                    {project.previewUrl || project.links[0].href}
-                  </div>
-                </div>
-                <a
-                  href={project.links[0].href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-text-tertiary hover:text-accent transition-colors duration-200"
-                  title="Open in new tab"
-                >
-                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                  </svg>
-                </a>
-              </div>
-              <!-- Iframe with fallback -->
-              <div class="relative" data-iframe-wrapper>
-                <iframe
-                  src={project.previewUrl || project.links[0].href}
-                  title={`${project.title} live preview`}
-                  class="w-full h-[500px] sm:h-[600px] bg-white"
-                  loading="lazy"
-                  sandbox="allow-scripts allow-same-origin allow-popups"
-                  data-iframe-preview
-                ></iframe>
-                <div class="hidden absolute inset-0 flex-col items-center justify-center bg-bg-secondary text-center p-8" data-iframe-fallback>
-                  <svg class="w-12 h-12 text-text-tertiary mb-4" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"></path>
-                  </svg>
-                  <p class="text-text-secondary mb-1 font-medium" data-i18n-es="Este sitio no permite vista previa embebida">This site doesn't allow embedded preview</p>
-                  <a
-                    href={project.links[0].href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 mt-3 px-4 py-2 text-sm font-mono text-accent border border-accent/30 rounded-lg hover:bg-accent/10 transition-colors duration-200"
-                  >
-                    <span data-i18n-es={`Visitar ${project.title}`}>Visit {project.title}</span>
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    {showLivePreview && (
+      <ProjectLivePreview
+        title={project.title}
+        primaryHref={primaryLink.href}
+        previewUrl={project.previewUrl}
+      />
     )}
 
-    <!-- Project navigation -->
-    <section class="border-t border-border">
-      <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
-        <div class="grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-border">
-          <!-- Previous -->
-          <div class="py-12 sm:pr-8">
-            {prevProject ? (
-              <a href={`/projects/${prevProject.slug}`} class="group block">
-                <span class="text-xs font-mono text-text-tertiary mb-2 block" data-i18n-es="Proyecto anterior">Previous project</span>
-                <span class="text-lg font-semibold group-hover:text-accent transition-colors duration-200 flex items-center gap-2">
-                  <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
-                  </svg>
-                  {prevProject.title}
-                </span>
-              </a>
-            ) : (
-              <a href="/projects" class="group block">
-                <span class="text-xs font-mono text-text-tertiary mb-2 block" data-i18n-es="Volver a">Back to</span>
-                <span class="text-lg font-semibold group-hover:text-accent transition-colors duration-200 flex items-center gap-2">
-                  <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
-                  </svg>
-                  <span data-i18n-es="Todos los Proyectos">All Projects</span>
-                </span>
-              </a>
-            )}
-          </div>
-
-          <!-- Next -->
-          <div class="py-12 sm:pl-8 text-right">
-            {nextProject ? (
-              <a href={`/projects/${nextProject.slug}`} class="group block">
-                <span class="text-xs font-mono text-text-tertiary mb-2 block" data-i18n-es="Siguiente proyecto">Next project</span>
-                <span class="text-lg font-semibold group-hover:text-accent transition-colors duration-200 flex items-center gap-2 justify-end">
-                  {nextProject.title}
-                  <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
-                  </svg>
-                </span>
-              </a>
-            ) : (
-              <a href="/projects" class="group block">
-                <span class="text-xs font-mono text-text-tertiary mb-2 block" data-i18n-es="Volver a">Back to</span>
-                <span class="text-lg font-semibold group-hover:text-accent transition-colors duration-200 flex items-center gap-2 justify-end">
-                  <span data-i18n-es="Todos los Proyectos">All Projects</span>
-                  <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
-                  </svg>
-                </span>
-              </a>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
+    <ProjectNavigation previousProject={previousProject} nextProject={nextProject} />
   </article>
 </Layout>

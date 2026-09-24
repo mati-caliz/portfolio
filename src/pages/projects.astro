@@ -11,18 +11,33 @@ const categories = [
 ];
 ---
 
-<Layout title="Projects | Matias Caliz" description="Products I build and ship end to end: real estate intelligence, AI agents on WhatsApp, electronic invoicing, and the search box millions of travelers use every day.">
+<Layout
+  title="Projects | Matias Caliz"
+  description="Products I build and ship end to end: real estate intelligence, AI agents on WhatsApp, electronic invoicing, and the search box millions of travelers use every day."
+>
   <section class="py-[var(--spacing-section)]">
     <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
       <!-- Header -->
       <div class="mb-16">
-        <p class="text-sm font-mono text-accent mb-4 uppercase tracking-widest hero-reveal" data-delay="0" data-i18n-es="Trabajo seleccionado">
+        <p
+          class="text-sm font-mono text-accent mb-4 uppercase tracking-widest hero-reveal"
+          data-delay="0"
+          data-i18n-es="Trabajo seleccionado"
+        >
           Selected work
         </p>
-        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4 hero-reveal" data-delay="100" data-i18n-es="Proyectos">
+        <h1
+          class="text-4xl sm:text-5xl font-bold tracking-tight mb-4 hero-reveal"
+          data-delay="100"
+          data-i18n-es="Proyectos"
+        >
           Projects
         </h1>
-        <p class="text-lg text-text-secondary max-w-xl hero-reveal" data-delay="200" data-i18n-es="Desde apps en producción sirviendo millones de usuarios hasta emprendimientos nacidos de la curiosidad y la ambición.">
+        <p
+          class="text-lg text-text-secondary max-w-xl hero-reveal"
+          data-delay="200"
+          data-i18n-es="Desde apps en producción sirviendo millones de usuarios hasta emprendimientos nacidos de la curiosidad y la ambición."
+        >
           From production apps serving millions of users to side ventures born from curiosity and ambition.
         </p>
 
@@ -60,7 +75,9 @@ const categories = [
 
 <style>
   .project-item {
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
 
   .project-item.hidden-filter {
@@ -80,18 +97,18 @@ const categories = [
 
     filterBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
-        const filter = btn.dataset.filter!;
+        const filter = btn.dataset["filter"];
 
-        filterBtns.forEach((b) => {
-          b.classList.remove("bg-accent", "text-white", "border-accent");
-          b.classList.add("text-text-secondary", "border-border");
+        filterBtns.forEach((otherButton) => {
+          otherButton.classList.remove("bg-accent", "text-white", "border-accent");
+          otherButton.classList.add("text-text-secondary", "border-border");
         });
         btn.classList.add("bg-accent", "text-white", "border-accent");
         btn.classList.remove("text-text-secondary", "border-border");
 
         projectItems.forEach((item) => {
-          const cat = item.dataset.category;
-          if (filter === "all" || cat === filter) {
+          const category = item.dataset["category"];
+          if (filter === "all" || category === filter) {
             item.classList.remove("hidden-filter");
           } else {
             item.classList.add("hidden-filter");

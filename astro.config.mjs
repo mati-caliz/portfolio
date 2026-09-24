@@ -1,17 +1,17 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from "@tailwindcss/vite";
 
-import preact from '@astrojs/preact';
-import sitemap from '@astrojs/sitemap';
+import preact from "@astrojs/preact";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://matiascaliz.com.ar',
+  site: "https://matiascaliz.com.ar",
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
 
   integrations: [preact(), sitemap()],
@@ -19,6 +19,6 @@ export default defineConfig({
   // Enable prefetch for instant navigation
   prefetch: {
     prefetchAll: true,
-    defaultStrategy: 'viewport',
+    defaultStrategy: "viewport",
   },
 });

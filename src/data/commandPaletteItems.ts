@@ -1,5 +1,7 @@
 import { projects } from "./projects";
 
+const PROJECT_KEYWORD_STACK_SIZE = 5;
+
 export interface CommandItem {
   id: string;
   label: string;
@@ -71,13 +73,16 @@ export const commandItems: CommandItem[] = [
   },
 
   // Projects (generated from data)
-  ...projects.map((p) => ({
-    id: `project-${p.slug}`,
-    label: p.title,
-    label_es: p.title,
+  ...projects.map((project) => ({
+    id: `project-${project.slug}`,
+    label: project.title,
+    label_es: project.title,
     category: "project" as const,
-    href: `/projects/${p.slug}`,
-    keywords: [...p.stack.slice(0, 5).map((s) => s.toLowerCase()), p.category],
+    href: `/projects/${project.slug}`,
+    keywords: [
+      ...project.stack.slice(0, PROJECT_KEYWORD_STACK_SIZE).map((tech) => tech.toLowerCase()),
+      project.category,
+    ],
     icon: "code",
   })),
 ];

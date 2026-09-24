@@ -81,7 +81,9 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
   line-height: 1.7;
-  transition: background-color 0.3s var(--ease-out-expo), color 0.3s var(--ease-out-expo);
+  transition:
+    background-color 0.3s var(--ease-out-expo),
+    color 0.3s var(--ease-out-expo);
 }
 
 /* ── Selection ── */
@@ -110,23 +112,43 @@ body {
 
 /* ── View Transition animations ── */
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fade-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes slide-up-in {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slide-up-out {
-  from { opacity: 1; transform: translateY(0); }
-  to { opacity: 0; transform: translateY(-12px); }
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
 }
 
 ::view-transition-old(root) {
@@ -150,8 +172,14 @@ body {
 
 /* ── Global reveal animations ── */
 @keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-reveal {
@@ -165,8 +193,9 @@ body {
 .scroll-reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal.visible {
@@ -176,8 +205,9 @@ body {
 
 /* ── Micro-interaction utilities ── */
 .hover-lift {
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.2s ease;
+  transition:
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.2s ease;
 }
 
 .hover-lift:hover {
@@ -186,31 +216,57 @@ body {
 }
 
 /* ── i18n show/hide (for elements with HTML content) ── */
-[data-lang="es"] .lang-en { display: none !important; }
-[data-lang="es"] .lang-es { display: block !important; }
+[data-lang="es"] .lang-en {
+  display: none !important;
+}
+[data-lang="es"] .lang-es {
+  display: block !important;
+}
 [data-lang="en"] .lang-es,
-:root:not([data-lang]) .lang-es { display: none !important; }
+:root:not([data-lang]) .lang-es {
+  display: none !important;
+}
 
 /* Inline variant for spans */
 [data-lang="es"] span.lang-es,
-[data-lang="es"] a.lang-es { display: inline !important; }
+[data-lang="es"] a.lang-es {
+  display: inline !important;
+}
 [data-lang="es"] span.lang-en,
-[data-lang="es"] a.lang-en { display: none !important; }
+[data-lang="es"] a.lang-en {
+  display: none !important;
+}
 
 /* Flex variant */
-[data-lang="es"] .lang-es-flex { display: flex !important; }
-[data-lang="es"] .lang-en-flex { display: none !important; }
+[data-lang="es"] .lang-es-flex {
+  display: flex !important;
+}
+[data-lang="es"] .lang-en-flex {
+  display: none !important;
+}
 
 /* ── GitHub Heatmap colors ── */
-.heatmap-0 { background-color: var(--color-bg-secondary); }
-.heatmap-1 { background-color: color-mix(in srgb, var(--color-accent) 25%, var(--color-bg-secondary)); }
-.heatmap-2 { background-color: color-mix(in srgb, var(--color-accent) 50%, var(--color-bg-secondary)); }
-.heatmap-3 { background-color: color-mix(in srgb, var(--color-accent) 75%, var(--color-bg-secondary)); }
-.heatmap-4 { background-color: var(--color-accent); }
+.heatmap-0 {
+  background-color: var(--color-bg-secondary);
+}
+.heatmap-1 {
+  background-color: color-mix(in srgb, var(--color-accent) 25%, var(--color-bg-secondary));
+}
+.heatmap-2 {
+  background-color: color-mix(in srgb, var(--color-accent) 50%, var(--color-bg-secondary));
+}
+.heatmap-3 {
+  background-color: color-mix(in srgb, var(--color-accent) 75%, var(--color-bg-secondary));
+}
+.heatmap-4 {
+  background-color: var(--color-accent);
+}
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

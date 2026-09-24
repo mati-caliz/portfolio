@@ -1,22 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getFeaturedProjects } from "../data/projects";
-import { experiences, education } from "../data/experience";
 import Terminal from "../components/Terminal";
 import BentoGrid from "../components/BentoGrid.astro";
 import GitHubHeatmap from "../components/GitHubHeatmap.astro";
-
-const featured = getFeaturedProjects();
+import HomeExperience from "../components/home/HomeExperience.astro";
+import HomeFeaturedProjects from "../components/home/HomeFeaturedProjects.astro";
 ---
 
 <Layout>
   <!-- Hero -->
   <section class="min-h-[calc(100vh-4rem)] flex items-center relative overflow-hidden" id="hero">
     <!-- Interactive dot grid canvas -->
-    <canvas
-      id="hero-canvas"
-      class="absolute inset-0 w-full h-full pointer-events-none"
-    ></canvas>
+    <canvas id="hero-canvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
 
     <!-- Gradient orb -->
     <div
@@ -28,10 +23,7 @@ const featured = getFeaturedProjects();
     <div class="max-w-5xl mx-auto px-[var(--spacing-container)] w-full relative z-10">
       <div class="max-w-2xl">
         <!-- Greeting -->
-        <p
-          class="text-base font-mono text-accent mb-4 opacity-0 hero-reveal"
-          data-delay="0"
-        >
+        <p class="text-base font-mono text-accent mb-4 opacity-0 hero-reveal" data-delay="0">
           <span class="inline-block w-2 h-2 rounded-full bg-accent mr-2 animate-pulse"></span>
           <span data-i18n-es="Hola, soy">Hey, I'm</span>
         </p>
@@ -41,8 +33,10 @@ const featured = getFeaturedProjects();
           class="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6 opacity-0 hero-reveal"
           data-delay="100"
         >
-          Matias<br />
-          <span class="text-text-secondary">Caliz</span><span class="text-accent">.</span>
+          Matias
+          <br />
+          <span class="text-text-secondary">Caliz</span>
+          <span class="text-accent">.</span>
         </h1>
 
         <!-- Rotating role -->
@@ -60,9 +54,15 @@ const featured = getFeaturedProjects();
           data-delay="400"
         >
           Currently crafting experiences at
-          <a href="https://www.despegar.com" target="_blank" rel="noopener noreferrer"
+          <a
+            href="https://www.despegar.com"
+            target="_blank"
+            rel="noopener noreferrer"
             class="text-text-secondary hover:text-accent transition-colors duration-200 underline decoration-border hover:decoration-accent underline-offset-4"
-          >Despegar</a>. Previously auditing systems at
+          >
+            Despegar
+          </a>
+          . Previously auditing systems at
           <span class="text-text-secondary">EY</span>.
         </p>
         <p
@@ -70,24 +70,37 @@ const featured = getFeaturedProjects();
           data-delay="400"
         >
           Actualmente creando experiencias en
-          <a href="https://www.despegar.com" target="_blank" rel="noopener noreferrer"
+          <a
+            href="https://www.despegar.com"
+            target="_blank"
+            rel="noopener noreferrer"
             class="text-text-secondary hover:text-accent transition-colors duration-200 underline decoration-border hover:decoration-accent underline-offset-4"
-          >Despegar</a>. Anteriormente auditando sistemas en
+          >
+            Despegar
+          </a>
+          . Anteriormente auditando sistemas en
           <span class="text-text-secondary">EY</span>.
         </p>
 
         <!-- CTAs -->
-        <div
-          class="flex flex-wrap gap-4 opacity-0 hero-reveal"
-          data-delay="550"
-        >
+        <div class="flex flex-wrap gap-4 opacity-0 hero-reveal" data-delay="550">
           <a
             href="/projects"
             class="group inline-flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-lg font-medium text-sm hover:bg-accent-hover transition-all duration-200 hover:gap-3"
           >
             <span data-i18n-es="Ver mi trabajo">See my work</span>
-            <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+            <svg
+              class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+              ></path>
             </svg>
           </a>
           <a
@@ -99,10 +112,7 @@ const featured = getFeaturedProjects();
         </div>
 
         <!-- Tech stack pills -->
-        <div
-          class="flex flex-wrap gap-2 mt-8 opacity-0 hero-reveal"
-          data-delay="700"
-        >
+        <div class="flex flex-wrap gap-2 mt-8 opacity-0 hero-reveal" data-delay="700">
           {["React", "Next.js", "Angular", "Java", "Spring", "TypeScript", "Python", "Docker"].map((tech) => (
             <span class="px-3 py-1 text-xs font-mono text-text-tertiary border border-border rounded-full hover:text-text-secondary hover:border-border-hover transition-colors duration-200">
               {tech}
@@ -116,7 +126,9 @@ const featured = getFeaturedProjects();
         class="absolute bottom-8 right-12 flex flex-col items-center gap-2 text-text-tertiary opacity-0 hero-reveal"
         data-delay="900"
       >
-        <span class="text-xs font-mono" data-i18n-es="bajar">scroll</span>
+        <span class="text-xs font-mono" data-i18n-es="bajar">
+          scroll
+        </span>
         <div class="w-px h-8 bg-border relative overflow-hidden">
           <div class="w-full h-3 bg-text-tertiary absolute animate-scroll-line"></div>
         </div>
@@ -132,23 +144,55 @@ const featured = getFeaturedProjects();
     <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
       <div class="grid lg:grid-cols-[1fr_1fr] gap-12 items-start">
         <div class="scroll-reveal">
-          <p class="text-xs font-mono text-accent mb-3 uppercase tracking-widest" data-i18n-es="Interactivo">Interactive</p>
-          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4" data-i18n-es="Probá la terminal">Try the terminal</h2>
+          <p class="text-xs font-mono text-accent mb-3 uppercase tracking-widest" data-i18n-es="Interactivo">
+            Interactive
+          </p>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4" data-i18n-es="Probá la terminal">
+            Try the terminal
+          </h2>
           <p class="text-text-secondary leading-relaxed mb-4 lang-en">
-            A quick way to explore who I am and what I do. Type <code class="px-1.5 py-0.5 text-xs font-mono bg-bg-secondary rounded border border-border">help</code> to get started.
+            A quick way to explore who I am and what I do. Type{" "}
+            <code class="px-1.5 py-0.5 text-xs font-mono bg-bg-secondary rounded border border-border">
+              help
+            </code>{" "}
+            to get started.
           </p>
           <p class="text-text-secondary leading-relaxed mb-4 lang-es">
-            Una forma rápida de explorar quién soy y qué hago. Escribí <code class="px-1.5 py-0.5 text-xs font-mono bg-bg-secondary rounded border border-border">help</code> para empezar.
+            Una forma rápida de explorar quién soy y qué hago. Escribí{" "}
+            <code class="px-1.5 py-0.5 text-xs font-mono bg-bg-secondary rounded border border-border">
+              help
+            </code>{" "}
+            para empezar.
           </p>
           <div class="space-y-2 text-sm text-text-tertiary lang-en">
-            <p>Commands like <code class="font-mono text-text-secondary">about</code>, <code class="font-mono text-text-secondary">skills</code>, <code class="font-mono text-text-secondary">projects</code> give you quick info.</p>
-            <p>Use <code class="font-mono text-text-secondary">open projects</code> to navigate directly to pages.</p>
-            <p>Arrow keys for command history. <code class="font-mono text-text-secondary">Ctrl+L</code> to clear.</p>
+            <p>
+              Commands like <code class="font-mono text-text-secondary">about</code>,{" "}
+              <code class="font-mono text-text-secondary">skills</code>,{" "}
+              <code class="font-mono text-text-secondary">projects</code> give you quick info.
+            </p>
+            <p>
+              Use <code class="font-mono text-text-secondary">open projects</code> to navigate directly to
+              pages.
+            </p>
+            <p>
+              Arrow keys for command history. <code class="font-mono text-text-secondary">Ctrl+L</code> to
+              clear.
+            </p>
           </div>
           <div class="space-y-2 text-sm text-text-tertiary lang-es">
-            <p>Comandos como <code class="font-mono text-text-secondary">about</code>, <code class="font-mono text-text-secondary">skills</code>, <code class="font-mono text-text-secondary">projects</code> te dan info rápida.</p>
-            <p>Usá <code class="font-mono text-text-secondary">open projects</code> para navegar directo a las páginas.</p>
-            <p>Flechas para historial de comandos. <code class="font-mono text-text-secondary">Ctrl+L</code> para limpiar.</p>
+            <p>
+              Comandos como <code class="font-mono text-text-secondary">about</code>,{" "}
+              <code class="font-mono text-text-secondary">skills</code>,{" "}
+              <code class="font-mono text-text-secondary">projects</code> te dan info rápida.
+            </p>
+            <p>
+              Usá <code class="font-mono text-text-secondary">open projects</code> para navegar directo a las
+              páginas.
+            </p>
+            <p>
+              Flechas para historial de comandos. <code class="font-mono text-text-secondary">Ctrl+L</code>{" "}
+              para limpiar.
+            </p>
           </div>
         </div>
         <div class="scroll-reveal" style="transition-delay: 150ms;">
@@ -165,182 +209,29 @@ const featured = getFeaturedProjects();
     </div>
   </section>
 
-  <!-- Experience -->
-  <section class="py-[var(--spacing-section)] border-t border-border">
-    <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
-      <div class="flex items-end justify-between mb-12">
-        <div>
-          <p class="text-xs font-mono text-accent mb-3 uppercase tracking-widest scroll-reveal" data-i18n-es="Trayectoria">Background</p>
-          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight scroll-reveal" data-i18n-es="Experiencia">Experience</h2>
-        </div>
-        <a
-          href="/experience"
-          class="hidden sm:flex items-center gap-2 text-sm text-text-secondary hover:text-accent transition-colors duration-200 group scroll-reveal"
-        >
-          <span data-i18n-es="Ver más">See more</span>
-          <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
-          </svg>
-        </a>
-      </div>
+  <HomeExperience />
 
-      <div class="space-y-6">
-        {experiences.map((exp, i) => (
-          <div
-            class="group scroll-reveal relative border border-border rounded-xl p-6 sm:p-8 hover:border-border-hover hover:bg-bg-secondary transition-all duration-300 overflow-hidden"
-            style={`transition-delay: ${i * 100}ms;`}
-          >
-            <div
-              class="absolute top-0 left-0 w-1 h-full rounded-l-xl"
-              style={`background: ${exp.color};`}
-            ></div>
-
-            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-              <div class="flex-1">
-                <div class="flex items-center gap-3 mb-1">
-                  <h3 class="text-lg sm:text-xl font-bold">{exp.company}</h3>
-                  {exp.current && (
-                    <span class="flex items-center gap-1.5 px-2 py-0.5 text-xs font-mono rounded-full border border-emerald-500/30 text-emerald-500">
-                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                      <span data-i18n-es="Actual">Current</span>
-                    </span>
-                  )}
-                </div>
-                <p class="text-sm font-medium text-accent mb-2 lang-en">{exp.role}</p>
-                <p class="text-sm font-medium text-accent mb-2 lang-es">{exp.role_es}</p>
-                <p class="text-sm text-text-secondary leading-relaxed lang-en">{exp.description}</p>
-                <p class="text-sm text-text-secondary leading-relaxed lang-es">{exp.description_es}</p>
-              </div>
-              <div class="sm:text-right shrink-0">
-                <p class="text-sm font-mono text-text-tertiary" data-i18n-es={exp.period_es}>{exp.period}</p>
-                <p class="text-xs text-text-tertiary mt-1" data-i18n-es={exp.location_es}>{exp.location}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-
-        {education.map((edu, i) => (
-          <div
-            class="group scroll-reveal relative border border-border rounded-xl p-6 sm:p-8 hover:border-border-hover hover:bg-bg-secondary transition-all duration-300 overflow-hidden"
-            style={`transition-delay: ${(experiences.length + i) * 100}ms;`}
-          >
-            <div class="absolute top-0 left-0 w-1 h-full rounded-l-xl bg-text-tertiary"></div>
-
-            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-              <div class="flex-1">
-                <h3 class="text-lg sm:text-xl font-bold mb-1">{edu.institution}</h3>
-                <p class="text-sm font-medium text-accent mb-2 lang-en">{edu.degree}</p>
-                <p class="text-sm font-medium text-accent mb-2 lang-es">{edu.degree_es}</p>
-                <p class="text-sm text-text-secondary leading-relaxed lang-en">{edu.description}</p>
-                <p class="text-sm text-text-secondary leading-relaxed lang-es">{edu.description_es}</p>
-              </div>
-              <div class="sm:text-right shrink-0">
-                <p class="text-sm font-mono text-text-tertiary">{edu.period}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <a
-        href="/experience"
-        class="sm:hidden flex items-center justify-center gap-2 mt-8 py-3 text-sm font-medium text-text-secondary hover:text-accent transition-colors duration-200 scroll-reveal"
-      >
-        <span data-i18n-es="Ver experiencia completa">See full experience</span>
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
-        </svg>
-      </a>
-    </div>
-  </section>
-
-  <!-- Featured Projects -->
-  <section class="py-[var(--spacing-section)] border-t border-border">
-    <div class="max-w-5xl mx-auto px-[var(--spacing-container)]">
-      <div class="flex items-end justify-between mb-12">
-        <div>
-          <p class="text-xs font-mono text-accent mb-3 uppercase tracking-widest scroll-reveal" data-i18n-es="Trabajo destacado">Featured work</p>
-          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight scroll-reveal" data-i18n-es="Proyectos Seleccionados">Selected Projects</h2>
-        </div>
-        <a
-          href="/projects"
-          class="hidden sm:flex items-center gap-2 text-sm text-text-secondary hover:text-accent transition-colors duration-200 group scroll-reveal"
-        >
-          <span data-i18n-es="Ver todos">View all</span>
-          <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
-          </svg>
-        </a>
-      </div>
-
-      <div class="space-y-4">
-        {featured.map((project, i) => (
-          <a
-            href={`/projects/${project.slug}`}
-            class="group block scroll-reveal"
-            style={`transition-delay: ${i * 100}ms;`}
-          >
-            <div class="relative border border-border rounded-xl p-6 sm:p-8 transition-all duration-300 hover:border-border-hover hover:bg-bg-secondary overflow-hidden">
-              <!-- Accent line -->
-              <div
-                class="absolute top-0 left-0 w-1 h-full scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top rounded-l-xl"
-                style={`background: ${project.color};`}
-              ></div>
-
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div class="flex-1">
-                  <div class="flex items-center gap-3 mb-2">
-                    <h3 class="text-lg sm:text-xl font-bold group-hover:text-accent transition-colors duration-200">
-                      {project.title}
-                    </h3>
-                    <span class="px-2 py-0.5 text-xs font-mono rounded-full border border-border text-text-tertiary"
-                      data-i18n-es={project.category === "work" ? "Profesional" : "Emprendimiento"}>
-                      {project.category === "work" ? "Professional" : "Venture"}
-                    </span>
-                  </div>
-                  <p class="text-sm text-text-secondary" data-i18n-es={project.tagline_es}>{project.tagline}</p>
-                </div>
-                <div class="flex items-center gap-4 shrink-0">
-                  <div class="hidden sm:flex flex-wrap gap-1.5">
-                    {project.stack.slice(0, 3).map((tech) => (
-                      <span class="px-2 py-0.5 text-xs font-mono text-text-tertiary">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <svg class="w-5 h-5 text-text-tertiary group-hover:text-accent transition-all duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
-
-      <!-- Mobile "view all" -->
-      <a
-        href="/projects"
-        class="sm:hidden flex items-center justify-center gap-2 mt-8 py-3 text-sm font-medium text-text-secondary hover:text-accent transition-colors duration-200 scroll-reveal"
-      >
-        <span data-i18n-es="Ver todos los proyectos">View all projects</span>
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
-        </svg>
-      </a>
-    </div>
-  </section>
+  <HomeFeaturedProjects />
 </Layout>
 
 <style>
   @keyframes scroll-line {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(300%); }
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(300%);
+    }
   }
 
   @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
   }
 
   .animate-scroll-line {
@@ -353,176 +244,5 @@ const featured = getFeaturedProjects();
 </style>
 
 <script>
-  // ── Role typing effect ──
-  const rolesEn = [
-    "Full Stack Engineer.",
-    "Product Builder.",
-    "Security-Minded Developer.",
-    "Fintech Enthusiast.",
-  ];
-  const rolesEs = [
-    "Ingeniero Full Stack.",
-    "Constructor de Productos.",
-    "Desarrollador Security-First.",
-    "Entusiasta Fintech.",
-  ];
-
-  function getRoles() {
-    return (document.documentElement.getAttribute("data-lang") || "en") === "es" ? rolesEs : rolesEn;
-  }
-
-  const roleEl = document.getElementById("role-text");
-  if (roleEl) {
-    let roleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let pauseTimer: ReturnType<typeof setTimeout> | null = null;
-
-    // Listen for language changes — reset typing
-    window.addEventListener("langchange", () => {
-      charIndex = 0;
-      isDeleting = false;
-      if (pauseTimer) clearTimeout(pauseTimer);
-      roleEl!.textContent = "";
-      typeRole();
-    });
-
-    function typeRole() {
-      const roles = getRoles();
-      const current = roles[roleIndex];
-
-      if (!isDeleting) {
-        roleEl!.textContent = current.slice(0, charIndex + 1);
-        charIndex++;
-
-        if (charIndex === current.length) {
-          // Pause before deleting
-          pauseTimer = setTimeout(() => {
-            isDeleting = true;
-            typeRole();
-          }, 2000);
-          return;
-        }
-        setTimeout(typeRole, 60 + Math.random() * 40);
-      } else {
-        roleEl!.textContent = current.slice(0, charIndex - 1);
-        charIndex--;
-
-        if (charIndex === 0) {
-          isDeleting = false;
-          roleIndex = (roleIndex + 1) % roles.length;
-          setTimeout(typeRole, 400);
-          return;
-        }
-        setTimeout(typeRole, 30);
-      }
-    }
-
-    // Start after hero reveals
-    setTimeout(typeRole, 800);
-  }
-
-  // ── Dot grid canvas ──
-  const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement;
-  if (canvas) {
-    const ctx = canvas.getContext("2d")!;
-    let mouseX = -1000;
-    let mouseY = -1000;
-    let animationId: number;
-    const dotSpacing = 32;
-    const dotRadius = 1;
-    const influenceRadius = 120;
-
-    function resize() {
-      const dpr = window.devicePixelRatio || 1;
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
-    }
-
-    function getAccentColor() {
-      return getComputedStyle(document.documentElement)
-        .getPropertyValue("--color-accent")
-        .trim();
-    }
-
-    function getBorderColor() {
-      return getComputedStyle(document.documentElement)
-        .getPropertyValue("--color-border")
-        .trim();
-    }
-
-    function draw() {
-      const rect = canvas.getBoundingClientRect();
-      ctx.clearRect(0, 0, rect.width, rect.height);
-
-      const accent = getAccentColor();
-      const border = getBorderColor();
-
-      for (let x = dotSpacing; x < rect.width; x += dotSpacing) {
-        for (let y = dotSpacing; y < rect.height; y += dotSpacing) {
-          const dx = mouseX - x;
-          const dy = mouseY - y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const influence = Math.max(0, 1 - dist / influenceRadius);
-
-          const radius = dotRadius + influence * 2.5;
-          const alpha = 0.15 + influence * 0.6;
-
-          ctx.beginPath();
-          ctx.arc(x, y, radius, 0, Math.PI * 2);
-          ctx.fillStyle =
-            influence > 0.05
-              ? accent.replace(")", `, ${alpha})` ).replace("rgb", "rgba")
-              : border.replace(")", `, ${0.3})` ).replace("rgb", "rgba");
-
-          // Fallback for hex colors
-          if (!ctx.fillStyle.includes("rgba")) {
-            ctx.globalAlpha = alpha;
-            ctx.fillStyle = influence > 0.05 ? accent : border;
-          }
-
-          ctx.fill();
-          ctx.globalAlpha = 1;
-        }
-      }
-
-      animationId = requestAnimationFrame(draw);
-    }
-
-    resize();
-    draw();
-
-    // Track mouse within the hero section
-    const hero = document.getElementById("hero");
-    hero?.addEventListener("mousemove", (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
-    });
-
-    hero?.addEventListener("mouseleave", () => {
-      mouseX = -1000;
-      mouseY = -1000;
-    });
-
-    window.addEventListener("resize", resize, { passive: true });
-
-    // Cleanup on page transition
-    document.addEventListener("astro:before-swap", () => {
-      cancelAnimationFrame(animationId);
-    });
-  }
-
-  // ── Orb parallax ──
-  const orb = document.getElementById("hero-orb");
-  if (orb) {
-    document.addEventListener("mousemove", (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 50;
-      const y = (e.clientY / window.innerHeight - 0.5) * 50;
-      orb.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-    });
-  }
-
+  import "../scripts/homeHero";
 </script>

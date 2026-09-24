@@ -1,5 +1,13 @@
 ---
 import type { Project } from "../data/projects";
+import {
+  PROJECT_CATEGORY_LABELS,
+  PROJECT_CATEGORY_LABELS_ES,
+  PROJECT_STATUS_COLORS,
+} from "../data/projectLabels";
+
+const CARD_STAGGER_DELAY_MS = 80;
+const VISIBLE_STACK_SIZE = 5;
 
 interface Props {
   project: Project;
@@ -9,23 +17,13 @@ interface Props {
 const { project, index } = Astro.props;
 const num = String(index + 1).padStart(2, "0");
 
-const statusColors = {
-  production: "bg-emerald-500",
-  "in-progress": "bg-amber-500",
-  completed: "bg-blue-500",
-};
-
-const categoryLabelsEs: Record<string, string> = {
-  work: "Profesional",
-  venture: "Emprendimiento",
-  "open-source": "Open Source",
-};
+const hiddenStackCount = project.stack.length - VISIBLE_STACK_SIZE;
 ---
 
 <a
   href={`/projects/${project.slug}`}
   class="group block scroll-reveal"
-  style={`transition-delay: ${index * 80}ms;`}
+  style={`transition-delay: ${index * CARD_STAGGER_DELAY_MS}ms;`}
 >
   <article class="relative h-full border border-border rounded-2xl p-6 sm:p-8 transition-all duration-300 hover:border-border-hover hover:bg-bg-secondary overflow-hidden">
     <!-- Accent glow on hover -->
@@ -39,8 +37,10 @@ const categoryLabelsEs: Record<string, string> = {
       <div class="flex items-center justify-between mb-4">
         <span class="text-xs font-mono text-text-tertiary">{num}</span>
         <div class="flex items-center gap-1.5">
-          <span class={`w-1.5 h-1.5 rounded-full ${statusColors[project.status]}`}></span>
-          <span class="text-xs font-mono text-text-tertiary" data-i18n-es={project.statusLabel_es}>{project.statusLabel}</span>
+          <span class={`w-1.5 h-1.5 rounded-full ${PROJECT_STATUS_COLORS[project.status]}`}></span>
+          <span class="text-xs font-mono text-text-tertiary" data-i18n-es={project.statusLabel_es}>
+            {project.statusLabel}
+          </span>
         </div>
       </div>
 
@@ -48,9 +48,9 @@ const categoryLabelsEs: Record<string, string> = {
       <div class="mb-3">
         <span
           class="inline-block px-2.5 py-0.5 text-xs font-mono rounded-full border border-border text-text-tertiary"
-          data-i18n-es={categoryLabelsEs[project.category]}
+          data-i18n-es={PROJECT_CATEGORY_LABELS_ES[project.category]}
         >
-          {project.category === "work" ? "Professional" : project.category === "venture" ? "Venture" : "Open Source"}
+          {PROJECT_CATEGORY_LABELS[project.category]}
         </span>
       </div>
 
@@ -60,28 +60,39 @@ const categoryLabelsEs: Record<string, string> = {
       </h3>
 
       <!-- Tagline -->
-      <p class="text-sm text-text-secondary leading-relaxed mb-6 min-h-[3rem]" data-i18n-es={project.tagline_es}>
+      <p
+        class="text-sm text-text-secondary leading-relaxed mb-6 min-h-[3rem]"
+        data-i18n-es={project.tagline_es}
+      >
         {project.tagline}
       </p>
 
       <!-- Stack -->
       <div class="flex flex-wrap gap-1.5 mb-6 min-h-[2rem]">
-        {project.stack.slice(0, 5).map((tech) => (
+        {project.stack.slice(0, VISIBLE_STACK_SIZE).map((tech) => (
           <span class="px-2 py-0.5 text-xs font-mono text-text-tertiary bg-bg-secondary rounded border border-border">
             {tech}
           </span>
         ))}
-        {project.stack.length > 5 && (
-          <span class="px-2 py-0.5 text-xs font-mono text-text-tertiary">
-            +{project.stack.length - 5}
-          </span>
+        {hiddenStackCount > 0 && (
+          <span class="px-2 py-0.5 text-xs font-mono text-text-tertiary">+{hiddenStackCount}</span>
         )}
       </div>
 
       <!-- Key highlight -->
       <div class="flex items-start gap-2 text-sm text-text-secondary">
-        <svg class="w-4 h-4 mt-0.5 text-accent shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+        <svg
+          class="w-4 h-4 mt-0.5 text-accent shrink-0"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+          ></path>
         </svg>
         <span data-i18n-es={project.highlights_es?.[0]}>{project.highlights[0]}</span>
       </div>
