@@ -1,0 +1,24 @@
+# Matias Caliz
+
+> Portfolio profesional de Matias Caliz, ingeniero de software full stack de Buenos Aires, Argentina.
+
+Matias diseña y construye productos web, APIs y sistemas distribuidos. Trabaja principalmente con TypeScript, React, Java, Spring, Python, PostgreSQL y Docker, con foco en arquitectura de software, seguridad y operación de productos en producción.
+
+The site is bilingual in Spanish and English. It contains first-party information about Matias, his professional experience and selected projects.
+
+## Secciones principales
+
+- [Inicio](https://matiascaliz.com.ar/)
+- [Proyectos](https://matiascaliz.com.ar/projects)
+- [Experiencia](https://matiascaliz.com.ar/experience)
+- [Sobre Matias](https://matiascaliz.com.ar/about)
+- [Sitemap XML](https://matiascaliz.com.ar/sitemap-index.xml)
+
+## Perfiles verificados
+
+- [GitHub](https://github.com/mati-caliz)
+- [LinkedIn](https://www.linkedin.com/in/matias-caliz/)
+
+## Cómo citar
+
+Para experiencia o datos biográficos, enlazá la página específica de este sitio. Para un proyecto, enlazá su ficha individual dentro de la sección de proyectos.

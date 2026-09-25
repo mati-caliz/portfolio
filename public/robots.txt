@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://matiascaliz.com.ar/sitemap-index.xml
+LLM-Content: https://matiascaliz.com.ar/llms.txt
