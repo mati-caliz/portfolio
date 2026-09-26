@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import type { RefObject } from "preact";
+import { navigateTo } from "../../lib/navigation";
 import { hasText } from "../../lib/text";
 import {
   NO_HISTORY_SELECTION,
@@ -71,7 +72,9 @@ export function useTerminal(): TerminalState {
         break;
       case "navigate":
         setLines([...linesWithInput, { type: "output", content: `Navigating to ${outcome.path}...` }]);
-        setTimeout(() => (window.location.href = outcome.path), NAVIGATION_DELAY_MS);
+        setTimeout(() => {
+          navigateTo(outcome.path);
+        }, NAVIGATION_DELAY_MS);
         return;
       case "matrix":
         setLines(linesWithInput);

@@ -19,6 +19,13 @@ interface DotPalette {
   border: string;
 }
 
+export type DotGridCanvas = Pick<HTMLCanvasElement, "width" | "height" | "getBoundingClientRect">;
+
+export type DotGridContext = Pick<
+  CanvasRenderingContext2D,
+  "scale" | "clearRect" | "beginPath" | "arc" | "fill" | "fillStyle" | "globalAlpha"
+>;
+
 function readColor(propertyName: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(propertyName).trim();
 }
@@ -35,8 +42,8 @@ class DotGridRenderer {
   private readonly pointer: Point = { left: OFFSCREEN_POINTER, top: OFFSCREEN_POINTER };
 
   constructor(
-    private readonly canvas: HTMLCanvasElement,
-    private readonly context: CanvasRenderingContext2D,
+    private readonly canvas: DotGridCanvas,
+    private readonly context: DotGridContext,
   ) {}
 
   resize(): void {
@@ -97,9 +104,16 @@ class DotGridRenderer {
 
 export function startDotGrid(canvas: HTMLCanvasElement, hero: HTMLElement | null): void {
   const context = canvas.getContext("2d");
-  if (context === null) {
-    return;
+  if (context !== null) {
+    animateDotGrid(canvas, context, hero);
   }
+}
+
+export function animateDotGrid(
+  canvas: DotGridCanvas,
+  context: DotGridContext,
+  hero: HTMLElement | null,
+): void {
   const renderer = new DotGridRenderer(canvas, context);
   let animationId = 0;
 

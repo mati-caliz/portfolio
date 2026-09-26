@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks"
 import type { RefObject } from "preact";
 import { commandItems, type CommandItem } from "../../data/commandPaletteItems";
 import { readDocumentLang } from "../../lib/documentLang";
+import { navigateTo } from "../../lib/navigation";
 import { hasText } from "../../lib/text";
 import { filterCommandItems, groupByCategory, wrapIndex, type CommandGroup } from "./commandSearch";
 
@@ -60,7 +61,7 @@ function useToggleShortcut(onToggle: () => void): void {
 
 function runCommand(item: CommandItem): void {
   if (hasText(item.href)) {
-    window.location.href = item.href;
+    navigateTo(item.href);
     return;
   }
   const buttonId = hasText(item.action) ? TOGGLE_BUTTON_IDS[item.action] : undefined;
